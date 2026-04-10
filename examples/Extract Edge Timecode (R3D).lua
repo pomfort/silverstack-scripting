@@ -10,7 +10,7 @@ function onStampVideo(videoClip)
   -- A Lua table can act as a dictionary
   -- Find the value for key "edge" in the file header info and store it into variable "timecode"
   local timecode = videoClip:getHeaderInfo()[edge]
-  -- Exit if timecode is nil
+  -- Exit if no timecode is found in the header info
   if timecode == nil then
     return
   end

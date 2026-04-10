@@ -5,9 +5,8 @@
 function onStampVideo(videoClip)
   local cameraIndex = videoClip:metadata():getCameraIndex()
   local reelName = videoClip:metadata():getReel()
-  -- Exit early if any condition is true
-  if cameraIndex == nil or reelName == nil
-     or not reelName:match("%d") then
+  -- Exit early if there is no camera index, no reel name, or the reel name is not a number
+  if cameraIndex == nil or reelName == nil or not reelName:match("%d") then
     return
   end
 

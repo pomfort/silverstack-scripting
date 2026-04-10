@@ -3,7 +3,7 @@
 -- Use case: Set the camera index (letter) based on the first characters in the clip name
 
 function onStampVideo(videoClip)
-  -- Exit early if the camera index (letter) is not nil
+  -- Exit early if the camera index (letter) is already set
   if videoClip:metadata():getCameraIndex() ~= nil then
     return
   end

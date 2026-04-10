@@ -4,8 +4,10 @@
 
 function onStampVideo(videoClip)
   local cameraIndex = videoClip:metadata():getCameraIndex()
-  -- Exit early if the the camera index (letter) is nil
-  if cameraIndex == nil then return end
+  -- Exit early if the the camera index (letter) is not set
+  if cameraIndex == nil then
+    return
+  end
   -- Replaces one or more underscores at the end of the string with an empty string
   local droppedTrailingUnderscores = string.gsub(cameraIndex, "_+$", "")
   videoClip:metadata():setCameraIndex(droppedTrailingUnderscores)
