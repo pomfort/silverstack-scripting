@@ -1,0 +1,2878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silverstack Lua API Reference</title>
+<style>
+:root {
+    --sidebar-width: 260px;
+    --bg: #fff;
+    --bg-secondary: #f5f6f8;
+    --bg-hover: #e8eaed;
+    --border: #d1d5db;
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --code-bg: #f0f2f5;
+    --badge-debug: #f59e0b;
+    --badge-deprecated: #ef4444;
+    --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+nav {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+nav .search-box {
+    padding: 12px;
+    position: sticky;
+    top: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    z-index: 1;
+}
+nav input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    background: var(--bg);
+}
+nav input:focus { border-color: var(--accent); }
+nav .nav-section { padding: 6px 0; }
+nav .nav-section-title {
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
+nav a.nav-item {
+    display: block;
+    padding: 3px 14px 3px 20px;
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+nav a.nav-item:hover { background: var(--bg-hover); }
+nav a.nav-item.nav-sub {
+    padding-left: 38px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+nav .nav-namespace {
+    padding: 10px 14px 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.03em;
+}
+
+main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 40px 64px;
+}
+main h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+main .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 28px; }
+
+h2.section-header {
+    font-size: 19px;
+    font-weight: 600;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+    margin: 32px 0 14px;
+}
+h3.namespace-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 20px 0 8px;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.badge-debug { background: #fef3c7; color: var(--badge-debug); }
+.badge-deprecated { background: #fee2e2; color: var(--badge-deprecated); }
+
+.type-entry { margin-bottom: 16px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.type-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    cursor: pointer;
+    user-select: none;
+}
+.type-header:hover { background: var(--bg-hover); }
+.type-header .chevron {
+    font-size: 11px;
+    color: var(--text-secondary);
+    transition: transform 0.15s;
+    flex-shrink: 0;
+}
+.type-entry.open .chevron { transform: rotate(90deg); }
+.type-header .type-name {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+}
+.type-header .type-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.type-body { display: none; border-top: 1px solid var(--border); padding: 12px 16px; }
+.type-entry.open .type-body { display: block; }
+.type-body > .description { font-size: 14px; margin-bottom: 10px; }
+
+.method-block {
+    padding: 6px 0 6px 12px;
+    margin: 8px 0;
+}
+.method-block h4 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 2px;
+}
+
+.fn-entry { margin-bottom: 14px; }
+.fn-entry h3 {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 2px;
+}
+
+.enum-entry { margin-bottom: 14px; }
+.enum-entry h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+
+code.sig {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--code-bg);
+    padding: 4px 8px;
+    border-radius: 5px;
+    display: block;
+    margin: 2px 0 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+.description { font-size: 14px; color: var(--text); margin: 3px 0; }
+.deprecated-note { font-size: 13px; color: var(--badge-deprecated); margin: 3px 0; }
+
+.args-table { font-size: 13px; border-collapse: collapse; margin: 4px 0; }
+.args-table th {
+    text-align: left;
+    font-weight: 600;
+    padding: 2px 10px 2px 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+.args-table td { padding: 2px 10px 2px 0; }
+.args-table td:first-child { font-family: var(--font-mono); white-space: nowrap; }
+
+.returns { font-size: 13px; color: var(--text-secondary); margin: 3px 0; }
+.returns strong { color: var(--text); }
+
+.enum-cases { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.enum-case {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--code-bg);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+code.sig a.sig-link {
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+}
+code.sig a.sig-link:hover { text-decoration: underline; }
+.description.namespace {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Filter..." autocomplete="off" spellcheck="false">
+    </div>
+    <div id="nav-list"></div>
+</nav>
+
+<main>
+    <h1>Silverstack Lua API</h1>
+    <div class="subtitle">Scripting reference · <a href="https://kb.pomfort.com/goto/sst-developer-api">Online Reference</a></div>
+    <div id="content"></div>
+    <div id="no-results" class="no-results hidden">No matching entries.</div>
+</main>
+
+<script>
+const D = {
+  "types": [
+    {
+      "typename": "Asset",
+      "name": "asset.Asset",
+      "description": "A representation of a video-, audio-clip, or document in the library.",
+      "deprecation": null,
+      "methods": [
+        {
+          "name": "addCuePoint",
+          "signature": "addCuePoint(CuePoint.Type, String, Int, Int) -> CuePoint",
+          "isStatic": false,
+          "description": "Add a CuePoint to a video-clip asset.",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "CuePoint type.",
+              "type": "CuePoint.Type"
+            },
+            {
+              "description": "Name",
+              "type": "String"
+            },
+            {
+              "description": "Frame Index",
+              "type": "Int"
+            },
+            {
+              "description": "Duration in Frames",
+              "type": "Int"
+            }
+          ],
+          "returns": "CuePoint"
+        },
+        {
+          "name": "getCuePoints",
+          "signature": "getCuePoints() -> [CuePoint]?",
+          "isStatic": false,
+          "description": "Get CuePoints for video-clip asset.",
+          "deprecation": null,
+          "args": [],
+          "returns": "[CuePoint]?"
+        },
+        {
+          "name": "getHeaderInfo",
+          "signature": "getHeaderInfo() -> Any",
+          "isStatic": false,
+          "description": "Get a table of the header info",
+          "deprecation": null,
+          "args": [],
+          "returns": "Any"
+        },
+        {
+          "name": "getResources",
+          "signature": "getResources() -> [FileResource]",
+          "isStatic": false,
+          "description": "Get all FileResources associated with this Asset",
+          "deprecation": null,
+          "args": [],
+          "returns": "[FileResource]"
+        },
+        {
+          "name": "getTranscodingSourceAsset",
+          "signature": "getTranscodingSourceAsset() -> Asset?",
+          "isStatic": false,
+          "description": "Get the Asset this Asset was transcoded from.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Asset?"
+        },
+        {
+          "name": "isAudioClip",
+          "signature": "isAudioClip() -> Bool",
+          "isStatic": false,
+          "description": "Check if asset is audio-clip asset.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
+        },
+        {
+          "name": "isClip",
+          "signature": "isClip() -> Bool",
+          "isStatic": false,
+          "description": "Check if asset is either audio- or video-clip asset.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
+        },
+        {
+          "name": "isVideoClip",
+          "signature": "isVideoClip() -> Bool",
+          "isStatic": false,
+          "description": "Check if asset is video-clip asset.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
+        },
+        {
+          "name": "metadata",
+          "signature": "metadata() -> Metadata?",
+          "isStatic": false,
+          "description": "Get metadata accessor",
+          "deprecation": null,
+          "args": [],
+          "returns": "Metadata?"
+        }
+      ]
+    },
+    {
+      "typename": "CuePoint",
+      "name": "asset.CuePoint",
+      "description": "Cue Point",
+      "deprecation": null,
+      "methods": [
+        {
+          "name": "getDuration",
+          "signature": "getDuration() -> Int",
+          "isStatic": false,
+          "description": "Get Cue Point duration in frames.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Int"
+        },
+        {
+          "name": "getFrame",
+          "signature": "getFrame() -> Int",
+          "isStatic": false,
+          "description": "Get Cue Point position in frames.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Int"
+        },
+        {
+          "name": "getName",
+          "signature": "getName() -> String",
+          "isStatic": false,
+          "description": "Get Cue Point name.",
+          "deprecation": null,
+          "args": [],
+          "returns": "String"
+        },
+        {
+          "name": "getType",
+          "signature": "getType() -> CuePoint.Type?",
+          "isStatic": false,
+          "description": "Get Cue Point type.",
+          "deprecation": null,
+          "args": [],
+          "returns": "CuePoint.Type?"
+        },
+        {
+          "name": "setDuration",
+          "signature": "setDuration()",
+          "isStatic": false,
+          "description": "Set Cue Point duration in frames.",
+          "deprecation": null,
+          "args": [],
+          "returns": null
+        },
+        {
+          "name": "setFrame",
+          "signature": "setFrame()",
+          "isStatic": false,
+          "description": "Set Cue Point position in frames.",
+          "deprecation": null,
+          "args": [],
+          "returns": null
+        },
+        {
+          "name": "setName",
+          "signature": "setName()",
+          "isStatic": false,
+          "description": "Set Cue Point name.",
+          "deprecation": null,
+          "args": [],
+          "returns": null
+        },
+        {
+          "name": "setType",
+          "signature": "setType()",
+          "isStatic": false,
+          "description": "Set Cue Point type.",
+          "deprecation": null,
+          "args": [],
+          "returns": null
+        }
+      ]
+    },
+    {
+      "typename": "FileResource",
+      "name": "asset.FileResource",
+      "description": null,
+      "deprecation": null,
+      "methods": [
+        {
+          "name": "getPath",
+          "signature": "getPath() -> String?",
+          "isStatic": false,
+          "description": "Get absolute file path to resource.",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getVolume",
+          "signature": "getVolume() -> Volume?",
+          "isStatic": false,
+          "description": "Get volume resource.",
+          "deprecation": null,
+          "args": [],
+          "returns": "Volume?"
+        }
+      ]
+    },
+    {
+      "typename": "Metadata",
+      "name": "asset.Metadata",
+      "description": null,
+      "deprecation": null,
+      "methods": [
+        {
+          "name": "getACESidt",
+          "signature": "getACESidt() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ACES Input Transform",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getACESidtID",
+          "signature": "getACESidtID() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ACES Input TransformID",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getACESodt",
+          "signature": "getACESodt() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ACES Output Transform",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getACESodtID",
+          "signature": "getACESodtID() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ACES Output TransformID",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getACESversion",
+          "signature": "getACESversion() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ACES version",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getActors",
+          "signature": "getActors() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Actors",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAnamorphic",
+          "signature": "getAnamorphic() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Anamorphic desqueeze",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioBitDepth",
+          "signature": "getAudioBitDepth() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Audio bit depth",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioCodec",
+          "signature": "getAudioCodec() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Codec of internal audio",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioSampleRate",
+          "signature": "getAudioSampleRate() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Audio sample rate",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioSources",
+          "signature": "getAudioSources() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Bin and track names of synced audio clips",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioTrackCountExternal",
+          "signature": "getAudioTrackCountExternal() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for no description",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioTrackCountInternal",
+          "signature": "getAudioTrackCountInternal() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for no description",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioTrackNames",
+          "signature": "getAudioTrackNames() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Audio track names",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getAudioTracks",
+          "signature": "getAudioTracks() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Summary of audio tracks",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCameraAssistant",
+          "signature": "getCameraAssistant() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Camera Assistant",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCameraAssistant2",
+          "signature": "getCameraAssistant2() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Second camera assistant",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCameraIndex",
+          "signature": "getCameraIndex() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Camera index letter or number",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCameraOrientation",
+          "signature": "getCameraOrientation() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Camera orientation",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCameraRollAngle",
+          "signature": "getCameraRollAngle() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Camera roll",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCameraTiltAngle",
+          "signature": "getCameraTiltAngle() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Camera tilt",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCaption",
+          "signature": "getCaption() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Caption",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCinematographer",
+          "signature": "getCinematographer() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Cinematographer",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getClipExposureIndex",
+          "signature": "getClipExposureIndex() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Exposure Index, ISO or ASA value from clip metadata",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getClipName",
+          "signature": "getClipName() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for (Clip) Name",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getClipTint",
+          "signature": "getClipTint() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Tint from clip metadata",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getClipWhitepoint",
+          "signature": "getClipWhitepoint() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for White point from clip metadata",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCodec",
+          "signature": "getCodec() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Codec",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getComment",
+          "signature": "getComment() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Comment",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCopyrightInfo",
+          "signature": "getCopyrightInfo() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Copyright information",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCrewUnit",
+          "signature": "getCrewUnit() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Crew unit",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCrop",
+          "signature": "getCrop() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Applied crop",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCuePointsCount",
+          "signature": "getCuePointsCount() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Number of cue points",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCustom1",
+          "signature": "getCustom1() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Custom field 1 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCustom2",
+          "signature": "getCustom2() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Custom field 2 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCustom3",
+          "signature": "getCustom3() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Custom field 3 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCustom4",
+          "signature": "getCustom4() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Custom field 4 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCustom5",
+          "signature": "getCustom5() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Custom field 5 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getCustom6",
+          "signature": "getCustom6() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Custom field 6 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDIT",
+          "signature": "getDIT() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Digital image technican",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDataManager",
+          "signature": "getDataManager() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Data manager",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDayNight",
+          "signature": "getDayNight() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Day/Night",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDecodingColorSpace",
+          "signature": "getDecodingColorSpace() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Used for grading",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDirector",
+          "signature": "getDirector() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Director",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDistanceToObject",
+          "signature": "getDistanceToObject() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Distance to object",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDurationInFrames",
+          "signature": "getDurationInFrames() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Duration (frames)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDurationInSamples",
+          "signature": "getDurationInSamples() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for no description",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDurationInSeconds",
+          "signature": "getDurationInSeconds() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Duration (time)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getDynamicMetadataExtracted",
+          "signature": "getDynamicMetadataExtracted() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Dynamic metatdata extracted",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getEpisode",
+          "signature": "getEpisode() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Episode",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFileSize",
+          "signature": "getFileSize() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for File size",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFileType",
+          "signature": "getFileType() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for File type",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFlag",
+          "signature": "getFlag() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Flag/Circled",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFlip",
+          "signature": "getFlip() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Flip",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFocalLength",
+          "signature": "getFocalLength() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Focal length",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFocusDistance",
+          "signature": "getFocusDistance() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Focus distance",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getFstop",
+          "signature": "getFstop() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for F-Stop",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getGPSposition",
+          "signature": "getGPSposition() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for GPS position",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getGradingMode",
+          "signature": "getGradingMode() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Grading mode",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashC4",
+          "signature": "getHashC4() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for C4ID hash of file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashMD5",
+          "signature": "getHashMD5() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for MD5 hash of file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashSHA1",
+          "signature": "getHashSHA1() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for SHA1 hash of file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashXXH128",
+          "signature": "getHashXXH128() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for XXH128 hash of file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashXXH3",
+          "signature": "getHashXXH3() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for XXH3 hash of file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashXXH64",
+          "signature": "getHashXXH64() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for XXH64 (BE) hash of file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getHashes",
+          "signature": "getHashes() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Available checksums",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getInOutDuration",
+          "signature": "getInOutDuration() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Duration (frames) between In and Out point",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getInteriorExterior",
+          "signature": "getInteriorExterior() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Interior/Exterior",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLabel",
+          "signature": "getLabel() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Label (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLensFilter",
+          "signature": "getLensFilter() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Lens filter",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLensModel",
+          "signature": "getLensModel() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Lens model",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLensSerialNumber",
+          "signature": "getLensSerialNumber() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Lens serial number",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLensZEISScorrection",
+          "signature": "getLensZEISScorrection() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ZEISS lens correction data",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLocation",
+          "signature": "getLocation() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Location",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLookInfo",
+          "signature": "getLookInfo() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Look info from camera",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLookSource",
+          "signature": "getLookSource() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Selected look source",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getLookSourceName",
+          "signature": "getLookSourceName() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Name of look source",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getNDopticalDensity",
+          "signature": "getNDopticalDensity() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Neutral-density filter (optical density)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getNativeISO",
+          "signature": "getNativeISO() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Native ISO",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getNodesCDL",
+          "signature": "getNodesCDL() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for CDL values: Slope Offset Power",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getNodesLMT",
+          "signature": "getNodesLMT() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for LMT Nodes",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getNodesLUT",
+          "signature": "getNodesLUT() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for List of applied LUTs",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getNodesSAT",
+          "signature": "getNodesSAT() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Saturation nodes",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getProcessedResolution",
+          "signature": "getProcessedResolution() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Clip resolution after desqueeze, crop & rotate",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getProducer",
+          "signature": "getProducer() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Producer",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getProductionCompany",
+          "signature": "getProductionCompany() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Production Company",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getProjectFPS",
+          "signature": "getProjectFPS() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Project / playback FPS",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRating",
+          "signature": "getRating() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Rating",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecorderFirmwareVersion",
+          "signature": "getRecorderFirmwareVersion() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording device firmware version",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecorderID",
+          "signature": "getRecorderID() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording device model ID",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecorderManufacturer",
+          "signature": "getRecorderManufacturer() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording device manufacturer",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecorderModel",
+          "signature": "getRecorderModel() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording device model",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecorderSerialNumber",
+          "signature": "getRecorderSerialNumber() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording device serial number",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecordingColorSpace",
+          "signature": "getRecordingColorSpace() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording color space",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRecordingDate",
+          "signature": "getRecordingDate() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Recording date from recorder",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getReel",
+          "signature": "getReel() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Reel/Tape",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getReferenceGamutCompression",
+          "signature": "getReferenceGamutCompression() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Reference Gamut Compression",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRegistrationDate",
+          "signature": "getRegistrationDate() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Date of ingest in library",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getResolution",
+          "signature": "getResolution() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Clip resolution before desqueeze, crop & rotate",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getRotation",
+          "signature": "getRotation() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Applied rotation",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getSamplesSinceMidnight",
+          "signature": "getSamplesSinceMidnight() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Samples since midnight",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getScan",
+          "signature": "getScan() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Scan type (progressive / interlaced)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getScene",
+          "signature": "getScene() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Scene",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getScriptSupervisor",
+          "signature": "getScriptSupervisor() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Script supervisor",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getSeason",
+          "signature": "getSeason() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Season",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getSensorFPS",
+          "signature": "getSensorFPS() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Sensor FPS of camera",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShootingDate",
+          "signature": "getShootingDate() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Shooting Date",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShootingDay",
+          "signature": "getShootingDay() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Shooting day",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShot",
+          "signature": "getShot() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Shot",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShotDescriptors",
+          "signature": "getShotDescriptors() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Shot descriptors",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShotID",
+          "signature": "getShotID() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for ShotID for referencing clip information (e.g. in ShotHub)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShothubCreatedBy",
+          "signature": "getShothubCreatedBy() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Added to ShotHub by user",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShutterAngle",
+          "signature": "getShutterAngle() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Shutter angle (degrees)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getShutterTime",
+          "signature": "getShutterTime() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Shutter (exposure time)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getSoundMixer",
+          "signature": "getSoundMixer() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Sound mixer",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getSoundroll",
+          "signature": "getSoundroll() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Tape name of synced audio clip",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getSourceCreationDate",
+          "signature": "getSourceCreationDate() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Creation date of source file",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCaudioOffsets",
+          "signature": "getTCaudioOffsets() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Offset between audio and video timecodes",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCend",
+          "signature": "getTCend() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for End timecode of clip (exclusive)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCendExtAudio",
+          "signature": "getTCendExtAudio() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Timecode of external audio clip at last video frame (exclusive)",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCformat",
+          "signature": "getTCformat() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Timecode format",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCinPoint",
+          "signature": "getTCinPoint() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Timecode of In point",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCoutPoint",
+          "signature": "getTCoutPoint() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Timecode of Out point",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCstart",
+          "signature": "getTCstart() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Start timecode of clip",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCstartExtAudio",
+          "signature": "getTCstartExtAudio() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Timecode of external audio clip at first video frame",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTCsyncSlate",
+          "signature": "getTCsyncSlate() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Timecode of slate marker",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTags",
+          "signature": "getTags() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Tags",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTake",
+          "signature": "getTake() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Take",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTape",
+          "signature": "getTape() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Audio tape name",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getTstop",
+          "signature": "getTstop() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for T-Stop",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getVerificationState",
+          "signature": "getVerificationState() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Verification state",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getWildTrack",
+          "signature": "getWildTrack() -> String?",
+          "isStatic": false,
+          "description": "Get metadatum for Wild track",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "setActors",
+          "signature": "setActors(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Actors: Actors",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setAnamorphic",
+          "signature": "setAnamorphic(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Anamorphic: Anamorphic desqueeze",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCameraAssistant",
+          "signature": "setCameraAssistant(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Camera Assistant: Camera Assistant",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCameraAssistant2",
+          "signature": "setCameraAssistant2(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Camera Assistant (2nd): Second camera assistant",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCameraIndex",
+          "signature": "setCameraIndex(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Camera: Camera index letter or number",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCameraOrientation",
+          "signature": "setCameraOrientation(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Camera Orientation: Camera orientation",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCameraRollAngle",
+          "signature": "setCameraRollAngle(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Camera Roll [°]: Camera roll",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCameraTiltAngle",
+          "signature": "setCameraTiltAngle(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Camera Tilt [°]: Camera tilt",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCaption",
+          "signature": "setCaption(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Caption: Caption",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCinematographer",
+          "signature": "setCinematographer(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Cinematographer: Cinematographer",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setClipName",
+          "signature": "setClipName(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Name: (Clip) Name",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setComment",
+          "signature": "setComment(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Comment: Comment",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCopyrightInfo",
+          "signature": "setCopyrightInfo(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Copyright Information: Copyright information",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCrewUnit",
+          "signature": "setCrewUnit(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Crew Unit: Crew unit",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCustom1",
+          "signature": "setCustom1(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Custom 1: Custom field 1 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCustom2",
+          "signature": "setCustom2(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Custom 2: Custom field 2 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCustom3",
+          "signature": "setCustom3(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Custom 3: Custom field 3 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCustom4",
+          "signature": "setCustom4(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Custom 4: Custom field 4 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCustom5",
+          "signature": "setCustom5(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Custom 5: Custom field 5 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setCustom6",
+          "signature": "setCustom6(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Custom 6: Custom field 6 (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setDIT",
+          "signature": "setDIT(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for DIT: Digital image technican",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setDataManager",
+          "signature": "setDataManager(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Data Manager: Data manager",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setDayNight",
+          "signature": "setDayNight(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Day/Night: Day/Night",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setDirector",
+          "signature": "setDirector(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Director: Director",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setDistanceToObject",
+          "signature": "setDistanceToObject(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Distance to Object: Distance to object",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setEpisode",
+          "signature": "setEpisode(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Episode: Episode",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setFlag",
+          "signature": "setFlag(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Flag/Circled: Flag/Circled",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setFlip",
+          "signature": "setFlip(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Flip: Flip",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setFocalLength",
+          "signature": "setFocalLength(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Focal Length: Focal length",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setFocusDistance",
+          "signature": "setFocusDistance(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Focus Distance: Focus distance",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setFstop",
+          "signature": "setFstop(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for F-Stop: F-Stop",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setGPSposition",
+          "signature": "setGPSposition(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for GPS Position: GPS position",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setInteriorExterior",
+          "signature": "setInteriorExterior(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Int/Ext: Interior/Exterior",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setLabel",
+          "signature": "setLabel(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Label: Label (customizeable per project in prefs)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setLensFilter",
+          "signature": "setLensFilter(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Lens Filter: Lens filter",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setLensModel",
+          "signature": "setLensModel(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Lens Model: Lens model",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setLensSerialNumber",
+          "signature": "setLensSerialNumber(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Lens Serial: Lens serial number",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Location: Location",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setNDopticalDensity",
+          "signature": "setNDopticalDensity(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for ND Filter: Neutral-density filter (optical density)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setNativeISO",
+          "signature": "setNativeISO(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Native ISO: Native ISO",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setProducer",
+          "signature": "setProducer(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Producer: Producer",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setProductionCompany",
+          "signature": "setProductionCompany(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Production: Production Company",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setProjectFPS",
+          "signature": "setProjectFPS(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Project FPS: Project / playback FPS",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setRating",
+          "signature": "setRating(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Rating: Rating",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setRecordingDate",
+          "signature": "setRecordingDate(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Recording Date: Recording date from recorder",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setReel",
+          "signature": "setReel(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Reel/Tape: Reel/Tape",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setRotation",
+          "signature": "setRotation(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Rotation: Applied rotation",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setScene",
+          "signature": "setScene(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Scene: Scene",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setScriptSupervisor",
+          "signature": "setScriptSupervisor(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Script Supervisor: Script supervisor",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setSeason",
+          "signature": "setSeason(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Season: Season",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setShootingDate",
+          "signature": "setShootingDate(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Shooting Date: Shooting Date",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setShootingDay",
+          "signature": "setShootingDay(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Shooting Day: Shooting day",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setShot",
+          "signature": "setShot(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Shot: Shot",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setShotDescriptors",
+          "signature": "setShotDescriptors(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Shot Descriptors: Shot descriptors",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setSoundMixer",
+          "signature": "setSoundMixer(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Sound Mixer: Sound mixer",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setTCstart",
+          "signature": "setTCstart(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for TC Start: Start timecode of clip",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setTake",
+          "signature": "setTake(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Take: Take",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setTape",
+          "signature": "setTape(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for Tape: Audio tape name",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        },
+        {
+          "name": "setTstop",
+          "signature": "setTstop(String) -> String?",
+          "isStatic": false,
+          "description": "Set metadatum for T-Stop: T-Stop",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String",
+              "type": "String"
+            }
+          ],
+          "returns": "String?"
+        }
+      ]
+    },
+    {
+      "typename": "Volume",
+      "name": "Volume",
+      "description": null,
+      "deprecation": null,
+      "methods": [
+        {
+          "name": "getLabel",
+          "signature": "getLabel() -> String?",
+          "isStatic": false,
+          "description": "Get the label of the Volume.",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        },
+        {
+          "name": "getMountPath",
+          "signature": "getMountPath() -> String?",
+          "isStatic": false,
+          "description": "Get the mount path of the Volume.",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "help",
+      "signature": "sst.help(Union<String, Table, Userdata, Function>?)",
+      "isStatic": false,
+      "description": "Print a listing of all available symbols within sst namespace or help about a symbol.",
+      "deprecation": null,
+      "args": [
+        {
+          "description": "Symbol name",
+          "type": "Union<String, Table, Userdata, Function>?"
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "utils.slack.getAvailableChannels",
+      "signature": "sst.utils.slack.getAvailableChannels() -> [String]",
+      "isStatic": false,
+      "description": "Get available Slack channels. Add new channels in Application Settings > Accounts.",
+      "deprecation": null,
+      "args": [],
+      "returns": "[String]"
+    },
+    {
+      "name": "utils.slack.sendMessage",
+      "signature": "sst.utils.slack.sendMessage(String, String)",
+      "isStatic": false,
+      "description": "Send a message via Slack",
+      "deprecation": null,
+      "args": [
+        {
+          "description": "Receiver channel",
+          "type": "String"
+        },
+        {
+          "description": "Message to send",
+          "type": "String"
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "enums": [
+    {
+      "name": "CuePoint.Type",
+      "cases": [
+        "compression",
+        "content",
+        "corruptFrame",
+        "exposure",
+        "flicker",
+        "mark",
+        "pixel",
+        "sharpness",
+        "slate"
+      ],
+      "deprecation": null
+    }
+  ]
+};
+
+function esc(s) {
+    if (!s) return "";
+    const el = document.createElement("span");
+    el.textContent = s;
+    return el.innerHTML;
+}
+
+function badgeHtml(item) {
+    let h = "";
+    if (item.deprecation) h += '<span class="badge badge-deprecated">DEPRECATED</span>';
+    return h;
+}
+
+const typeIndex = {};
+function buildTypeIndex() {
+    if (!D) return;
+    D.types.forEach(t => {
+        typeIndex[t.typename] = slug("type", t.typename);
+    });
+    D.enums.forEach(e => {
+        typeIndex[e.name] = slug("enum", e.name);
+    });
+}
+
+function linkifySignature(sig) {
+    const escaped = esc(sig);
+    const sortedNames = Object.keys(typeIndex).sort((a, b) => b.length - a.length);
+    if (!sortedNames.length) return escaped;
+    const pattern = new RegExp("\\b(" + sortedNames.map(n => n.replace(/\./g, "\\.")).join("|") + ")\\b", "g");
+    return escaped.replace(pattern, (match) => {
+        const target = typeIndex[match];
+        return target ? '<a href="#' + target + '" class="sig-link">' + match + '</a>' : match;
+    });
+}
+
+function linkifyType(typeStr) {
+    const escaped = esc(typeStr);
+    const sortedNames = Object.keys(typeIndex).sort((a, b) => b.length - a.length);
+    if (!sortedNames.length) return escaped;
+    const pattern = new RegExp("\\b(" + sortedNames.map(n => n.replace(/\./g, "\\.")).join("|") + ")\\b", "g");
+    return escaped.replace(pattern, (match) => {
+        const target = typeIndex[match];
+        return target ? '<a href="#' + target + '" class="sig-link">' + match + '</a>' : match;
+    });
+}
+
+function extractReturnType(sig) {
+    const m = sig.match(/->\s*(.+)$/);
+    return m ? m[1].trim() : null;
+}
+
+function fnDetailHtml(f) {
+    let h = '<code class="sig">' + linkifySignature(f.signature) + '</code>';
+    if (f.deprecation) h += '<div class="deprecated-note">Deprecated: ' + esc(f.deprecation) + '</div>';
+    if (f.description) h += '<div class="description">' + esc(f.description) + '</div>';
+    if (f.args.length) {
+        h += '<table class="args-table"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>';
+        f.args.forEach(a => { h += '<tr><td>' + linkifyType(a.type) + '</td><td>' + esc(a.description) + '</td></tr>'; });
+        h += '</tbody></table>';
+    }
+    if (f.returns) {
+        h += '<div class="returns"><strong>Note:</strong> Returns ' + esc(f.returns) + '</div>';
+    }
+    return h;
+}
+
+function slug(prefix, name) {
+    return prefix + "-" + name.replace(/[^a-zA-Z0-9]+/g, "-").toLowerCase();
+}
+
+function expandTypeFor(targetId) {
+    const el = document.getElementById(targetId);
+    if (!el) return;
+    const typeEntry = el.closest(".type-entry") || el;
+    if (typeEntry.classList.contains("type-entry")) {
+        typeEntry.classList.add("open");
+    }
+}
+
+function build() {
+    if (!D) return;
+    buildTypeIndex();
+    const navEl = document.getElementById("nav-list");
+    const contentEl = document.getElementById("content");
+    let nav = "", body = "";
+
+    const typeNames = new Set(D.types.map(t => t.typename));
+    const enumsByType = {};
+    const standaloneEnums = [];
+    D.enums.forEach(e => {
+        const dot = e.name.indexOf(".");
+        const prefix = dot > 0 ? e.name.substring(0, dot) : "";
+        if (prefix && typeNames.has(prefix)) {
+            if (!enumsByType[prefix]) enumsByType[prefix] = [];
+            enumsByType[prefix].push(e);
+        } else {
+            standaloneEnums.push(e);
+        }
+    });
+
+    if (D.types.length) {
+        const nsMap = {};
+        D.types.forEach(t => {
+            const dot = t.name.lastIndexOf(".");
+            const ns = dot > 0 ? t.name.substring(0, dot) : "";
+            if (!nsMap[ns]) nsMap[ns] = [];
+            nsMap[ns].push(t);
+        });
+        const nsKeys = Object.keys(nsMap).filter(k => k !== "").sort();
+        if (nsMap[""]) nsKeys.push("");
+        const nsGroups = nsKeys.map(ns => ({ ns: ns || "Other", types: nsMap[ns || ""] }));
+
+        nav += '<div class="nav-section"><div class="nav-section-title">Types</div>';
+        body += '<h2 class="section-header" id="sec-types">Types</h2>';
+        nsGroups.forEach(group => {
+            nav += '<div class="nav-namespace" data-search="' + esc(group.ns.toLowerCase()) + '">' + esc(group.ns) + '</div>';
+            body += '<h3 class="namespace-header" data-ns="' + esc(group.ns) + '">' + esc(group.ns) + '</h3>';
+            group.types.forEach(t => {
+                const id = slug("type", t.typename);
+                nav += '<a class="nav-item" href="#' + id + '" data-search="' + esc(t.name.toLowerCase()) + '">' + esc(t.typename) + '</a>';
+                t.methods.forEach(m => {
+                    const sep = m.isStatic ? "." : ":";
+                    const mId = slug("m", t.typename + sep + m.name);
+                    nav += '<a class="nav-item nav-sub" href="#' + mId + '" data-search="' + esc((t.name + sep + m.name).toLowerCase()) + '">' + esc(sep + m.name) + '</a>';
+                });
+
+                let typeBody = "";
+                if (t.description) typeBody += '<div class="description">' + esc(t.description) + '</div>';
+                t.methods.forEach(m => {
+                    const sep = m.isStatic ? "." : ":";
+                    const mId = slug("m", t.typename + sep + m.name);
+                    typeBody += '<div class="method-block" id="' + mId + '" data-search="' + esc((sep + m.name).toLowerCase()) + '">';
+                    typeBody += '<h4>' + esc(sep + m.name) + badgeHtml(m) + '</h4>';
+                    typeBody += fnDetailHtml(m);
+                    typeBody += '</div>';
+                });
+                const nestedEnums = enumsByType[t.typename] || [];
+                nestedEnums.forEach(e => {
+                    const eId = slug("enum", e.name);
+                    const enumLabel = e.name.substring(t.typename.length + 1);
+                    typeBody += '<div class="method-block" id="' + eId + '" data-search="' + esc(e.name.toLowerCase()) + '">';
+                    typeBody += '<h4>.' + esc(enumLabel) + badgeHtml(e) + '</h4>';
+                    typeBody += '<div class="enum-cases">';
+                    e.cases.forEach(c => { typeBody += '<span class="enum-case">.' + esc(c) + '</span>'; });
+                    typeBody += '</div></div>';
+                    nav += '<a class="nav-item nav-sub" href="#' + eId + '" data-search="' + esc(e.name.toLowerCase()) + '">.' + esc(enumLabel) + '</a>';
+                });
+
+                const searchTerms = [t.name.toLowerCase()]
+                    .concat(t.methods.map(m => m.name.toLowerCase()))
+                    .concat(nestedEnums.map(e => e.name.toLowerCase()))
+                    .join(" ");
+                body += '<div class="type-entry" id="' + id + '" data-search="' + esc(searchTerms) + '">';
+                body += '<div class="type-header" onclick="this.parentElement.classList.toggle(\'open\')">';
+                body += '<span class="chevron">&#9654;</span>';
+                body += '<span class="type-name">' + esc(t.typename) + '</span>';
+                body += badgeHtml(t);
+                if (t.description) body += '<span class="type-desc">' + esc(t.description) + '</span>';
+                body += '</div>';
+                body += '<div class="type-body">' + typeBody + '</div>';
+                body += '</div>';
+            });
+        });
+        nav += '</div>';
+    }
+
+    if (standaloneEnums.length) {
+        nav += '<div class="nav-section"><div class="nav-section-title">Enums</div>';
+        body += '<h2 class="section-header" id="sec-enums">Enums</h2>';
+        standaloneEnums.forEach(e => {
+            const id = slug("enum", e.name);
+            const searchTerms = [e.name.toLowerCase()].concat(e.cases.map(c => c.toLowerCase())).join(" ");
+            nav += '<a class="nav-item" href="#' + id + '" data-search="' + esc(searchTerms) + '">' + esc(e.name) + '</a>';
+            body += '<div class="enum-entry" id="' + id + '" data-search="' + esc(searchTerms) + '">';
+            body += '<h3>' + esc(e.name) + badgeHtml(e) + '</h3>';
+            body += '<div class="enum-cases">';
+            e.cases.forEach(c => { body += '<span class="enum-case">.' + esc(c) + '</span>'; });
+            body += '</div></div>';
+        });
+        nav += '</div>';
+    }
+
+    if (D.functions.length) {
+        nav += '<div class="nav-section"><div class="nav-section-title">Functions</div>';
+        body += '<h2 class="section-header" id="sec-functions">Functions</h2>';
+        D.functions.forEach(f => {
+            const id = slug("fn", f.name);
+            nav += '<a class="nav-item" href="#' + id + '" data-search="' + esc(f.name.toLowerCase()) + '">' + esc(f.name) + '</a>';
+            body += '<div class="fn-entry" id="' + id + '" data-search="' + esc(f.name.toLowerCase()) + '">';
+            body += '<h3>' + esc(f.name) + badgeHtml(f) + '</h3>';
+            body += fnDetailHtml(f);
+            body += '</div>';
+        });
+        nav += '</div>';
+    }
+
+    navEl.innerHTML = nav;
+    contentEl.innerHTML = body;
+}
+
+function filterAll() {
+    const q = document.getElementById("search").value.toLowerCase().trim();
+    const noResults = document.getElementById("no-results");
+    let anyVisible = false;
+
+    document.querySelectorAll("nav a.nav-item").forEach(item => {
+        const match = !q || (item.dataset.search || "").includes(q);
+        item.classList.toggle("hidden", !match);
+    });
+    document.querySelectorAll("nav .nav-namespace").forEach(ns => {
+        let next = ns.nextElementSibling;
+        let hasVisible = false;
+        while (next && next.matches("a.nav-item")) {
+            if (!next.classList.contains("hidden")) hasVisible = true;
+            next = next.nextElementSibling;
+        }
+        ns.classList.toggle("hidden", !hasVisible);
+    });
+    document.querySelectorAll("nav .nav-section").forEach(sec => {
+        const vis = sec.querySelector("a.nav-item:not(.hidden)");
+        sec.classList.toggle("hidden", !vis);
+    });
+
+    document.querySelectorAll(".type-entry").forEach(el => {
+        const match = !q || (el.dataset.search || "").includes(q);
+        el.classList.toggle("hidden", !match);
+        if (match) anyVisible = true;
+        el.querySelectorAll(".method-block").forEach(m => {
+            if (q) {
+                m.classList.toggle("hidden", !(m.dataset.search || "").includes(q));
+            } else {
+                m.classList.remove("hidden");
+            }
+        });
+    });
+    document.querySelectorAll(".fn-entry, .enum-entry").forEach(el => {
+        const match = !q || (el.dataset.search || "").includes(q);
+        el.classList.toggle("hidden", !match);
+        if (match) anyVisible = true;
+    });
+    document.querySelectorAll("h3.namespace-header").forEach(h => {
+        let next = h.nextElementSibling;
+        let hasVisible = false;
+        while (next && next.matches(".type-entry")) {
+            if (!next.classList.contains("hidden")) hasVisible = true;
+            next = next.nextElementSibling;
+        }
+        h.classList.toggle("hidden", q && !hasVisible);
+    });
+    document.querySelectorAll("h2.section-header").forEach(h => {
+        let next = h.nextElementSibling;
+        let hasVisible = false;
+        while (next && !next.matches("h2.section-header")) {
+            if (!next.classList.contains("hidden") && !next.matches("h3.namespace-header")) hasVisible = true;
+            next = next.nextElementSibling;
+        }
+        h.classList.toggle("hidden", q && !hasVisible);
+    });
+
+    noResults.classList.toggle("hidden", anyVisible || !q);
+}
+
+document.getElementById("search").addEventListener("input", filterAll);
+build();
+
+document.getElementById("nav-list").addEventListener("click", function(e) {
+    const link = e.target.closest("a.nav-item");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const targetId = href.slice(1);
+    expandTypeFor(targetId);
+});
+
+document.querySelector("main").addEventListener("click", function(e) {
+    const link = e.target.closest("a.sig-link");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    const targetId = href.slice(1);
+    expandTypeFor(targetId);
+});
+</script>
+</body>
+</html>

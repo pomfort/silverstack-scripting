@@ -1,0 +1,3896 @@
+{
+  "enums" : {
+
+  },
+  "functions" : {
+    "help" : {
+      "description" : "Print a listing of all available symbols within sst namespace or help about a symbol.",
+      "scene" : [
+
+      ],
+      "signature" : {
+        "args" : [
+          {
+            "description" : "Symbol name",
+            "type" : "Union<String, Table, Userdata, Function>?"
+          }
+        ],
+        "throws" : true
+      }
+    },
+    "utils.slack.getAvailableChannels" : {
+      "description" : "Get available Slack channels. Add new channels in Application Settings > Accounts.",
+      "scene" : [
+        "metadataManipulating"
+      ],
+      "signature" : {
+        "args" : [
+
+        ],
+        "returns" : {
+          "type" : "[String]"
+        },
+        "throws" : false
+      }
+    },
+    "utils.slack.sendMessage" : {
+      "description" : "Send a message via Slack",
+      "scene" : [
+        "metadataManipulating"
+      ],
+      "signature" : {
+        "args" : [
+          {
+            "description" : "Receiver channel",
+            "type" : "String"
+          },
+          {
+            "description" : "Message to send",
+            "type" : "String"
+          }
+        ],
+        "throws" : true
+      }
+    }
+  },
+  "types" : {
+    "Asset" : {
+      "description" : "A representation of a video-, audio-clip, or document in the library.",
+      "enums" : {
+
+      },
+      "functions" : {
+        "addCuePoint" : {
+          "description" : "Add a CuePoint to a video-clip asset.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "CuePoint type.",
+                "type" : "CuePoint.Type"
+              },
+              {
+                "description" : "Name",
+                "type" : "String"
+              },
+              {
+                "description" : "Frame Index",
+                "type" : "Int"
+              },
+              {
+                "description" : "Duration in Frames",
+                "type" : "Int"
+              }
+            ],
+            "returns" : {
+              "type" : "CuePoint"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "getCuePoints" : {
+          "description" : "Get CuePoints for video-clip asset.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "[CuePoint]?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHeaderInfo" : {
+          "description" : "Get a table of the header info",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "[String: Any]",
+              "type" : "Any"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "getResources" : {
+          "description" : "Get all FileResources associated with this Asset",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "[FileResource]"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTranscodingSourceAsset" : {
+          "description" : "Get the Asset this Asset was transcoded from.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "nil if this Asset is not the result of a transcode job.",
+              "type" : "Asset?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "isAudioClip" : {
+          "description" : "Check if asset is audio-clip asset.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "isClip" : {
+          "description" : "Check if asset is either audio- or video-clip asset.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "isVideoClip" : {
+          "description" : "Check if asset is video-clip asset.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "metadata" : {
+          "description" : "Get metadata accessor",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Metadata?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        }
+      },
+      "qualifiedName" : "asset.Asset",
+      "scene" : [
+        "metadataManipulating"
+      ]
+    },
+    "CuePoint" : {
+      "description" : "Cue Point",
+      "enums" : {
+        "CuePoint.Type" : {
+          "cases" : [
+            "compression",
+            "content",
+            "corruptFrame",
+            "exposure",
+            "flicker",
+            "mark",
+            "pixel",
+            "sharpness",
+            "slate"
+          ],
+          "scene" : [
+            "metadataManipulating"
+          ]
+        }
+      },
+      "functions" : {
+        "getDuration" : {
+          "description" : "Get Cue Point duration in frames.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Int"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFrame" : {
+          "description" : "Get Cue Point position in frames.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Int"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getName" : {
+          "description" : "Get Cue Point name.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "String"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getType" : {
+          "description" : "Get Cue Point type.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "CuePoint.Type?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "setDuration" : {
+          "description" : "Set Cue Point duration in frames.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "setFrame" : {
+          "description" : "Set Cue Point position in frames.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "setName" : {
+          "description" : "Set Cue Point name.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "setType" : {
+          "description" : "Set Cue Point type.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "static" : false,
+            "throws" : false
+          }
+        }
+      },
+      "qualifiedName" : "asset.CuePoint",
+      "scene" : [
+        "metadataManipulating"
+      ]
+    },
+    "FileResource" : {
+      "enums" : {
+
+      },
+      "functions" : {
+        "getPath" : {
+          "description" : "Get absolute file path to resource.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getVolume" : {
+          "description" : "Get volume resource.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Volume?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        }
+      },
+      "qualifiedName" : "asset.FileResource",
+      "scene" : [
+        "metadataManipulating"
+      ]
+    },
+    "Metadata" : {
+      "enums" : {
+
+      },
+      "functions" : {
+        "getACESidt" : {
+          "description" : "Get metadatum for ACES Input Transform",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getACESidtID" : {
+          "description" : "Get metadatum for ACES Input TransformID",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getACESodt" : {
+          "description" : "Get metadatum for ACES Output Transform",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getACESodtID" : {
+          "description" : "Get metadatum for ACES Output TransformID",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getACESversion" : {
+          "description" : "Get metadatum for ACES version",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getActors" : {
+          "description" : "Get metadatum for Actors",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAnamorphic" : {
+          "description" : "Get metadatum for Anamorphic desqueeze",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioBitDepth" : {
+          "description" : "Get metadatum for Audio bit depth",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioCodec" : {
+          "description" : "Get metadatum for Codec of internal audio",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioSampleRate" : {
+          "description" : "Get metadatum for Audio sample rate",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioSources" : {
+          "description" : "Get metadatum for Bin and track names of synced audio clips",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioTrackCountExternal" : {
+          "description" : "Get metadatum for no description",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioTrackCountInternal" : {
+          "description" : "Get metadatum for no description",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioTrackNames" : {
+          "description" : "Get metadatum for Audio track names",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getAudioTracks" : {
+          "description" : "Get metadatum for Summary of audio tracks",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCameraAssistant" : {
+          "description" : "Get metadatum for Camera Assistant",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCameraAssistant2" : {
+          "description" : "Get metadatum for Second camera assistant",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCameraIndex" : {
+          "description" : "Get metadatum for Camera index letter or number",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCameraOrientation" : {
+          "description" : "Get metadatum for Camera orientation",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCameraRollAngle" : {
+          "description" : "Get metadatum for Camera roll",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCameraTiltAngle" : {
+          "description" : "Get metadatum for Camera tilt",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCaption" : {
+          "description" : "Get metadatum for Caption",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCinematographer" : {
+          "description" : "Get metadatum for Cinematographer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getClipExposureIndex" : {
+          "description" : "Get metadatum for Exposure Index, ISO or ASA value from clip metadata",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getClipName" : {
+          "description" : "Get metadatum for (Clip) Name",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getClipTint" : {
+          "description" : "Get metadatum for Tint from clip metadata",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getClipWhitepoint" : {
+          "description" : "Get metadatum for White point from clip metadata",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCodec" : {
+          "description" : "Get metadatum for Codec",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getComment" : {
+          "description" : "Get metadatum for Comment",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCopyrightInfo" : {
+          "description" : "Get metadatum for Copyright information",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCrewUnit" : {
+          "description" : "Get metadatum for Crew unit",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCrop" : {
+          "description" : "Get metadatum for Applied crop",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCuePointsCount" : {
+          "description" : "Get metadatum for Number of cue points",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCustom1" : {
+          "description" : "Get metadatum for Custom field 1 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCustom2" : {
+          "description" : "Get metadatum for Custom field 2 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCustom3" : {
+          "description" : "Get metadatum for Custom field 3 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCustom4" : {
+          "description" : "Get metadatum for Custom field 4 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCustom5" : {
+          "description" : "Get metadatum for Custom field 5 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCustom6" : {
+          "description" : "Get metadatum for Custom field 6 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDIT" : {
+          "description" : "Get metadatum for Digital image technican",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDataManager" : {
+          "description" : "Get metadatum for Data manager",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDayNight" : {
+          "description" : "Get metadatum for Day/Night",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDecodingColorSpace" : {
+          "description" : "Get metadatum for Used for grading",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDirector" : {
+          "description" : "Get metadatum for Director",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDistanceToObject" : {
+          "description" : "Get metadatum for Distance to object",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDurationInFrames" : {
+          "description" : "Get metadatum for Duration (frames)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDurationInSamples" : {
+          "description" : "Get metadatum for no description",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDurationInSeconds" : {
+          "description" : "Get metadatum for Duration (time)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getDynamicMetadataExtracted" : {
+          "description" : "Get metadatum for Dynamic metatdata extracted",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getEpisode" : {
+          "description" : "Get metadatum for Episode",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFileSize" : {
+          "description" : "Get metadatum for File size",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFileType" : {
+          "description" : "Get metadatum for File type",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFlag" : {
+          "description" : "Get metadatum for Flag/Circled",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFlip" : {
+          "description" : "Get metadatum for Flip",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFocalLength" : {
+          "description" : "Get metadatum for Focal length",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFocusDistance" : {
+          "description" : "Get metadatum for Focus distance",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFstop" : {
+          "description" : "Get metadatum for F-Stop",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getGPSposition" : {
+          "description" : "Get metadatum for GPS position",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getGradingMode" : {
+          "description" : "Get metadatum for Grading mode",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashC4" : {
+          "description" : "Get metadatum for C4ID hash of file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashMD5" : {
+          "description" : "Get metadatum for MD5 hash of file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashSHA1" : {
+          "description" : "Get metadatum for SHA1 hash of file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashXXH128" : {
+          "description" : "Get metadatum for XXH128 hash of file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashXXH3" : {
+          "description" : "Get metadatum for XXH3 hash of file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashXXH64" : {
+          "description" : "Get metadatum for XXH64 (BE) hash of file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getHashes" : {
+          "description" : "Get metadatum for Available checksums",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getInOutDuration" : {
+          "description" : "Get metadatum for Duration (frames) between In and Out point",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getInteriorExterior" : {
+          "description" : "Get metadatum for Interior/Exterior",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLabel" : {
+          "description" : "Get metadatum for Label (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLensFilter" : {
+          "description" : "Get metadatum for Lens filter",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLensModel" : {
+          "description" : "Get metadatum for Lens model",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLensSerialNumber" : {
+          "description" : "Get metadatum for Lens serial number",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLensZEISScorrection" : {
+          "description" : "Get metadatum for ZEISS lens correction data",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLocation" : {
+          "description" : "Get metadatum for Location",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLookInfo" : {
+          "description" : "Get metadatum for Look info from camera",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLookSource" : {
+          "description" : "Get metadatum for Selected look source",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getLookSourceName" : {
+          "description" : "Get metadatum for Name of look source",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getNDopticalDensity" : {
+          "description" : "Get metadatum for Neutral-density filter (optical density)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getNativeISO" : {
+          "description" : "Get metadatum for Native ISO",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getNodesCDL" : {
+          "description" : "Get metadatum for CDL values: Slope Offset Power",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getNodesLMT" : {
+          "description" : "Get metadatum for LMT Nodes",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getNodesLUT" : {
+          "description" : "Get metadatum for List of applied LUTs",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getNodesSAT" : {
+          "description" : "Get metadatum for Saturation nodes",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getProcessedResolution" : {
+          "description" : "Get metadatum for Clip resolution after desqueeze, crop & rotate",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getProducer" : {
+          "description" : "Get metadatum for Producer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getProductionCompany" : {
+          "description" : "Get metadatum for Production Company",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getProjectFPS" : {
+          "description" : "Get metadatum for Project / playback FPS",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRating" : {
+          "description" : "Get metadatum for Rating",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecorderFirmwareVersion" : {
+          "description" : "Get metadatum for Recording device firmware version",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecorderID" : {
+          "description" : "Get metadatum for Recording device model ID",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecorderManufacturer" : {
+          "description" : "Get metadatum for Recording device manufacturer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecorderModel" : {
+          "description" : "Get metadatum for Recording device model",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecorderSerialNumber" : {
+          "description" : "Get metadatum for Recording device serial number",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecordingColorSpace" : {
+          "description" : "Get metadatum for Recording color space",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRecordingDate" : {
+          "description" : "Get metadatum for Recording date from recorder",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getReel" : {
+          "description" : "Get metadatum for Reel/Tape",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getReferenceGamutCompression" : {
+          "description" : "Get metadatum for Reference Gamut Compression",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRegistrationDate" : {
+          "description" : "Get metadatum for Date of ingest in library",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getResolution" : {
+          "description" : "Get metadatum for Clip resolution before desqueeze, crop & rotate",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getRotation" : {
+          "description" : "Get metadatum for Applied rotation",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getSamplesSinceMidnight" : {
+          "description" : "Get metadatum for Samples since midnight",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getScan" : {
+          "description" : "Get metadatum for Scan type (progressive / interlaced)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getScene" : {
+          "description" : "Get metadatum for Scene",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getScriptSupervisor" : {
+          "description" : "Get metadatum for Script supervisor",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getSeason" : {
+          "description" : "Get metadatum for Season",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getSensorFPS" : {
+          "description" : "Get metadatum for Sensor FPS of camera",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShootingDate" : {
+          "description" : "Get metadatum for Shooting Date",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShootingDay" : {
+          "description" : "Get metadatum for Shooting day",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShot" : {
+          "description" : "Get metadatum for Shot",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShotDescriptors" : {
+          "description" : "Get metadatum for Shot descriptors",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShotID" : {
+          "description" : "Get metadatum for ShotID for referencing clip information (e.g. in ShotHub)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShothubCreatedBy" : {
+          "description" : "Get metadatum for Added to ShotHub by user",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShutterAngle" : {
+          "description" : "Get metadatum for Shutter angle (degrees)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getShutterTime" : {
+          "description" : "Get metadatum for Shutter (exposure time)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getSoundMixer" : {
+          "description" : "Get metadatum for Sound mixer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getSoundroll" : {
+          "description" : "Get metadatum for Tape name of synced audio clip",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getSourceCreationDate" : {
+          "description" : "Get metadatum for Creation date of source file",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCaudioOffsets" : {
+          "description" : "Get metadatum for Offset between audio and video timecodes",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCend" : {
+          "description" : "Get metadatum for End timecode of clip (exclusive)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCendExtAudio" : {
+          "description" : "Get metadatum for Timecode of external audio clip at last video frame (exclusive)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCformat" : {
+          "description" : "Get metadatum for Timecode format",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCinPoint" : {
+          "description" : "Get metadatum for Timecode of In point",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCoutPoint" : {
+          "description" : "Get metadatum for Timecode of Out point",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCstart" : {
+          "description" : "Get metadatum for Start timecode of clip",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCstartExtAudio" : {
+          "description" : "Get metadatum for Timecode of external audio clip at first video frame",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCsyncSlate" : {
+          "description" : "Get metadatum for Timecode of slate marker",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTags" : {
+          "description" : "Get metadatum for Tags",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTake" : {
+          "description" : "Get metadatum for Take",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTape" : {
+          "description" : "Get metadatum for Audio tape name",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTstop" : {
+          "description" : "Get metadatum for T-Stop",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getVerificationState" : {
+          "description" : "Get metadatum for Verification state",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getWildTrack" : {
+          "description" : "Get metadatum for Wild track",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Formatted String",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "setActors" : {
+          "description" : "Set metadatum for Actors: Actors",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setAnamorphic" : {
+          "description" : "Set metadatum for Anamorphic: Anamorphic desqueeze",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCameraAssistant" : {
+          "description" : "Set metadatum for Camera Assistant: Camera Assistant",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCameraAssistant2" : {
+          "description" : "Set metadatum for Camera Assistant (2nd): Second camera assistant",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCameraIndex" : {
+          "description" : "Set metadatum for Camera: Camera index letter or number",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCameraOrientation" : {
+          "description" : "Set metadatum for Camera Orientation: Camera orientation",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCameraRollAngle" : {
+          "description" : "Set metadatum for Camera Roll [°]: Camera roll",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCameraTiltAngle" : {
+          "description" : "Set metadatum for Camera Tilt [°]: Camera tilt",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCaption" : {
+          "description" : "Set metadatum for Caption: Caption",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCinematographer" : {
+          "description" : "Set metadatum for Cinematographer: Cinematographer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setClipName" : {
+          "description" : "Set metadatum for Name: (Clip) Name",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setComment" : {
+          "description" : "Set metadatum for Comment: Comment",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCopyrightInfo" : {
+          "description" : "Set metadatum for Copyright Information: Copyright information",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCrewUnit" : {
+          "description" : "Set metadatum for Crew Unit: Crew unit",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCustom1" : {
+          "description" : "Set metadatum for Custom 1: Custom field 1 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCustom2" : {
+          "description" : "Set metadatum for Custom 2: Custom field 2 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCustom3" : {
+          "description" : "Set metadatum for Custom 3: Custom field 3 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCustom4" : {
+          "description" : "Set metadatum for Custom 4: Custom field 4 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCustom5" : {
+          "description" : "Set metadatum for Custom 5: Custom field 5 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setCustom6" : {
+          "description" : "Set metadatum for Custom 6: Custom field 6 (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setDIT" : {
+          "description" : "Set metadatum for DIT: Digital image technican",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setDataManager" : {
+          "description" : "Set metadatum for Data Manager: Data manager",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setDayNight" : {
+          "description" : "Set metadatum for Day/Night: Day/Night",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setDirector" : {
+          "description" : "Set metadatum for Director: Director",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setDistanceToObject" : {
+          "description" : "Set metadatum for Distance to Object: Distance to object",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setEpisode" : {
+          "description" : "Set metadatum for Episode: Episode",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setFlag" : {
+          "description" : "Set metadatum for Flag/Circled: Flag/Circled",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setFlip" : {
+          "description" : "Set metadatum for Flip: Flip",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setFocalLength" : {
+          "description" : "Set metadatum for Focal Length: Focal length",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setFocusDistance" : {
+          "description" : "Set metadatum for Focus Distance: Focus distance",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setFstop" : {
+          "description" : "Set metadatum for F-Stop: F-Stop",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setGPSposition" : {
+          "description" : "Set metadatum for GPS Position: GPS position",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setInteriorExterior" : {
+          "description" : "Set metadatum for Int/Ext: Interior/Exterior",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setLabel" : {
+          "description" : "Set metadatum for Label: Label (customizeable per project in prefs)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setLensFilter" : {
+          "description" : "Set metadatum for Lens Filter: Lens filter",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setLensModel" : {
+          "description" : "Set metadatum for Lens Model: Lens model",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setLensSerialNumber" : {
+          "description" : "Set metadatum for Lens Serial: Lens serial number",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setLocation" : {
+          "description" : "Set metadatum for Location: Location",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setNDopticalDensity" : {
+          "description" : "Set metadatum for ND Filter: Neutral-density filter (optical density)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setNativeISO" : {
+          "description" : "Set metadatum for Native ISO: Native ISO",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setProducer" : {
+          "description" : "Set metadatum for Producer: Producer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setProductionCompany" : {
+          "description" : "Set metadatum for Production: Production Company",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setProjectFPS" : {
+          "description" : "Set metadatum for Project FPS: Project / playback FPS",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setRating" : {
+          "description" : "Set metadatum for Rating: Rating",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setRecordingDate" : {
+          "description" : "Set metadatum for Recording Date: Recording date from recorder",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setReel" : {
+          "description" : "Set metadatum for Reel/Tape: Reel/Tape",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setRotation" : {
+          "description" : "Set metadatum for Rotation: Applied rotation",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setScene" : {
+          "description" : "Set metadatum for Scene: Scene",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setScriptSupervisor" : {
+          "description" : "Set metadatum for Script Supervisor: Script supervisor",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setSeason" : {
+          "description" : "Set metadatum for Season: Season",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setShootingDate" : {
+          "description" : "Set metadatum for Shooting Date: Shooting Date",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setShootingDay" : {
+          "description" : "Set metadatum for Shooting Day: Shooting day",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setShot" : {
+          "description" : "Set metadatum for Shot: Shot",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setShotDescriptors" : {
+          "description" : "Set metadatum for Shot Descriptors: Shot descriptors",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setSoundMixer" : {
+          "description" : "Set metadatum for Sound Mixer: Sound mixer",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setTCstart" : {
+          "description" : "Set metadatum for TC Start: Start timecode of clip",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setTake" : {
+          "description" : "Set metadatum for Take: Take",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setTape" : {
+          "description" : "Set metadatum for Tape: Audio tape name",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setTstop" : {
+          "description" : "Set metadatum for T-Stop: T-Stop",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String of previous value",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        }
+      },
+      "qualifiedName" : "asset.Metadata",
+      "scene" : [
+        "metadataManipulating"
+      ]
+    },
+    "Volume" : {
+      "enums" : {
+
+      },
+      "functions" : {
+        "getLabel" : {
+          "description" : "Get the label of the Volume.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getMountPath" : {
+          "description" : "Get the mount path of the Volume.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "description" : "Mount path",
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        }
+      },
+      "qualifiedName" : "Volume",
+      "scene" : [
+        "metadataManipulating"
+      ]
+    }
+  }
+}

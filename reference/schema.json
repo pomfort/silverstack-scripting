@@ -1,0 +1,108 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "LuaHelp",
+    "type": "object",
+    "required": ["functions", "types", "enums"],
+    "additionalProperties": false,
+    "properties": {
+        "functions": {
+            "type": "object",
+            "description": "free functions",
+            "additionalProperties": { "$ref": "#/$defs/Function" }
+        },
+        "types": {
+            "type": "object",
+            "additionalProperties": { "$ref": "#/$defs/Type" }
+        },
+        "enums": {
+            "type": "object",
+            "additionalProperties": { "$ref": "#/$defs/Enum" }
+        }
+    },
+    "$defs": {
+        "Scene": {
+            "type": "array",
+            "items": { "type": "string" }
+        },
+        "TypeRef": {
+            "title": "TypeRef",
+            "description": "type name and description, used for function arguments and return values",
+            "type": "object",
+            "required": ["type"],
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "typename"
+                },
+                "description": { "type": ["string", "null"] }
+            }
+        },
+        "Signature": {
+            "title": "Signature",
+            "type": "object",
+            "required": ["args", "throws"],
+            "additionalProperties": false,
+            "properties": {
+                "args": {
+                    "type": "array",
+                    "items": { "$ref": "#/$defs/TypeRef" }
+                },
+                "throws": { "type": "boolean" },
+                "static": { "type": ["boolean", "null"] },
+                "returns": {
+                    "oneOf": [
+                        { "$ref": "#/$defs/TypeRef" },
+                        { "type": "null" }
+                    ]
+                }
+            }
+        },
+        "Function": {
+            "title": "Function",
+            "type": "object",
+            "required": ["signature", "scene"],
+            "additionalProperties": false,
+            "properties": {
+                "signature": { "$ref": "#/$defs/Signature" },
+                "description": { "type": ["string", "null"] },
+                "deprecation": { "type": ["string", "null"] },
+                "scene": { "$ref": "#/$defs/Scene" }
+            }
+        },
+        "Enum": {
+            "title": "Enum",
+            "type": "object",
+            "required": ["cases", "scene"],
+            "additionalProperties": false,
+            "properties": {
+                "cases": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "deprecation": { "type": ["string", "null"] },
+                "scene": { "$ref": "#/$defs/Scene" }
+            }
+        },
+        "Type": {
+            "title": "Type",
+            "type": "object",
+            "required": ["qualifiedName", "scene", "functions", "enums"],
+            "additionalProperties": false,
+            "properties": {
+                "qualifiedName": { "type": "string" },
+                "description":   { "type": ["string", "null"] },
+                "deprecation":   { "type": ["string", "null"] },
+                "scene": { "$ref": "#/$defs/Scene" },
+                "functions": {
+                    "type": "object",
+                    "additionalProperties": { "$ref": "#/$defs/Function" }
+                },
+                "enums": {
+                    "type": "object",
+                    "additionalProperties": { "$ref": "#/$defs/Enum" }
+                }
+            }
+        }
+    }
+}
