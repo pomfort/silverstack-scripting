@@ -13,11 +13,15 @@ Compatible with:
 * Silverstack XT
 * Silverstack Lab
 
-More details on how to apply scripts in the user interface, can be found in the [knowledge base](https://kb.pomfort.com/?p=26000).
+More details on how to apply scripts in the user interface, can be found in the [knowledge base](https://kb.pomfort.com/silverstack/).
 
 ## 1. Introduction
 
-This the technical documentation for the Silverstack scripting interface.
+This the technical documentation for the Silverstack scripting interface which includes the following resources:
+* A human-readable reference [`lua-reference.md`](./reference/lua-reference.md)
+* A machine-readable [`lua-reference.json`](./reference/lua-reference.json)
+* A machine-readable [`schema.json`](./reference/schema.json) for validation and LLM/tooling integration
+* See [example scripts](./examples) for practical usage
 
 Scripts can be applied with the following scope:
 * Ingest scripts enable you to apply adjustments when ingesting clips into Silverstack (and only then)
