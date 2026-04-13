@@ -3,7 +3,7 @@
 -- Use case: Create an email draft with job information that can be checked before sending it
 
 function onFinish(_, _, workingPath, success)
-  local to = "evh@pomfort.com"
+  local to = "example@example.com"
   local subject = "Mail from Silverstack Script"
   -- Check if success is true and set the string to "Successful", otherwise use "Failed"
   local status = success and "Successful" or "Failed"
