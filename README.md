@@ -13,7 +13,7 @@ Compatible with:
 * Silverstack XT
 * Silverstack Lab
 
-More details on how to apply scripts in the user interface, can be found in the [knowledge base](https://kb.pomfort.com/silverstack/).
+More details on how to apply scripts in the user interface, can be found in the [knowledge base](https://kb.pomfort.com/?p=26000).
 
 ## 1. Introduction
 
@@ -187,81 +187,9 @@ Scripts can read and write external files (e.g. CSV, JSON) using standard Lua fi
 Silverstack provides access to the relevant metadata, but does not include built-in parsers or exporters for formats such as ALE or CSV.
 These formats can be implemented manually in Lua or processed via external tools triggered from the script. This allows flexible integration into existing pipelines.
 
-## 3. Example scripts
+## 3. Troubleshooting
 
-The following examples show scripts that can be appended to a workflow:
-
-* Example 1: Ignore underscore (_) character in camera index of video clips using using an ingest script
-```
--- sst: ingest
-function onStampVideo(videoClip)
-  local cameraIndex = videoClip:metadata():getCameraIndex()
-  if cameraIndex == nil then return end
-  local droppedTrailingUnderscores = string.gsub(cameraIndex, "_+$", "")
-  videoClip:metadata():setCameraIndex(droppedTrailingUnderscores)
-end
-```
-
-* Example 2: Adjusting metadata only for audio clips using an ingest script
-```
--- sst: ingest
--- Function onStampVideo must exist but may be empty
-function onStampVideo()
-end
-
--- Checks if metadata field custom1 of audioClip is nil (meaning empty) and sets a new value for it if the condition is true
-function onStampAudio(audioClip, clipIndex, resource)
-    local custom1 = audioClip:metadata():getCustom1()
-    if custom1 == nil then
-        audioClip:metadata():setCustom1("My custom value")
-    end
-end
-```
-
-* Example 3: Iterate over assets, get the resource path and print it into metadata field custom2 via a post step script
-```
--- sst: post-step
-function onFinish(assets, resources, workingPath, success)
-    if success then
-        for i, asset in ipairs(assets) do
-            local path = resources[i]:getPath()
-            asset:metadata():setCustom2(path)
-        end
-    end
-end
-```
-
-* Example 4: Create an email draft for sending job information
-```
--- sst: post-step
-function onFinish(assets, resources, workingPath, success)
-
-    local function url_encode(s)
-      -- Minimal URL-encoding (good enough for tests)
-      s = tostring(s)
-      s = s:gsub("\n", "\r\n")
-      s = s:gsub("([^%w%-%_%.%~ ])", function(c)
-        return string.format("%%%02X", string.byte(c))
-      end)
-      return s:gsub(" ", "%%20")
-    end
-
-    local to = "yourmail@yourserver.com"
-    local subject = "Test from Lua"
-    local body = "Hello!\n\nThis draft was opened by a post step script.\n"
-
-    local url = "mailto:" .. url_encode(to)
-      .. "?subject=" .. url_encode(subject)
-      .. "&body=" .. url_encode(body)
-
-    -- Use `open` to hand off to the default mail client
-    os.execute(string.format('open "%s"', url))
-end
-```
-
-## 4. Troubleshooting
-
-* Evaluate the type of any variable:
+Evaluate the type of any variable:
 ```
 local sourceAsset = asset:getTranscodingSourceAsset()
 if type(sourceAsset) ~= sst.Asset then
@@ -269,13 +197,13 @@ if type(sourceAsset) ~= sst.Asset then
 end
 ```
 
-* For testing, you can provoke errors like this:
+For testing, you can provoke errors like this:
 ```
 error("Source asset is nil!")
 ```
 
-## 5. Changelog
+## 4. Changelog
 
-### Version 1.0.0 (13.04.2026)
+### Version 1.0 (Wednesday, 14.04.2026)
 
 * Initial public release
