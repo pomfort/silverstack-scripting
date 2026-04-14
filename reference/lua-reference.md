@@ -1,16 +1,16 @@
 # Silverstack Lua API
 
-[Online Reference](https://kb.pomfort.com/goto/sst-developer-api)
-
 - [Types](#types)
-  - [Asset](#asset)
-  - [CuePoint](#cuepoint)
-  - [FileResource](#fileresource)
-  - [Metadata](#metadata)
-  - [Volume](#volume)
+  - [Asset](#type-asset)
+  - [CuePoint](#type-cuepoint)
+  - [FileResource](#type-fileresource)
+  - [Metadata](#type-metadata)
+  - [Volume](#type-volume)
 - [Functions](#functions)
 
 ## Types
+
+<a id="type-asset"></a>
 
 ### Asset
 
@@ -113,6 +113,8 @@ Get metadata accessor
 
 **Returns:** `Metadata?`
 
+<a id="type-cuepoint"></a>
+
 ### CuePoint
 
 Cue Point
@@ -193,6 +195,8 @@ Set Cue Point type.
 
 `compression` `content` `corruptFrame` `exposure` `flicker` `mark` `pixel` `sharpness` `slate`
 
+<a id="type-fileresource"></a>
+
 ### FileResource
 
 #### `:getPath`
@@ -214,6 +218,8 @@ getVolume() -> Volume?
 Get volume resource.
 
 **Returns:** `Volume?`
+
+<a id="type-metadata"></a>
 
 ### Metadata
 
@@ -2362,6 +2368,8 @@ Set metadatum for T-Stop: T-Stop
 | `String` | Formatted String |
 
 **Returns:** `String?`
+
+<a id="type-volume"></a>
 
 ### Volume
 

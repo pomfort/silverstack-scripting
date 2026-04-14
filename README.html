@@ -65,7 +65,7 @@ img {
 </style>
 </head>
 <body>
-<p style="margin-bottom: 16px;"><a href="https://kb.pomfort.com/goto/sst-developer-api">Online Reference</a></p>
+<p style="margin-bottom: 16px;"><a href="https://kb.pomfort.com/goto/sst-developer-api">Online Help</a></p>
 <p align="left">
   <img src="img/fn-icon.png" width="100">
 </p>
@@ -81,7 +81,13 @@ img {
 </ul>
 <p>More details on how to apply scripts in the user interface, can be found in the <a href="https://kb.pomfort.com/?p=26000">knowledge base</a>.</p>
 <h2>1. Introduction</h2>
-<p>This the technical documentation for the Silverstack scripting interface.</p>
+<p>This the technical documentation for the Silverstack scripting interface which includes the following resources:</p>
+<ul>
+<li>A human-readable reference <a href="./reference/lua-reference.html"><code>lua-reference.html</code></a></li>
+<li>A machine-readable <a href="./reference/lua-reference.json"><code>lua-reference.json</code></a></li>
+<li>A machine-readable <a href="./reference/schema.json"><code>schema.json</code></a> for validation and LLM/tooling integration</li>
+<li>See <a href="./examples">example scripts</a> for practical usage</li>
+</ul>
 <p>Scripts can be applied with the following scope:</p>
 <ul>
 <li>Ingest scripts enable you to apply adjustments when ingesting clips into Silverstack (and only then)</li>
@@ -198,92 +204,18 @@ return M
 <p>Scripts can read and write external files (e.g. CSV, JSON) using standard Lua file I/O.
 Silverstack provides access to the relevant metadata, but does not include built-in parsers or exporters for formats such as ALE or CSV.
 These formats can be implemented manually in Lua or processed via external tools triggered from the script. This allows flexible integration into existing pipelines.</p>
-<h2>3. Example scripts</h2>
-<p>The following examples show scripts that can be appended to a workflow:</p>
-<ul>
-<li>Example 1: Ignore underscore (_) character in camera index of video clips using using an ingest script</li>
-</ul>
-<pre><code>-- sst: ingest
-function onStampVideo(videoClip)
-  local cameraIndex = videoClip:metadata():getCameraIndex()
-  if cameraIndex == nil then return end
-  local droppedTrailingUnderscores = string.gsub(cameraIndex, &quot;_+$&quot;, &quot;&quot;)
-  videoClip:metadata():setCameraIndex(droppedTrailingUnderscores)
-end
-</code></pre>
-<ul>
-<li>Example 2: Adjusting metadata only for audio clips using an ingest script</li>
-</ul>
-<pre><code>-- sst: ingest
--- Function onStampVideo must exist but may be empty
-function onStampVideo()
-end
-
--- Checks if metadata field custom1 of audioClip is nil (meaning empty) and sets a new value for it if the condition is true
-function onStampAudio(audioClip, clipIndex, resource)
-    local custom1 = audioClip:metadata():getCustom1()
-    if custom1 == nil then
-        audioClip:metadata():setCustom1(&quot;My custom value&quot;)
-    end
-end
-</code></pre>
-<ul>
-<li>Example 3: Iterate over assets, get the resource path and print it into metadata field custom2 via a post step script</li>
-</ul>
-<pre><code>-- sst: post-step
-function onFinish(assets, resources, workingPath, success)
-    if success then
-        for i, asset in ipairs(assets) do
-            local path = resources[i]:getPath()
-            asset:metadata():setCustom2(path)
-        end
-    end
-end
-</code></pre>
-<ul>
-<li>Example 4: Create an email draft for sending job information</li>
-</ul>
-<pre><code>-- sst: post-step
-function onFinish(assets, resources, workingPath, success)
-
-    local function url_encode(s)
-      -- Minimal URL-encoding (good enough for tests)
-      s = tostring(s)
-      s = s:gsub(&quot;\n&quot;, &quot;\r\n&quot;)
-      s = s:gsub(&quot;([^%w%-%_%.%~ ])&quot;, function(c)
-        return string.format(&quot;%%%02X&quot;, string.byte(c))
-      end)
-      return s:gsub(&quot; &quot;, &quot;%%20&quot;)
-    end
-
-    local to = &quot;yourmail@yourserver.com&quot;
-    local subject = &quot;Test from Lua&quot;
-    local body = &quot;Hello!\n\nThis draft was opened by a post step script.\n&quot;
-
-    local url = &quot;mailto:&quot; .. url_encode(to)
-      .. &quot;?subject=&quot; .. url_encode(subject)
-      .. &quot;&amp;body=&quot; .. url_encode(body)
-
-    -- Use `open` to hand off to the default mail client
-    os.execute(string.format('open &quot;%s&quot;', url))
-end
-</code></pre>
-<h2>4. Troubleshooting</h2>
-<ul>
-<li>Evaluate the type of any variable:</li>
-</ul>
+<h2>3. Troubleshooting</h2>
+<p>Evaluate the type of any variable:</p>
 <pre><code>local sourceAsset = asset:getTranscodingSourceAsset()
 if type(sourceAsset) ~= sst.Asset then
     print(&quot;Type is not asset&quot;)
 end
 </code></pre>
-<ul>
-<li>For testing, you can provoke errors like this:</li>
-</ul>
+<p>For testing, you can provoke errors like this:</p>
 <pre><code>error(&quot;Source asset is nil!&quot;)
 </code></pre>
-<h2>5. Changelog</h2>
-<h3>Version 1.0.0 (13.04.2026)</h3>
+<h2>4. Changelog</h2>
+<h3>Version 1.0 — 2026-04-15</h3>
 <ul>
 <li>Initial public release</li>
 </ul>

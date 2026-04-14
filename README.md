@@ -204,6 +204,6 @@ error("Source asset is nil!")
 
 ## 4. Changelog
 
-### Version 1.0 (Wednesday, 14.04.2026)
+### Version 1.0 — 2026-04-15
 
 * Initial public release
