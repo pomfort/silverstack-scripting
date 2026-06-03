@@ -107,6 +107,22 @@
             "throws" : false
           }
         },
+        "getFolder" : {
+          "description" : "Get containing Folder",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Folder?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
         "getHeaderInfo" : {
           "description" : "Get a table of the header info",
           "scene" : [
@@ -319,7 +335,9 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "type" : "Int"
+              }
             ],
             "static" : false,
             "throws" : false
@@ -332,7 +350,9 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "type" : "Int"
+              }
             ],
             "static" : false,
             "throws" : false
@@ -345,7 +365,9 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "type" : "String"
+              }
             ],
             "static" : false,
             "throws" : false
@@ -358,7 +380,9 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "type" : "CuePoint.Type"
+              }
             ],
             "static" : false,
             "throws" : false
@@ -413,9 +437,92 @@
         "metadataManipulating"
       ]
     },
-    "Metadata" : {
+    "Folder" : {
       "enums" : {
 
+      },
+      "functions" : {
+        "getName" : {
+          "description" : "Get Folder name",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        }
+      },
+      "qualifiedName" : "Folder",
+      "scene" : [
+        "metadataManipulating"
+      ]
+    },
+    "Metadata" : {
+      "enums" : {
+        "Metadata.FlipMode" : {
+          "cases" : [
+            "both",
+            "horizontal",
+            "none",
+            "vertical"
+          ],
+          "description" : "Raw values for getFlip, setFlip.",
+          "scene" : [
+            "metadataManipulating"
+          ]
+        },
+        "Metadata.GradingMode" : {
+          "cases" : [
+            "ACES_CDL",
+            "ACES_CDLadvanced",
+            "ACESfreestyle",
+            "AmiraCompatible",
+            "ArriCAPsimple",
+            "CDLadvanced",
+            "CDLandLUT",
+            "VaricamCompatible",
+            "freestyle",
+            "unknown"
+          ],
+          "description" : "Raw values for getGradingMode.",
+          "scene" : [
+            "metadataManipulating"
+          ]
+        },
+        "Metadata.LabelColor" : {
+          "cases" : [
+            "blue",
+            "gray",
+            "green",
+            "none",
+            "orange",
+            "purple",
+            "red",
+            "yellow"
+          ],
+          "description" : "Raw values for getLabel, setLabel.",
+          "scene" : [
+            "metadataManipulating"
+          ]
+        },
+        "Metadata.RotationMode" : {
+          "cases" : [
+            "left",
+            "none",
+            "right"
+          ],
+          "description" : "Raw values for getRotation, setRotation.",
+          "scene" : [
+            "metadataManipulating"
+          ]
+        }
       },
       "functions" : {
         "getACESidt" : {
@@ -527,11 +634,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -544,11 +654,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -578,11 +691,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -612,11 +728,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -629,11 +748,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -748,11 +870,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -765,11 +890,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -816,11 +944,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -850,11 +981,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -867,11 +1001,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -952,11 +1089,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -969,11 +1109,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1139,11 +1282,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1190,11 +1336,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1207,11 +1356,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1224,17 +1376,21 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
           }
         },
         "getDynamicMetadataExtracted" : {
+          "deprecation" : "Prefer hasDynamicMetadataExtracted method.",
           "description" : "Get metadatum for Dynamic metatdata extracted",
           "scene" : [
             "metadataManipulating"
@@ -1269,17 +1425,20 @@
           }
         },
         "getFileSize" : {
-          "description" : "Get metadatum for File size",
+          "description" : "Get metadatum for File size. Raw value in bytes.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1303,6 +1462,7 @@
           }
         },
         "getFlag" : {
+          "deprecation" : "Prefer hasFlag method.",
           "description" : "Get metadatum for Flag/Circled",
           "scene" : [
             "metadataManipulating"
@@ -1320,17 +1480,20 @@
           }
         },
         "getFlip" : {
-          "description" : "Get metadatum for Flip",
+          "description" : "Get metadatum for Flip. Raw values defined in `asset.Metadata.FlipMode`.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1343,11 +1506,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1360,11 +1526,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1411,11 +1580,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1547,11 +1719,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1575,17 +1750,20 @@
           }
         },
         "getLabel" : {
-          "description" : "Get metadatum for Label (customizeable per project in prefs)",
+          "description" : "Get metadatum for Label. Raw value defined in `asset.Metadata.LabelColor`. Formatted value customizable per project in prefs.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1734,11 +1912,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1751,11 +1932,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1836,11 +2020,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1887,11 +2074,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -1904,11 +2094,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2023,11 +2216,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2074,11 +2270,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2091,28 +2290,34 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
           }
         },
         "getRotation" : {
-          "description" : "Get metadatum for Applied rotation",
+          "description" : "Get metadatum for Applied rotation. Raw values defined in `asset.Metadata.RotationMode`.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2125,11 +2330,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2210,11 +2418,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2227,11 +2438,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2339,6 +2553,26 @@
             "throws" : false
           }
         },
+        "getShutterAngleDegrees" : {
+          "description" : "Get metadatum for Shutter angle in degrees",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
         "getShutterTime" : {
           "description" : "Get metadatum for Shutter (exposure time)",
           "scene" : [
@@ -2346,11 +2580,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2397,11 +2634,14 @@
           ],
           "signature" : {
             "args" : [
-
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
             ],
             "returns" : {
-              "description" : "Formatted String",
-              "type" : "String?"
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2470,6 +2710,26 @@
             "returns" : {
               "description" : "Formatted String",
               "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getTCformatFPS" : {
+          "description" : "Get metadatum for no description",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : false
@@ -2629,7 +2889,8 @@
           }
         },
         "getVerificationState" : {
-          "description" : "Get metadatum for Verification state",
+          "deprecation" : "Prefer hasVerificationState method.",
+          "description" : "Get metadatum for Verification State. Raw value: nil=unverified, false=failed, true=verified",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2646,6 +2907,7 @@
           }
         },
         "getWildTrack" : {
+          "deprecation" : "Prefer hasWildTrack method.",
           "description" : "Get metadatum for Wild track",
           "scene" : [
             "metadataManipulating"
@@ -2662,8 +2924,88 @@
             "throws" : false
           }
         },
+        "hasDynamicMetadataExtracted" : {
+          "description" : "Get boolean value for Dynamic metatdata extracted",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "hasFlag" : {
+          "description" : "Get boolean value for Flag/Circled",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "hasTCformatDrop" : {
+          "description" : "Get boolean value for no description",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "hasVerificationState" : {
+          "description" : "Get boolean value for Verification State. Raw value: nil=unverified, false=failed, true=verified",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "hasWildTrack" : {
+          "description" : "Get boolean value for Wild track",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Bool"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
         "setActors" : {
-          "description" : "Set metadatum for Actors: Actors",
+          "description" : "Set metadatum for Actors",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2683,27 +3025,27 @@
           }
         },
         "setAnamorphic" : {
-          "description" : "Set metadatum for Anamorphic: Anamorphic desqueeze",
+          "description" : "Set metadatum for Anamorphic desqueeze",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setCameraAssistant" : {
-          "description" : "Set metadatum for Camera Assistant: Camera Assistant",
+          "description" : "Set metadatum for Camera Assistant",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2723,7 +3065,7 @@
           }
         },
         "setCameraAssistant2" : {
-          "description" : "Set metadatum for Camera Assistant (2nd): Second camera assistant",
+          "description" : "Set metadatum for Second camera assistant",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2743,7 +3085,7 @@
           }
         },
         "setCameraIndex" : {
-          "description" : "Set metadatum for Camera: Camera index letter or number",
+          "description" : "Set metadatum for Camera index letter or number",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2763,7 +3105,7 @@
           }
         },
         "setCameraOrientation" : {
-          "description" : "Set metadatum for Camera Orientation: Camera orientation",
+          "description" : "Set metadatum for Camera orientation",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2783,47 +3125,47 @@
           }
         },
         "setCameraRollAngle" : {
-          "description" : "Set metadatum for Camera Roll [°]: Camera roll",
+          "description" : "Set metadatum for Camera roll",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setCameraTiltAngle" : {
-          "description" : "Set metadatum for Camera Tilt [°]: Camera tilt",
+          "description" : "Set metadatum for Camera tilt",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setCaption" : {
-          "description" : "Set metadatum for Caption: Caption",
+          "description" : "Set metadatum for Caption",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2843,7 +3185,7 @@
           }
         },
         "setCinematographer" : {
-          "description" : "Set metadatum for Cinematographer: Cinematographer",
+          "description" : "Set metadatum for Cinematographer",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2863,7 +3205,7 @@
           }
         },
         "setClipName" : {
-          "description" : "Set metadatum for Name: (Clip) Name",
+          "description" : "Set metadatum for (Clip) Name",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2883,7 +3225,7 @@
           }
         },
         "setComment" : {
-          "description" : "Set metadatum for Comment: Comment",
+          "description" : "Set metadatum for Comment",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2903,7 +3245,7 @@
           }
         },
         "setCopyrightInfo" : {
-          "description" : "Set metadatum for Copyright Information: Copyright information",
+          "description" : "Set metadatum for Copyright information",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2923,7 +3265,7 @@
           }
         },
         "setCrewUnit" : {
-          "description" : "Set metadatum for Crew Unit: Crew unit",
+          "description" : "Set metadatum for Crew unit",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2942,8 +3284,28 @@
             "throws" : true
           }
         },
+        "setCrop" : {
+          "description" : "Set metadatum for Applied crop",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
         "setCustom1" : {
-          "description" : "Set metadatum for Custom 1: Custom field 1 (customizeable per project in prefs)",
+          "description" : "Set metadatum for Custom field 1 (customizeable per project in prefs)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2963,7 +3325,7 @@
           }
         },
         "setCustom2" : {
-          "description" : "Set metadatum for Custom 2: Custom field 2 (customizeable per project in prefs)",
+          "description" : "Set metadatum for Custom field 2 (customizeable per project in prefs)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2983,7 +3345,7 @@
           }
         },
         "setCustom3" : {
-          "description" : "Set metadatum for Custom 3: Custom field 3 (customizeable per project in prefs)",
+          "description" : "Set metadatum for Custom field 3 (customizeable per project in prefs)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3003,7 +3365,7 @@
           }
         },
         "setCustom4" : {
-          "description" : "Set metadatum for Custom 4: Custom field 4 (customizeable per project in prefs)",
+          "description" : "Set metadatum for Custom field 4 (customizeable per project in prefs)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3023,7 +3385,7 @@
           }
         },
         "setCustom5" : {
-          "description" : "Set metadatum for Custom 5: Custom field 5 (customizeable per project in prefs)",
+          "description" : "Set metadatum for Custom field 5 (customizeable per project in prefs)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3043,7 +3405,7 @@
           }
         },
         "setCustom6" : {
-          "description" : "Set metadatum for Custom 6: Custom field 6 (customizeable per project in prefs)",
+          "description" : "Set metadatum for Custom field 6 (customizeable per project in prefs)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3063,7 +3425,7 @@
           }
         },
         "setDIT" : {
-          "description" : "Set metadatum for DIT: Digital image technican",
+          "description" : "Set metadatum for Digital image technican",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3083,7 +3445,7 @@
           }
         },
         "setDataManager" : {
-          "description" : "Set metadatum for Data Manager: Data manager",
+          "description" : "Set metadatum for Data manager",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3103,7 +3465,7 @@
           }
         },
         "setDayNight" : {
-          "description" : "Set metadatum for Day/Night: Day/Night",
+          "description" : "Set metadatum for Day/Night",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3123,7 +3485,7 @@
           }
         },
         "setDirector" : {
-          "description" : "Set metadatum for Director: Director",
+          "description" : "Set metadatum for Director",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3143,7 +3505,7 @@
           }
         },
         "setDistanceToObject" : {
-          "description" : "Set metadatum for Distance to Object: Distance to object",
+          "description" : "Set metadatum for Distance to object",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3163,7 +3525,7 @@
           }
         },
         "setEpisode" : {
-          "description" : "Set metadatum for Episode: Episode",
+          "description" : "Set metadatum for Episode",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3183,87 +3545,87 @@
           }
         },
         "setFlag" : {
-          "description" : "Set metadatum for Flag/Circled: Flag/Circled",
+          "description" : "Set metadatum for Flag/Circled",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Bool value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Boolean previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setFlip" : {
-          "description" : "Set metadatum for Flip: Flip",
+          "description" : "Set metadatum for Flip. Raw values defined in `asset.Metadata.FlipMode`.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setFocalLength" : {
-          "description" : "Set metadatum for Focal Length: Focal length",
+          "description" : "Set metadatum for Focal length",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setFocusDistance" : {
-          "description" : "Set metadatum for Focus Distance: Focus distance",
+          "description" : "Set metadatum for Focus distance",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setFstop" : {
-          "description" : "Set metadatum for F-Stop: F-Stop",
+          "description" : "Set metadatum for F-Stop",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3283,7 +3645,7 @@
           }
         },
         "setGPSposition" : {
-          "description" : "Set metadatum for GPS Position: GPS position",
+          "description" : "Set metadatum for GPS position",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3303,7 +3665,7 @@
           }
         },
         "setInteriorExterior" : {
-          "description" : "Set metadatum for Int/Ext: Interior/Exterior",
+          "description" : "Set metadatum for Interior/Exterior",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3323,27 +3685,27 @@
           }
         },
         "setLabel" : {
-          "description" : "Set metadatum for Label: Label (customizeable per project in prefs)",
+          "description" : "Set metadatum for Label. Raw value defined in `asset.Metadata.LabelColor`. Formatted value customizable per project in prefs.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setLensFilter" : {
-          "description" : "Set metadatum for Lens Filter: Lens filter",
+          "description" : "Set metadatum for Lens filter",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3363,7 +3725,7 @@
           }
         },
         "setLensModel" : {
-          "description" : "Set metadatum for Lens Model: Lens model",
+          "description" : "Set metadatum for Lens model",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3383,7 +3745,7 @@
           }
         },
         "setLensSerialNumber" : {
-          "description" : "Set metadatum for Lens Serial: Lens serial number",
+          "description" : "Set metadatum for Lens serial number",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3403,7 +3765,7 @@
           }
         },
         "setLocation" : {
-          "description" : "Set metadatum for Location: Location",
+          "description" : "Set metadatum for Location",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3423,47 +3785,47 @@
           }
         },
         "setNDopticalDensity" : {
-          "description" : "Set metadatum for ND Filter: Neutral-density filter (optical density)",
+          "description" : "Set metadatum for Neutral-density filter (optical density)",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setNativeISO" : {
-          "description" : "Set metadatum for Native ISO: Native ISO",
+          "description" : "Set metadatum for Native ISO",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setProducer" : {
-          "description" : "Set metadatum for Producer: Producer",
+          "description" : "Set metadatum for Producer",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3483,7 +3845,7 @@
           }
         },
         "setProductionCompany" : {
-          "description" : "Set metadatum for Production: Production Company",
+          "description" : "Set metadatum for Production Company",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3503,67 +3865,67 @@
           }
         },
         "setProjectFPS" : {
-          "description" : "Set metadatum for Project FPS: Project / playback FPS",
+          "description" : "Set metadatum for Project / playback FPS",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setRating" : {
-          "description" : "Set metadatum for Rating: Rating",
+          "description" : "Set metadatum for Rating",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setRecordingDate" : {
-          "description" : "Set metadatum for Recording Date: Recording date from recorder",
+          "description" : "Set metadatum for Recording date from recorder",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setReel" : {
-          "description" : "Set metadatum for Reel/Tape: Reel/Tape",
+          "description" : "Set metadatum for Reel/Tape",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3583,27 +3945,27 @@
           }
         },
         "setRotation" : {
-          "description" : "Set metadatum for Rotation: Applied rotation",
+          "description" : "Set metadatum for Applied rotation. Raw values defined in `asset.Metadata.RotationMode`.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setScene" : {
-          "description" : "Set metadatum for Scene: Scene",
+          "description" : "Set metadatum for Scene",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3623,7 +3985,7 @@
           }
         },
         "setScriptSupervisor" : {
-          "description" : "Set metadatum for Script Supervisor: Script supervisor",
+          "description" : "Set metadatum for Script supervisor",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3643,7 +4005,7 @@
           }
         },
         "setSeason" : {
-          "description" : "Set metadatum for Season: Season",
+          "description" : "Set metadatum for Season",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3663,27 +4025,27 @@
           }
         },
         "setShootingDate" : {
-          "description" : "Set metadatum for Shooting Date: Shooting Date",
+          "description" : "Set metadatum for Shooting Date",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
-                "description" : "Formatted String",
-                "type" : "String"
+                "description" : "Formatted String or raw value",
+                "type" : "Any"
               }
             ],
             "returns" : {
-              "description" : "Formatted String of previous value",
-              "type" : "String?"
+              "description" : "Formatted String or raw value of previous value",
+              "type" : "Any"
             },
             "static" : false,
             "throws" : true
           }
         },
         "setShootingDay" : {
-          "description" : "Set metadatum for Shooting Day: Shooting day",
+          "description" : "Set metadatum for Shooting day",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3703,7 +4065,7 @@
           }
         },
         "setShot" : {
-          "description" : "Set metadatum for Shot: Shot",
+          "description" : "Set metadatum for Shot",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3723,7 +4085,7 @@
           }
         },
         "setShotDescriptors" : {
-          "description" : "Set metadatum for Shot Descriptors: Shot descriptors",
+          "description" : "Set metadatum for Shot descriptors",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3743,7 +4105,7 @@
           }
         },
         "setSoundMixer" : {
-          "description" : "Set metadatum for Sound Mixer: Sound mixer",
+          "description" : "Set metadatum for Sound mixer",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3763,7 +4125,7 @@
           }
         },
         "setTCstart" : {
-          "description" : "Set metadatum for TC Start: Start timecode of clip",
+          "description" : "Set metadatum for Start timecode of clip",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3783,7 +4145,7 @@
           }
         },
         "setTake" : {
-          "description" : "Set metadatum for Take: Take",
+          "description" : "Set metadatum for Take",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3803,7 +4165,7 @@
           }
         },
         "setTape" : {
-          "description" : "Set metadatum for Tape: Audio tape name",
+          "description" : "Set metadatum for Audio tape name",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3823,7 +4185,7 @@
           }
         },
         "setTstop" : {
-          "description" : "Set metadatum for T-Stop: T-Stop",
+          "description" : "Set metadatum for T-Stop",
           "scene" : [
             "metadataManipulating"
           ],

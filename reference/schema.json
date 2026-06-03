@@ -80,6 +80,7 @@
                     "type": "array",
                     "items": { "type": "string" }
                 },
+                "description":   { "type": ["string", "null"] },
                 "deprecation": { "type": ["string", "null"] },
                 "scene": { "$ref": "#/$defs/Scene" }
             }
