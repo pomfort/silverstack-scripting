@@ -201,6 +201,13 @@ code.sig {
     white-space: pre-wrap;
     word-break: break-all;
 }
+.description code, .type-desc code, .args-table code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--code-bg);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
 .description { font-size: 14px; color: var(--text); margin: 3px 0; }
 .deprecated-note { font-size: 13px; color: var(--badge-deprecated); margin: 3px 0; }
 
@@ -214,9 +221,6 @@ code.sig {
 }
 .args-table td { padding: 2px 10px 2px 0; }
 .args-table td:first-child { font-family: var(--font-mono); white-space: nowrap; }
-
-.returns { font-size: 13px; color: var(--text-secondary); margin: 3px 0; }
-.returns strong { color: var(--text); }
 
 .enum-cases { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
 .enum-case {
@@ -308,6 +312,15 @@ const D = {
           "deprecation": null,
           "args": [],
           "returns": "[CuePoint]?"
+        },
+        {
+          "name": "getFolder",
+          "signature": "getFolder() -> Folder?",
+          "isStatic": false,
+          "description": "Get containing Folder",
+          "deprecation": null,
+          "args": [],
+          "returns": "Folder?"
         },
         {
           "name": "getHeaderInfo",
@@ -418,38 +431,54 @@ const D = {
         },
         {
           "name": "setDuration",
-          "signature": "setDuration()",
+          "signature": "setDuration(Int)",
           "isStatic": false,
           "description": "Set Cue Point duration in frames.",
           "deprecation": null,
-          "args": [],
+          "args": [
+            {
+              "type": "Int"
+            }
+          ],
           "returns": null
         },
         {
           "name": "setFrame",
-          "signature": "setFrame()",
+          "signature": "setFrame(Int)",
           "isStatic": false,
           "description": "Set Cue Point position in frames.",
           "deprecation": null,
-          "args": [],
+          "args": [
+            {
+              "type": "Int"
+            }
+          ],
           "returns": null
         },
         {
           "name": "setName",
-          "signature": "setName()",
+          "signature": "setName(String)",
           "isStatic": false,
           "description": "Set Cue Point name.",
           "deprecation": null,
-          "args": [],
+          "args": [
+            {
+              "type": "String"
+            }
+          ],
           "returns": null
         },
         {
           "name": "setType",
-          "signature": "setType()",
+          "signature": "setType(CuePoint.Type)",
           "isStatic": false,
           "description": "Set Cue Point type.",
           "deprecation": null,
-          "args": [],
+          "args": [
+            {
+              "type": "CuePoint.Type"
+            }
+          ],
           "returns": null
         }
       ]
@@ -477,6 +506,23 @@ const D = {
           "deprecation": null,
           "args": [],
           "returns": "Volume?"
+        }
+      ]
+    },
+    {
+      "typename": "Folder",
+      "name": "Folder",
+      "description": null,
+      "deprecation": null,
+      "methods": [
+        {
+          "name": "getName",
+          "signature": "getName() -> String?",
+          "isStatic": false,
+          "description": "Get Folder name",
+          "deprecation": null,
+          "args": [],
+          "returns": "String?"
         }
       ]
     },
@@ -542,21 +588,31 @@ const D = {
         },
         {
           "name": "getAnamorphic",
-          "signature": "getAnamorphic() -> String?",
+          "signature": "getAnamorphic(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Anamorphic desqueeze",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getAudioBitDepth",
-          "signature": "getAudioBitDepth() -> String?",
+          "signature": "getAudioBitDepth(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Audio bit depth",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getAudioCodec",
@@ -569,12 +625,17 @@ const D = {
         },
         {
           "name": "getAudioSampleRate",
-          "signature": "getAudioSampleRate() -> String?",
+          "signature": "getAudioSampleRate(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Audio sample rate",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getAudioSources",
@@ -587,21 +648,31 @@ const D = {
         },
         {
           "name": "getAudioTrackCountExternal",
-          "signature": "getAudioTrackCountExternal() -> String?",
+          "signature": "getAudioTrackCountExternal(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for no description",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getAudioTrackCountInternal",
-          "signature": "getAudioTrackCountInternal() -> String?",
+          "signature": "getAudioTrackCountInternal(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for no description",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getAudioTrackNames",
@@ -659,21 +730,31 @@ const D = {
         },
         {
           "name": "getCameraRollAngle",
-          "signature": "getCameraRollAngle() -> String?",
+          "signature": "getCameraRollAngle(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Camera roll",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getCameraTiltAngle",
-          "signature": "getCameraTiltAngle() -> String?",
+          "signature": "getCameraTiltAngle(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Camera tilt",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getCaption",
@@ -695,12 +776,17 @@ const D = {
         },
         {
           "name": "getClipExposureIndex",
-          "signature": "getClipExposureIndex() -> String?",
+          "signature": "getClipExposureIndex(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Exposure Index, ISO or ASA value from clip metadata",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getClipName",
@@ -713,21 +799,31 @@ const D = {
         },
         {
           "name": "getClipTint",
-          "signature": "getClipTint() -> String?",
+          "signature": "getClipTint(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Tint from clip metadata",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getClipWhitepoint",
-          "signature": "getClipWhitepoint() -> String?",
+          "signature": "getClipWhitepoint(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for White point from clip metadata",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getCodec",
@@ -767,21 +863,31 @@ const D = {
         },
         {
           "name": "getCrop",
-          "signature": "getCrop() -> String?",
+          "signature": "getCrop(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Applied crop",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getCuePointsCount",
-          "signature": "getCuePointsCount() -> String?",
+          "signature": "getCuePointsCount(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Number of cue points",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getCustom1",
@@ -866,12 +972,17 @@ const D = {
         },
         {
           "name": "getDecodingColorSpace",
-          "signature": "getDecodingColorSpace() -> String?",
+          "signature": "getDecodingColorSpace(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Used for grading",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getDirector",
@@ -893,37 +1004,52 @@ const D = {
         },
         {
           "name": "getDurationInFrames",
-          "signature": "getDurationInFrames() -> String?",
+          "signature": "getDurationInFrames(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Duration (frames)",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getDurationInSamples",
-          "signature": "getDurationInSamples() -> String?",
+          "signature": "getDurationInSamples(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for no description",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getDurationInSeconds",
-          "signature": "getDurationInSeconds() -> String?",
+          "signature": "getDurationInSeconds(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Duration (time)",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getDynamicMetadataExtracted",
           "signature": "getDynamicMetadataExtracted() -> String?",
           "isStatic": false,
           "description": "Get metadatum for Dynamic metatdata extracted",
-          "deprecation": null,
+          "deprecation": "Prefer hasDynamicMetadataExtracted method.",
           "args": [],
           "returns": "String?"
         },
@@ -938,12 +1064,17 @@ const D = {
         },
         {
           "name": "getFileSize",
-          "signature": "getFileSize() -> String?",
+          "signature": "getFileSize(Bool?) -> Any",
           "isStatic": false,
-          "description": "Get metadatum for File size",
+          "description": "Get metadatum for File size. Raw value in bytes.",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getFileType",
@@ -959,36 +1090,51 @@ const D = {
           "signature": "getFlag() -> String?",
           "isStatic": false,
           "description": "Get metadatum for Flag/Circled",
-          "deprecation": null,
+          "deprecation": "Prefer hasFlag method.",
           "args": [],
           "returns": "String?"
         },
         {
           "name": "getFlip",
-          "signature": "getFlip() -> String?",
+          "signature": "getFlip(Bool?) -> Any",
           "isStatic": false,
-          "description": "Get metadatum for Flip",
+          "description": "Get metadatum for Flip. Raw values defined in `asset.Metadata.FlipMode`.",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getFocalLength",
-          "signature": "getFocalLength() -> String?",
+          "signature": "getFocalLength(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Focal length",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getFocusDistance",
-          "signature": "getFocusDistance() -> String?",
+          "signature": "getFocusDistance(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Focus distance",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getFstop",
@@ -1010,12 +1156,17 @@ const D = {
         },
         {
           "name": "getGradingMode",
-          "signature": "getGradingMode() -> String?",
+          "signature": "getGradingMode(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Grading mode",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getHashC4",
@@ -1082,12 +1233,17 @@ const D = {
         },
         {
           "name": "getInOutDuration",
-          "signature": "getInOutDuration() -> String?",
+          "signature": "getInOutDuration(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Duration (frames) between In and Out point",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getInteriorExterior",
@@ -1100,12 +1256,17 @@ const D = {
         },
         {
           "name": "getLabel",
-          "signature": "getLabel() -> String?",
+          "signature": "getLabel(Bool?) -> Any",
           "isStatic": false,
-          "description": "Get metadatum for Label (customizeable per project in prefs)",
+          "description": "Get metadatum for Label. Raw value defined in `asset.Metadata.LabelColor`. Formatted value customizable per project in prefs.",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getLensFilter",
@@ -1181,21 +1342,31 @@ const D = {
         },
         {
           "name": "getNDopticalDensity",
-          "signature": "getNDopticalDensity() -> String?",
+          "signature": "getNDopticalDensity(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Neutral-density filter (optical density)",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getNativeISO",
-          "signature": "getNativeISO() -> String?",
+          "signature": "getNativeISO(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Native ISO",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getNodesCDL",
@@ -1235,12 +1406,17 @@ const D = {
         },
         {
           "name": "getProcessedResolution",
-          "signature": "getProcessedResolution() -> String?",
+          "signature": "getProcessedResolution(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Clip resolution after desqueeze, crop & rotate",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getProducer",
@@ -1262,21 +1438,31 @@ const D = {
         },
         {
           "name": "getProjectFPS",
-          "signature": "getProjectFPS() -> String?",
+          "signature": "getProjectFPS(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Project / playback FPS",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getRating",
-          "signature": "getRating() -> String?",
+          "signature": "getRating(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Rating",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getRecorderFirmwareVersion",
@@ -1334,12 +1520,17 @@ const D = {
         },
         {
           "name": "getRecordingDate",
-          "signature": "getRecordingDate() -> String?",
+          "signature": "getRecordingDate(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Recording date from recorder",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getReel",
@@ -1361,39 +1552,59 @@ const D = {
         },
         {
           "name": "getRegistrationDate",
-          "signature": "getRegistrationDate() -> String?",
+          "signature": "getRegistrationDate(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Date of ingest in library",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getResolution",
-          "signature": "getResolution() -> String?",
+          "signature": "getResolution(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Clip resolution before desqueeze, crop & rotate",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getRotation",
-          "signature": "getRotation() -> String?",
+          "signature": "getRotation(Bool?) -> Any",
           "isStatic": false,
-          "description": "Get metadatum for Applied rotation",
+          "description": "Get metadatum for Applied rotation. Raw values defined in `asset.Metadata.RotationMode`.",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getSamplesSinceMidnight",
-          "signature": "getSamplesSinceMidnight() -> String?",
+          "signature": "getSamplesSinceMidnight(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Samples since midnight",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getScan",
@@ -1433,21 +1644,31 @@ const D = {
         },
         {
           "name": "getSensorFPS",
-          "signature": "getSensorFPS() -> String?",
+          "signature": "getSensorFPS(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Sensor FPS of camera",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getShootingDate",
-          "signature": "getShootingDate() -> String?",
+          "signature": "getShootingDate(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Shooting Date",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getShootingDay",
@@ -1504,13 +1725,32 @@ const D = {
           "returns": "String?"
         },
         {
+          "name": "getShutterAngleDegrees",
+          "signature": "getShutterAngleDegrees(Bool?) -> Any",
+          "isStatic": false,
+          "description": "Get metadatum for Shutter angle in degrees",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
+        },
+        {
           "name": "getShutterTime",
-          "signature": "getShutterTime() -> String?",
+          "signature": "getShutterTime(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Shutter (exposure time)",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getSoundMixer",
@@ -1532,12 +1772,17 @@ const D = {
         },
         {
           "name": "getSourceCreationDate",
-          "signature": "getSourceCreationDate() -> String?",
+          "signature": "getSourceCreationDate(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Creation date of source file",
           "deprecation": null,
-          "args": [],
-          "returns": "String?"
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getTCaudioOffsets",
@@ -1574,6 +1819,20 @@ const D = {
           "deprecation": null,
           "args": [],
           "returns": "String?"
+        },
+        {
+          "name": "getTCformatFPS",
+          "signature": "getTCformatFPS(Bool?) -> Any",
+          "isStatic": false,
+          "description": "Get metadatum for no description",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
         },
         {
           "name": "getTCinPoint",
@@ -1660,8 +1919,8 @@ const D = {
           "name": "getVerificationState",
           "signature": "getVerificationState() -> String?",
           "isStatic": false,
-          "description": "Get metadatum for Verification state",
-          "deprecation": null,
+          "description": "Get metadatum for Verification State. Raw value: nil=unverified, false=failed, true=verified",
+          "deprecation": "Prefer hasVerificationState method.",
           "args": [],
           "returns": "String?"
         },
@@ -1670,15 +1929,60 @@ const D = {
           "signature": "getWildTrack() -> String?",
           "isStatic": false,
           "description": "Get metadatum for Wild track",
-          "deprecation": null,
+          "deprecation": "Prefer hasWildTrack method.",
           "args": [],
           "returns": "String?"
+        },
+        {
+          "name": "hasDynamicMetadataExtracted",
+          "signature": "hasDynamicMetadataExtracted() -> Bool",
+          "isStatic": false,
+          "description": "Get boolean value for Dynamic metatdata extracted",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
+        },
+        {
+          "name": "hasFlag",
+          "signature": "hasFlag() -> Bool",
+          "isStatic": false,
+          "description": "Get boolean value for Flag/Circled",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
+        },
+        {
+          "name": "hasTCformatDrop",
+          "signature": "hasTCformatDrop() -> Bool",
+          "isStatic": false,
+          "description": "Get boolean value for no description",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
+        },
+        {
+          "name": "hasVerificationState",
+          "signature": "hasVerificationState() -> Bool?",
+          "isStatic": false,
+          "description": "Get boolean value for Verification State. Raw value: nil=unverified, false=failed, true=verified",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool?"
+        },
+        {
+          "name": "hasWildTrack",
+          "signature": "hasWildTrack() -> Bool",
+          "isStatic": false,
+          "description": "Get boolean value for Wild track",
+          "deprecation": null,
+          "args": [],
+          "returns": "Bool"
         },
         {
           "name": "setActors",
           "signature": "setActors(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Actors: Actors",
+          "description": "Set metadatum for Actors",
           "deprecation": null,
           "args": [
             {
@@ -1690,23 +1994,23 @@ const D = {
         },
         {
           "name": "setAnamorphic",
-          "signature": "setAnamorphic(String) -> String?",
+          "signature": "setAnamorphic(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Anamorphic: Anamorphic desqueeze",
+          "description": "Set metadatum for Anamorphic desqueeze",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setCameraAssistant",
           "signature": "setCameraAssistant(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Camera Assistant: Camera Assistant",
+          "description": "Set metadatum for Camera Assistant",
           "deprecation": null,
           "args": [
             {
@@ -1720,7 +2024,7 @@ const D = {
           "name": "setCameraAssistant2",
           "signature": "setCameraAssistant2(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Camera Assistant (2nd): Second camera assistant",
+          "description": "Set metadatum for Second camera assistant",
           "deprecation": null,
           "args": [
             {
@@ -1734,7 +2038,7 @@ const D = {
           "name": "setCameraIndex",
           "signature": "setCameraIndex(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Camera: Camera index letter or number",
+          "description": "Set metadatum for Camera index letter or number",
           "deprecation": null,
           "args": [
             {
@@ -1748,7 +2052,7 @@ const D = {
           "name": "setCameraOrientation",
           "signature": "setCameraOrientation(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Camera Orientation: Camera orientation",
+          "description": "Set metadatum for Camera orientation",
           "deprecation": null,
           "args": [
             {
@@ -1760,37 +2064,37 @@ const D = {
         },
         {
           "name": "setCameraRollAngle",
-          "signature": "setCameraRollAngle(String) -> String?",
+          "signature": "setCameraRollAngle(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Camera Roll [°]: Camera roll",
+          "description": "Set metadatum for Camera roll",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setCameraTiltAngle",
-          "signature": "setCameraTiltAngle(String) -> String?",
+          "signature": "setCameraTiltAngle(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Camera Tilt [°]: Camera tilt",
+          "description": "Set metadatum for Camera tilt",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setCaption",
           "signature": "setCaption(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Caption: Caption",
+          "description": "Set metadatum for Caption",
           "deprecation": null,
           "args": [
             {
@@ -1804,7 +2108,7 @@ const D = {
           "name": "setCinematographer",
           "signature": "setCinematographer(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Cinematographer: Cinematographer",
+          "description": "Set metadatum for Cinematographer",
           "deprecation": null,
           "args": [
             {
@@ -1818,7 +2122,7 @@ const D = {
           "name": "setClipName",
           "signature": "setClipName(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Name: (Clip) Name",
+          "description": "Set metadatum for (Clip) Name",
           "deprecation": null,
           "args": [
             {
@@ -1832,7 +2136,7 @@ const D = {
           "name": "setComment",
           "signature": "setComment(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Comment: Comment",
+          "description": "Set metadatum for Comment",
           "deprecation": null,
           "args": [
             {
@@ -1846,7 +2150,7 @@ const D = {
           "name": "setCopyrightInfo",
           "signature": "setCopyrightInfo(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Copyright Information: Copyright information",
+          "description": "Set metadatum for Copyright information",
           "deprecation": null,
           "args": [
             {
@@ -1860,7 +2164,7 @@ const D = {
           "name": "setCrewUnit",
           "signature": "setCrewUnit(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Crew Unit: Crew unit",
+          "description": "Set metadatum for Crew unit",
           "deprecation": null,
           "args": [
             {
@@ -1871,10 +2175,24 @@ const D = {
           "returns": "String?"
         },
         {
+          "name": "setCrop",
+          "signature": "setCrop(Any) -> Any",
+          "isStatic": false,
+          "description": "Set metadatum for Applied crop",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Formatted String or raw value",
+              "type": "Any"
+            }
+          ],
+          "returns": "Any"
+        },
+        {
           "name": "setCustom1",
           "signature": "setCustom1(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Custom 1: Custom field 1 (customizeable per project in prefs)",
+          "description": "Set metadatum for Custom field 1 (customizeable per project in prefs)",
           "deprecation": null,
           "args": [
             {
@@ -1888,7 +2206,7 @@ const D = {
           "name": "setCustom2",
           "signature": "setCustom2(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Custom 2: Custom field 2 (customizeable per project in prefs)",
+          "description": "Set metadatum for Custom field 2 (customizeable per project in prefs)",
           "deprecation": null,
           "args": [
             {
@@ -1902,7 +2220,7 @@ const D = {
           "name": "setCustom3",
           "signature": "setCustom3(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Custom 3: Custom field 3 (customizeable per project in prefs)",
+          "description": "Set metadatum for Custom field 3 (customizeable per project in prefs)",
           "deprecation": null,
           "args": [
             {
@@ -1916,7 +2234,7 @@ const D = {
           "name": "setCustom4",
           "signature": "setCustom4(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Custom 4: Custom field 4 (customizeable per project in prefs)",
+          "description": "Set metadatum for Custom field 4 (customizeable per project in prefs)",
           "deprecation": null,
           "args": [
             {
@@ -1930,7 +2248,7 @@ const D = {
           "name": "setCustom5",
           "signature": "setCustom5(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Custom 5: Custom field 5 (customizeable per project in prefs)",
+          "description": "Set metadatum for Custom field 5 (customizeable per project in prefs)",
           "deprecation": null,
           "args": [
             {
@@ -1944,7 +2262,7 @@ const D = {
           "name": "setCustom6",
           "signature": "setCustom6(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Custom 6: Custom field 6 (customizeable per project in prefs)",
+          "description": "Set metadatum for Custom field 6 (customizeable per project in prefs)",
           "deprecation": null,
           "args": [
             {
@@ -1958,7 +2276,7 @@ const D = {
           "name": "setDIT",
           "signature": "setDIT(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for DIT: Digital image technican",
+          "description": "Set metadatum for Digital image technican",
           "deprecation": null,
           "args": [
             {
@@ -1972,7 +2290,7 @@ const D = {
           "name": "setDataManager",
           "signature": "setDataManager(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Data Manager: Data manager",
+          "description": "Set metadatum for Data manager",
           "deprecation": null,
           "args": [
             {
@@ -1986,7 +2304,7 @@ const D = {
           "name": "setDayNight",
           "signature": "setDayNight(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Day/Night: Day/Night",
+          "description": "Set metadatum for Day/Night",
           "deprecation": null,
           "args": [
             {
@@ -2000,7 +2318,7 @@ const D = {
           "name": "setDirector",
           "signature": "setDirector(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Director: Director",
+          "description": "Set metadatum for Director",
           "deprecation": null,
           "args": [
             {
@@ -2014,7 +2332,7 @@ const D = {
           "name": "setDistanceToObject",
           "signature": "setDistanceToObject(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Distance to Object: Distance to object",
+          "description": "Set metadatum for Distance to object",
           "deprecation": null,
           "args": [
             {
@@ -2028,7 +2346,7 @@ const D = {
           "name": "setEpisode",
           "signature": "setEpisode(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Episode: Episode",
+          "description": "Set metadatum for Episode",
           "deprecation": null,
           "args": [
             {
@@ -2040,65 +2358,65 @@ const D = {
         },
         {
           "name": "setFlag",
-          "signature": "setFlag(String) -> String?",
+          "signature": "setFlag(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Flag/Circled: Flag/Circled",
+          "description": "Set metadatum for Flag/Circled",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Bool value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setFlip",
-          "signature": "setFlip(String) -> String?",
+          "signature": "setFlip(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Flip: Flip",
+          "description": "Set metadatum for Flip. Raw values defined in `asset.Metadata.FlipMode`.",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setFocalLength",
-          "signature": "setFocalLength(String) -> String?",
+          "signature": "setFocalLength(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Focal Length: Focal length",
+          "description": "Set metadatum for Focal length",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setFocusDistance",
-          "signature": "setFocusDistance(String) -> String?",
+          "signature": "setFocusDistance(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Focus Distance: Focus distance",
+          "description": "Set metadatum for Focus distance",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setFstop",
           "signature": "setFstop(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for F-Stop: F-Stop",
+          "description": "Set metadatum for F-Stop",
           "deprecation": null,
           "args": [
             {
@@ -2112,7 +2430,7 @@ const D = {
           "name": "setGPSposition",
           "signature": "setGPSposition(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for GPS Position: GPS position",
+          "description": "Set metadatum for GPS position",
           "deprecation": null,
           "args": [
             {
@@ -2126,7 +2444,7 @@ const D = {
           "name": "setInteriorExterior",
           "signature": "setInteriorExterior(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Int/Ext: Interior/Exterior",
+          "description": "Set metadatum for Interior/Exterior",
           "deprecation": null,
           "args": [
             {
@@ -2138,23 +2456,23 @@ const D = {
         },
         {
           "name": "setLabel",
-          "signature": "setLabel(String) -> String?",
+          "signature": "setLabel(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Label: Label (customizeable per project in prefs)",
+          "description": "Set metadatum for Label. Raw value defined in `asset.Metadata.LabelColor`. Formatted value customizable per project in prefs.",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setLensFilter",
           "signature": "setLensFilter(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Lens Filter: Lens filter",
+          "description": "Set metadatum for Lens filter",
           "deprecation": null,
           "args": [
             {
@@ -2168,7 +2486,7 @@ const D = {
           "name": "setLensModel",
           "signature": "setLensModel(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Lens Model: Lens model",
+          "description": "Set metadatum for Lens model",
           "deprecation": null,
           "args": [
             {
@@ -2182,7 +2500,7 @@ const D = {
           "name": "setLensSerialNumber",
           "signature": "setLensSerialNumber(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Lens Serial: Lens serial number",
+          "description": "Set metadatum for Lens serial number",
           "deprecation": null,
           "args": [
             {
@@ -2196,7 +2514,7 @@ const D = {
           "name": "setLocation",
           "signature": "setLocation(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Location: Location",
+          "description": "Set metadatum for Location",
           "deprecation": null,
           "args": [
             {
@@ -2208,37 +2526,37 @@ const D = {
         },
         {
           "name": "setNDopticalDensity",
-          "signature": "setNDopticalDensity(String) -> String?",
+          "signature": "setNDopticalDensity(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for ND Filter: Neutral-density filter (optical density)",
+          "description": "Set metadatum for Neutral-density filter (optical density)",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setNativeISO",
-          "signature": "setNativeISO(String) -> String?",
+          "signature": "setNativeISO(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Native ISO: Native ISO",
+          "description": "Set metadatum for Native ISO",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setProducer",
           "signature": "setProducer(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Producer: Producer",
+          "description": "Set metadatum for Producer",
           "deprecation": null,
           "args": [
             {
@@ -2252,7 +2570,7 @@ const D = {
           "name": "setProductionCompany",
           "signature": "setProductionCompany(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Production: Production Company",
+          "description": "Set metadatum for Production Company",
           "deprecation": null,
           "args": [
             {
@@ -2264,51 +2582,51 @@ const D = {
         },
         {
           "name": "setProjectFPS",
-          "signature": "setProjectFPS(String) -> String?",
+          "signature": "setProjectFPS(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Project FPS: Project / playback FPS",
+          "description": "Set metadatum for Project / playback FPS",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setRating",
-          "signature": "setRating(String) -> String?",
+          "signature": "setRating(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Rating: Rating",
+          "description": "Set metadatum for Rating",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setRecordingDate",
-          "signature": "setRecordingDate(String) -> String?",
+          "signature": "setRecordingDate(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Recording Date: Recording date from recorder",
+          "description": "Set metadatum for Recording date from recorder",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setReel",
           "signature": "setReel(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Reel/Tape: Reel/Tape",
+          "description": "Set metadatum for Reel/Tape",
           "deprecation": null,
           "args": [
             {
@@ -2320,23 +2638,23 @@ const D = {
         },
         {
           "name": "setRotation",
-          "signature": "setRotation(String) -> String?",
+          "signature": "setRotation(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Rotation: Applied rotation",
+          "description": "Set metadatum for Applied rotation. Raw values defined in `asset.Metadata.RotationMode`.",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setScene",
           "signature": "setScene(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Scene: Scene",
+          "description": "Set metadatum for Scene",
           "deprecation": null,
           "args": [
             {
@@ -2350,7 +2668,7 @@ const D = {
           "name": "setScriptSupervisor",
           "signature": "setScriptSupervisor(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Script Supervisor: Script supervisor",
+          "description": "Set metadatum for Script supervisor",
           "deprecation": null,
           "args": [
             {
@@ -2364,7 +2682,7 @@ const D = {
           "name": "setSeason",
           "signature": "setSeason(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Season: Season",
+          "description": "Set metadatum for Season",
           "deprecation": null,
           "args": [
             {
@@ -2376,23 +2694,23 @@ const D = {
         },
         {
           "name": "setShootingDate",
-          "signature": "setShootingDate(String) -> String?",
+          "signature": "setShootingDate(Any) -> Any",
           "isStatic": false,
-          "description": "Set metadatum for Shooting Date: Shooting Date",
+          "description": "Set metadatum for Shooting Date",
           "deprecation": null,
           "args": [
             {
-              "description": "Formatted String",
-              "type": "String"
+              "description": "Formatted String or raw value",
+              "type": "Any"
             }
           ],
-          "returns": "String?"
+          "returns": "Any"
         },
         {
           "name": "setShootingDay",
           "signature": "setShootingDay(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Shooting Day: Shooting day",
+          "description": "Set metadatum for Shooting day",
           "deprecation": null,
           "args": [
             {
@@ -2406,7 +2724,7 @@ const D = {
           "name": "setShot",
           "signature": "setShot(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Shot: Shot",
+          "description": "Set metadatum for Shot",
           "deprecation": null,
           "args": [
             {
@@ -2420,7 +2738,7 @@ const D = {
           "name": "setShotDescriptors",
           "signature": "setShotDescriptors(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Shot Descriptors: Shot descriptors",
+          "description": "Set metadatum for Shot descriptors",
           "deprecation": null,
           "args": [
             {
@@ -2434,7 +2752,7 @@ const D = {
           "name": "setSoundMixer",
           "signature": "setSoundMixer(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Sound Mixer: Sound mixer",
+          "description": "Set metadatum for Sound mixer",
           "deprecation": null,
           "args": [
             {
@@ -2448,7 +2766,7 @@ const D = {
           "name": "setTCstart",
           "signature": "setTCstart(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for TC Start: Start timecode of clip",
+          "description": "Set metadatum for Start timecode of clip",
           "deprecation": null,
           "args": [
             {
@@ -2462,7 +2780,7 @@ const D = {
           "name": "setTake",
           "signature": "setTake(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Take: Take",
+          "description": "Set metadatum for Take",
           "deprecation": null,
           "args": [
             {
@@ -2476,7 +2794,7 @@ const D = {
           "name": "setTape",
           "signature": "setTape(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for Tape: Audio tape name",
+          "description": "Set metadatum for Audio tape name",
           "deprecation": null,
           "args": [
             {
@@ -2490,7 +2808,7 @@ const D = {
           "name": "setTstop",
           "signature": "setTstop(String) -> String?",
           "isStatic": false,
-          "description": "Set metadatum for T-Stop: T-Stop",
+          "description": "Set metadatum for T-Stop",
           "deprecation": null,
           "args": [
             {
@@ -2586,6 +2904,60 @@ const D = {
         "sharpness",
         "slate"
       ],
+      "description": null,
+      "deprecation": null
+    },
+    {
+      "name": "Metadata.FlipMode",
+      "cases": [
+        "both",
+        "horizontal",
+        "none",
+        "vertical"
+      ],
+      "description": "Raw values for getFlip, setFlip.",
+      "deprecation": null
+    },
+    {
+      "name": "Metadata.GradingMode",
+      "cases": [
+        "ACES_CDL",
+        "ACES_CDLadvanced",
+        "ACESfreestyle",
+        "AmiraCompatible",
+        "ArriCAPsimple",
+        "CDLadvanced",
+        "CDLandLUT",
+        "VaricamCompatible",
+        "freestyle",
+        "unknown"
+      ],
+      "description": "Raw values for getGradingMode.",
+      "deprecation": null
+    },
+    {
+      "name": "Metadata.LabelColor",
+      "cases": [
+        "blue",
+        "gray",
+        "green",
+        "none",
+        "orange",
+        "purple",
+        "red",
+        "yellow"
+      ],
+      "description": "Raw values for getLabel, setLabel.",
+      "deprecation": null
+    },
+    {
+      "name": "Metadata.RotationMode",
+      "cases": [
+        "left",
+        "none",
+        "right"
+      ],
+      "description": "Raw values for getRotation, setRotation.",
       "deprecation": null
     }
   ]
@@ -2642,17 +3014,28 @@ function extractReturnType(sig) {
     return m ? m[1].trim() : null;
 }
 
+function renderDescription(text) {
+    if (!text) return '';
+    const parts = text.split('`');
+    let out = '';
+    for (let i = 0; i < parts.length; i++) {
+        if (i % 2 === 0) {
+            out += esc(parts[i]);
+        } else {
+            out += '<code>' + linkifyType(parts[i]) + '</code>';
+        }
+    }
+    return out;
+}
+
 function fnDetailHtml(f) {
     let h = '<code class="sig">' + linkifySignature(f.signature) + '</code>';
     if (f.deprecation) h += '<div class="deprecated-note">Deprecated: ' + esc(f.deprecation) + '</div>';
-    if (f.description) h += '<div class="description">' + esc(f.description) + '</div>';
+    if (f.description) h += '<div class="description">' + renderDescription(f.description) + '</div>';
     if (f.args.length) {
         h += '<table class="args-table"><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>';
-        f.args.forEach(a => { h += '<tr><td>' + linkifyType(a.type) + '</td><td>' + esc(a.description) + '</td></tr>'; });
+        f.args.forEach(a => { h += '<tr><td>' + linkifyType(a.type) + '</td><td>' + renderDescription(a.description) + '</td></tr>'; });
         h += '</tbody></table>';
-    }
-    if (f.returns) {
-        h += '<div class="returns"><strong>Note:</strong> Returns ' + esc(f.returns) + '</div>';
     }
     return h;
 }
@@ -2718,7 +3101,7 @@ function build() {
                 });
 
                 let typeBody = "";
-                if (t.description) typeBody += '<div class="description">' + esc(t.description) + '</div>';
+                if (t.description) typeBody += '<div class="description">' + renderDescription(t.description) + '</div>';
                 t.methods.forEach(m => {
                     const sep = m.isStatic ? "." : ":";
                     const mId = slug("m", t.typename + sep + m.name);
@@ -2733,6 +3116,7 @@ function build() {
                     const enumLabel = e.name.substring(t.typename.length + 1);
                     typeBody += '<div class="method-block" id="' + eId + '" data-search="' + esc(e.name.toLowerCase()) + '">';
                     typeBody += '<h4>.' + esc(enumLabel) + badgeHtml(e) + '</h4>';
+                    if (e.description) typeBody += '<div class="description">' + renderDescription(e.description) + '</div>';
                     typeBody += '<div class="enum-cases">';
                     e.cases.forEach(c => { typeBody += '<span class="enum-case">.' + esc(c) + '</span>'; });
                     typeBody += '</div></div>';
@@ -2748,7 +3132,7 @@ function build() {
                 body += '<span class="chevron">&#9654;</span>';
                 body += '<span class="type-name">' + esc(t.typename) + '</span>';
                 body += badgeHtml(t);
-                if (t.description) body += '<span class="type-desc">' + esc(t.description) + '</span>';
+                if (t.description) body += '<span class="type-desc">' + renderDescription(t.description) + '</span>';
                 body += '</div>';
                 body += '<div class="type-body">' + typeBody + '</div>';
                 body += '</div>';
@@ -2766,6 +3150,7 @@ function build() {
             nav += '<a class="nav-item" href="#' + id + '" data-search="' + esc(searchTerms) + '">' + esc(e.name) + '</a>';
             body += '<div class="enum-entry" id="' + id + '" data-search="' + esc(searchTerms) + '">';
             body += '<h3>' + esc(e.name) + badgeHtml(e) + '</h3>';
+            if (e.description) body += '<div class="description">' + renderDescription(e.description) + '</div>';
             body += '<div class="enum-cases">';
             e.cases.forEach(c => { body += '<span class="enum-case">.' + esc(c) + '</span>'; });
             body += '</div></div>';

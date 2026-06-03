@@ -4,6 +4,7 @@
   - [Asset](#type-asset)
   - [CuePoint](#type-cuepoint)
   - [FileResource](#type-fileresource)
+  - [Folder](#type-folder)
   - [Metadata](#type-metadata)
   - [Volume](#type-volume)
 - [Functions](#functions)
@@ -31,8 +32,6 @@ Add a CuePoint to a video-clip asset.
 | `Int` | Frame Index |
 | `Int` | Duration in Frames |
 
-**Returns:** `CuePoint`
-
 #### `:getCuePoints`
 
 ```lua
@@ -41,7 +40,13 @@ getCuePoints() -> [CuePoint]?
 
 Get CuePoints for video-clip asset.
 
-**Returns:** `[CuePoint]?`
+#### `:getFolder`
+
+```lua
+getFolder() -> Folder?
+```
+
+Get containing Folder
 
 #### `:getHeaderInfo`
 
@@ -51,8 +56,6 @@ getHeaderInfo() -> Any
 
 Get a table of the header info
 
-**Returns:** `Any`
-
 #### `:getResources`
 
 ```lua
@@ -60,8 +63,6 @@ getResources() -> [FileResource]
 ```
 
 Get all FileResources associated with this Asset
-
-**Returns:** `[FileResource]`
 
 #### `:getTranscodingSourceAsset`
 
@@ -71,8 +72,6 @@ getTranscodingSourceAsset() -> Asset?
 
 Get the Asset this Asset was transcoded from.
 
-**Returns:** `Asset?`
-
 #### `:isAudioClip`
 
 ```lua
@@ -80,8 +79,6 @@ isAudioClip() -> Bool
 ```
 
 Check if asset is audio-clip asset.
-
-**Returns:** `Bool`
 
 #### `:isClip`
 
@@ -91,8 +88,6 @@ isClip() -> Bool
 
 Check if asset is either audio- or video-clip asset.
 
-**Returns:** `Bool`
-
 #### `:isVideoClip`
 
 ```lua
@@ -101,8 +96,6 @@ isVideoClip() -> Bool
 
 Check if asset is video-clip asset.
 
-**Returns:** `Bool`
-
 #### `:metadata`
 
 ```lua
@@ -110,8 +103,6 @@ metadata() -> Metadata?
 ```
 
 Get metadata accessor
-
-**Returns:** `Metadata?`
 
 <a id="type-cuepoint"></a>
 
@@ -127,8 +118,6 @@ getDuration() -> Int
 
 Get Cue Point duration in frames.
 
-**Returns:** `Int`
-
 #### `:getFrame`
 
 ```lua
@@ -136,8 +125,6 @@ getFrame() -> Int
 ```
 
 Get Cue Point position in frames.
-
-**Returns:** `Int`
 
 #### `:getName`
 
@@ -147,8 +134,6 @@ getName() -> String
 
 Get Cue Point name.
 
-**Returns:** `String`
-
 #### `:getType`
 
 ```lua
@@ -157,39 +142,53 @@ getType() -> CuePoint.Type?
 
 Get Cue Point type.
 
-**Returns:** `CuePoint.Type?`
-
 #### `:setDuration`
 
 ```lua
-setDuration()
+setDuration(Int)
 ```
 
 Set Cue Point duration in frames.
 
+| Parameter | Description |
+|-----------|-------------|
+| `Int` |  |
+
 #### `:setFrame`
 
 ```lua
-setFrame()
+setFrame(Int)
 ```
 
 Set Cue Point position in frames.
 
+| Parameter | Description |
+|-----------|-------------|
+| `Int` |  |
+
 #### `:setName`
 
 ```lua
-setName()
+setName(String)
 ```
 
 Set Cue Point name.
 
+| Parameter | Description |
+|-----------|-------------|
+| `String` |  |
+
 #### `:setType`
 
 ```lua
-setType()
+setType(CuePoint.Type)
 ```
 
 Set Cue Point type.
+
+| Parameter | Description |
+|-----------|-------------|
+| `CuePoint.Type` |  |
 
 #### `.Type`
 
@@ -207,8 +206,6 @@ getPath() -> String?
 
 Get absolute file path to resource.
 
-**Returns:** `String?`
-
 #### `:getVolume`
 
 ```lua
@@ -217,7 +214,17 @@ getVolume() -> Volume?
 
 Get volume resource.
 
-**Returns:** `Volume?`
+<a id="type-folder"></a>
+
+### Folder
+
+#### `:getName`
+
+```lua
+getName() -> String?
+```
+
+Get Folder name
 
 <a id="type-metadata"></a>
 
@@ -231,8 +238,6 @@ getACESidt() -> String?
 
 Get metadatum for ACES Input Transform
 
-**Returns:** `String?`
-
 #### `:getACESidtID`
 
 ```lua
@@ -240,8 +245,6 @@ getACESidtID() -> String?
 ```
 
 Get metadatum for ACES Input TransformID
-
-**Returns:** `String?`
 
 #### `:getACESodt`
 
@@ -251,8 +254,6 @@ getACESodt() -> String?
 
 Get metadatum for ACES Output Transform
 
-**Returns:** `String?`
-
 #### `:getACESodtID`
 
 ```lua
@@ -260,8 +261,6 @@ getACESodtID() -> String?
 ```
 
 Get metadatum for ACES Output TransformID
-
-**Returns:** `String?`
 
 #### `:getACESversion`
 
@@ -271,8 +270,6 @@ getACESversion() -> String?
 
 Get metadatum for ACES version
 
-**Returns:** `String?`
-
 #### `:getActors`
 
 ```lua
@@ -281,27 +278,29 @@ getActors() -> String?
 
 Get metadatum for Actors
 
-**Returns:** `String?`
-
 #### `:getAnamorphic`
 
 ```lua
-getAnamorphic() -> String?
+getAnamorphic(Bool?) -> Any
 ```
 
 Get metadatum for Anamorphic desqueeze
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getAudioBitDepth`
 
 ```lua
-getAudioBitDepth() -> String?
+getAudioBitDepth(Bool?) -> Any
 ```
 
 Get metadatum for Audio bit depth
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getAudioCodec`
 
@@ -311,17 +310,17 @@ getAudioCodec() -> String?
 
 Get metadatum for Codec of internal audio
 
-**Returns:** `String?`
-
 #### `:getAudioSampleRate`
 
 ```lua
-getAudioSampleRate() -> String?
+getAudioSampleRate(Bool?) -> Any
 ```
 
 Get metadatum for Audio sample rate
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getAudioSources`
 
@@ -331,27 +330,29 @@ getAudioSources() -> String?
 
 Get metadatum for Bin and track names of synced audio clips
 
-**Returns:** `String?`
-
 #### `:getAudioTrackCountExternal`
 
 ```lua
-getAudioTrackCountExternal() -> String?
+getAudioTrackCountExternal(Bool?) -> Any
 ```
 
 Get metadatum for no description
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getAudioTrackCountInternal`
 
 ```lua
-getAudioTrackCountInternal() -> String?
+getAudioTrackCountInternal(Bool?) -> Any
 ```
 
 Get metadatum for no description
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getAudioTrackNames`
 
@@ -361,8 +362,6 @@ getAudioTrackNames() -> String?
 
 Get metadatum for Audio track names
 
-**Returns:** `String?`
-
 #### `:getAudioTracks`
 
 ```lua
@@ -370,8 +369,6 @@ getAudioTracks() -> String?
 ```
 
 Get metadatum for Summary of audio tracks
-
-**Returns:** `String?`
 
 #### `:getCameraAssistant`
 
@@ -381,8 +378,6 @@ getCameraAssistant() -> String?
 
 Get metadatum for Camera Assistant
 
-**Returns:** `String?`
-
 #### `:getCameraAssistant2`
 
 ```lua
@@ -390,8 +385,6 @@ getCameraAssistant2() -> String?
 ```
 
 Get metadatum for Second camera assistant
-
-**Returns:** `String?`
 
 #### `:getCameraIndex`
 
@@ -401,8 +394,6 @@ getCameraIndex() -> String?
 
 Get metadatum for Camera index letter or number
 
-**Returns:** `String?`
-
 #### `:getCameraOrientation`
 
 ```lua
@@ -411,27 +402,29 @@ getCameraOrientation() -> String?
 
 Get metadatum for Camera orientation
 
-**Returns:** `String?`
-
 #### `:getCameraRollAngle`
 
 ```lua
-getCameraRollAngle() -> String?
+getCameraRollAngle(Bool?) -> Any
 ```
 
 Get metadatum for Camera roll
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getCameraTiltAngle`
 
 ```lua
-getCameraTiltAngle() -> String?
+getCameraTiltAngle(Bool?) -> Any
 ```
 
 Get metadatum for Camera tilt
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getCaption`
 
@@ -441,8 +434,6 @@ getCaption() -> String?
 
 Get metadatum for Caption
 
-**Returns:** `String?`
-
 #### `:getCinematographer`
 
 ```lua
@@ -451,17 +442,17 @@ getCinematographer() -> String?
 
 Get metadatum for Cinematographer
 
-**Returns:** `String?`
-
 #### `:getClipExposureIndex`
 
 ```lua
-getClipExposureIndex() -> String?
+getClipExposureIndex(Bool?) -> Any
 ```
 
 Get metadatum for Exposure Index, ISO or ASA value from clip metadata
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getClipName`
 
@@ -471,27 +462,29 @@ getClipName() -> String?
 
 Get metadatum for (Clip) Name
 
-**Returns:** `String?`
-
 #### `:getClipTint`
 
 ```lua
-getClipTint() -> String?
+getClipTint(Bool?) -> Any
 ```
 
 Get metadatum for Tint from clip metadata
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getClipWhitepoint`
 
 ```lua
-getClipWhitepoint() -> String?
+getClipWhitepoint(Bool?) -> Any
 ```
 
 Get metadatum for White point from clip metadata
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getCodec`
 
@@ -501,8 +494,6 @@ getCodec() -> String?
 
 Get metadatum for Codec
 
-**Returns:** `String?`
-
 #### `:getComment`
 
 ```lua
@@ -510,8 +501,6 @@ getComment() -> String?
 ```
 
 Get metadatum for Comment
-
-**Returns:** `String?`
 
 #### `:getCopyrightInfo`
 
@@ -521,8 +510,6 @@ getCopyrightInfo() -> String?
 
 Get metadatum for Copyright information
 
-**Returns:** `String?`
-
 #### `:getCrewUnit`
 
 ```lua
@@ -531,27 +518,29 @@ getCrewUnit() -> String?
 
 Get metadatum for Crew unit
 
-**Returns:** `String?`
-
 #### `:getCrop`
 
 ```lua
-getCrop() -> String?
+getCrop(Bool?) -> Any
 ```
 
 Get metadatum for Applied crop
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getCuePointsCount`
 
 ```lua
-getCuePointsCount() -> String?
+getCuePointsCount(Bool?) -> Any
 ```
 
 Get metadatum for Number of cue points
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getCustom1`
 
@@ -561,8 +550,6 @@ getCustom1() -> String?
 
 Get metadatum for Custom field 1 (customizeable per project in prefs)
 
-**Returns:** `String?`
-
 #### `:getCustom2`
 
 ```lua
@@ -570,8 +557,6 @@ getCustom2() -> String?
 ```
 
 Get metadatum for Custom field 2 (customizeable per project in prefs)
-
-**Returns:** `String?`
 
 #### `:getCustom3`
 
@@ -581,8 +566,6 @@ getCustom3() -> String?
 
 Get metadatum for Custom field 3 (customizeable per project in prefs)
 
-**Returns:** `String?`
-
 #### `:getCustom4`
 
 ```lua
@@ -590,8 +573,6 @@ getCustom4() -> String?
 ```
 
 Get metadatum for Custom field 4 (customizeable per project in prefs)
-
-**Returns:** `String?`
 
 #### `:getCustom5`
 
@@ -601,8 +582,6 @@ getCustom5() -> String?
 
 Get metadatum for Custom field 5 (customizeable per project in prefs)
 
-**Returns:** `String?`
-
 #### `:getCustom6`
 
 ```lua
@@ -610,8 +589,6 @@ getCustom6() -> String?
 ```
 
 Get metadatum for Custom field 6 (customizeable per project in prefs)
-
-**Returns:** `String?`
 
 #### `:getDIT`
 
@@ -621,8 +598,6 @@ getDIT() -> String?
 
 Get metadatum for Digital image technican
 
-**Returns:** `String?`
-
 #### `:getDataManager`
 
 ```lua
@@ -630,8 +605,6 @@ getDataManager() -> String?
 ```
 
 Get metadatum for Data manager
-
-**Returns:** `String?`
 
 #### `:getDayNight`
 
@@ -641,17 +614,17 @@ getDayNight() -> String?
 
 Get metadatum for Day/Night
 
-**Returns:** `String?`
-
 #### `:getDecodingColorSpace`
 
 ```lua
-getDecodingColorSpace() -> String?
+getDecodingColorSpace(Bool?) -> Any
 ```
 
 Get metadatum for Used for grading
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getDirector`
 
@@ -661,8 +634,6 @@ getDirector() -> String?
 
 Get metadatum for Director
 
-**Returns:** `String?`
-
 #### `:getDistanceToObject`
 
 ```lua
@@ -671,47 +642,49 @@ getDistanceToObject() -> String?
 
 Get metadatum for Distance to object
 
-**Returns:** `String?`
-
 #### `:getDurationInFrames`
 
 ```lua
-getDurationInFrames() -> String?
+getDurationInFrames(Bool?) -> Any
 ```
 
 Get metadatum for Duration (frames)
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getDurationInSamples`
 
 ```lua
-getDurationInSamples() -> String?
+getDurationInSamples(Bool?) -> Any
 ```
 
 Get metadatum for no description
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getDurationInSeconds`
 
 ```lua
-getDurationInSeconds() -> String?
+getDurationInSeconds(Bool?) -> Any
 ```
 
 Get metadatum for Duration (time)
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
-#### `:getDynamicMetadataExtracted`
+#### `:getDynamicMetadataExtracted` — *deprecated: Prefer hasDynamicMetadataExtracted method.*
 
 ```lua
 getDynamicMetadataExtracted() -> String?
 ```
 
 Get metadatum for Dynamic metatdata extracted
-
-**Returns:** `String?`
 
 #### `:getEpisode`
 
@@ -721,17 +694,17 @@ getEpisode() -> String?
 
 Get metadatum for Episode
 
-**Returns:** `String?`
-
 #### `:getFileSize`
 
 ```lua
-getFileSize() -> String?
+getFileSize(Bool?) -> Any
 ```
 
-Get metadatum for File size
+Get metadatum for File size. Raw value in bytes.
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getFileType`
 
@@ -741,9 +714,7 @@ getFileType() -> String?
 
 Get metadatum for File type
 
-**Returns:** `String?`
-
-#### `:getFlag`
+#### `:getFlag` — *deprecated: Prefer hasFlag method.*
 
 ```lua
 getFlag() -> String?
@@ -751,37 +722,41 @@ getFlag() -> String?
 
 Get metadatum for Flag/Circled
 
-**Returns:** `String?`
-
 #### `:getFlip`
 
 ```lua
-getFlip() -> String?
+getFlip(Bool?) -> Any
 ```
 
-Get metadatum for Flip
+Get metadatum for Flip. Raw values defined in `asset.Metadata.FlipMode`.
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getFocalLength`
 
 ```lua
-getFocalLength() -> String?
+getFocalLength(Bool?) -> Any
 ```
 
 Get metadatum for Focal length
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getFocusDistance`
 
 ```lua
-getFocusDistance() -> String?
+getFocusDistance(Bool?) -> Any
 ```
 
 Get metadatum for Focus distance
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getFstop`
 
@@ -791,8 +766,6 @@ getFstop() -> String?
 
 Get metadatum for F-Stop
 
-**Returns:** `String?`
-
 #### `:getGPSposition`
 
 ```lua
@@ -801,17 +774,17 @@ getGPSposition() -> String?
 
 Get metadatum for GPS position
 
-**Returns:** `String?`
-
 #### `:getGradingMode`
 
 ```lua
-getGradingMode() -> String?
+getGradingMode(Bool?) -> Any
 ```
 
 Get metadatum for Grading mode
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getHashC4`
 
@@ -821,8 +794,6 @@ getHashC4() -> String?
 
 Get metadatum for C4ID hash of file
 
-**Returns:** `String?`
-
 #### `:getHashMD5`
 
 ```lua
@@ -830,8 +801,6 @@ getHashMD5() -> String?
 ```
 
 Get metadatum for MD5 hash of file
-
-**Returns:** `String?`
 
 #### `:getHashSHA1`
 
@@ -841,8 +810,6 @@ getHashSHA1() -> String?
 
 Get metadatum for SHA1 hash of file
 
-**Returns:** `String?`
-
 #### `:getHashXXH128`
 
 ```lua
@@ -850,8 +817,6 @@ getHashXXH128() -> String?
 ```
 
 Get metadatum for XXH128 hash of file
-
-**Returns:** `String?`
 
 #### `:getHashXXH3`
 
@@ -861,8 +826,6 @@ getHashXXH3() -> String?
 
 Get metadatum for XXH3 hash of file
 
-**Returns:** `String?`
-
 #### `:getHashXXH64`
 
 ```lua
@@ -870,8 +833,6 @@ getHashXXH64() -> String?
 ```
 
 Get metadatum for XXH64 (BE) hash of file
-
-**Returns:** `String?`
 
 #### `:getHashes`
 
@@ -881,17 +842,17 @@ getHashes() -> String?
 
 Get metadatum for Available checksums
 
-**Returns:** `String?`
-
 #### `:getInOutDuration`
 
 ```lua
-getInOutDuration() -> String?
+getInOutDuration(Bool?) -> Any
 ```
 
 Get metadatum for Duration (frames) between In and Out point
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getInteriorExterior`
 
@@ -901,17 +862,17 @@ getInteriorExterior() -> String?
 
 Get metadatum for Interior/Exterior
 
-**Returns:** `String?`
-
 #### `:getLabel`
 
 ```lua
-getLabel() -> String?
+getLabel(Bool?) -> Any
 ```
 
-Get metadatum for Label (customizeable per project in prefs)
+Get metadatum for Label. Raw value defined in `asset.Metadata.LabelColor`. Formatted value customizable per project in prefs.
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getLensFilter`
 
@@ -921,8 +882,6 @@ getLensFilter() -> String?
 
 Get metadatum for Lens filter
 
-**Returns:** `String?`
-
 #### `:getLensModel`
 
 ```lua
@@ -930,8 +889,6 @@ getLensModel() -> String?
 ```
 
 Get metadatum for Lens model
-
-**Returns:** `String?`
 
 #### `:getLensSerialNumber`
 
@@ -941,8 +898,6 @@ getLensSerialNumber() -> String?
 
 Get metadatum for Lens serial number
 
-**Returns:** `String?`
-
 #### `:getLensZEISScorrection`
 
 ```lua
@@ -950,8 +905,6 @@ getLensZEISScorrection() -> String?
 ```
 
 Get metadatum for ZEISS lens correction data
-
-**Returns:** `String?`
 
 #### `:getLocation`
 
@@ -961,8 +914,6 @@ getLocation() -> String?
 
 Get metadatum for Location
 
-**Returns:** `String?`
-
 #### `:getLookInfo`
 
 ```lua
@@ -970,8 +921,6 @@ getLookInfo() -> String?
 ```
 
 Get metadatum for Look info from camera
-
-**Returns:** `String?`
 
 #### `:getLookSource`
 
@@ -981,8 +930,6 @@ getLookSource() -> String?
 
 Get metadatum for Selected look source
 
-**Returns:** `String?`
-
 #### `:getLookSourceName`
 
 ```lua
@@ -991,27 +938,29 @@ getLookSourceName() -> String?
 
 Get metadatum for Name of look source
 
-**Returns:** `String?`
-
 #### `:getNDopticalDensity`
 
 ```lua
-getNDopticalDensity() -> String?
+getNDopticalDensity(Bool?) -> Any
 ```
 
 Get metadatum for Neutral-density filter (optical density)
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getNativeISO`
 
 ```lua
-getNativeISO() -> String?
+getNativeISO(Bool?) -> Any
 ```
 
 Get metadatum for Native ISO
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getNodesCDL`
 
@@ -1021,8 +970,6 @@ getNodesCDL() -> String?
 
 Get metadatum for CDL values: Slope Offset Power
 
-**Returns:** `String?`
-
 #### `:getNodesLMT`
 
 ```lua
@@ -1030,8 +977,6 @@ getNodesLMT() -> String?
 ```
 
 Get metadatum for LMT Nodes
-
-**Returns:** `String?`
 
 #### `:getNodesLUT`
 
@@ -1041,8 +986,6 @@ getNodesLUT() -> String?
 
 Get metadatum for List of applied LUTs
 
-**Returns:** `String?`
-
 #### `:getNodesSAT`
 
 ```lua
@@ -1051,17 +994,17 @@ getNodesSAT() -> String?
 
 Get metadatum for Saturation nodes
 
-**Returns:** `String?`
-
 #### `:getProcessedResolution`
 
 ```lua
-getProcessedResolution() -> String?
+getProcessedResolution(Bool?) -> Any
 ```
 
 Get metadatum for Clip resolution after desqueeze, crop & rotate
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getProducer`
 
@@ -1071,8 +1014,6 @@ getProducer() -> String?
 
 Get metadatum for Producer
 
-**Returns:** `String?`
-
 #### `:getProductionCompany`
 
 ```lua
@@ -1081,27 +1022,29 @@ getProductionCompany() -> String?
 
 Get metadatum for Production Company
 
-**Returns:** `String?`
-
 #### `:getProjectFPS`
 
 ```lua
-getProjectFPS() -> String?
+getProjectFPS(Bool?) -> Any
 ```
 
 Get metadatum for Project / playback FPS
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getRating`
 
 ```lua
-getRating() -> String?
+getRating(Bool?) -> Any
 ```
 
 Get metadatum for Rating
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getRecorderFirmwareVersion`
 
@@ -1111,8 +1054,6 @@ getRecorderFirmwareVersion() -> String?
 
 Get metadatum for Recording device firmware version
 
-**Returns:** `String?`
-
 #### `:getRecorderID`
 
 ```lua
@@ -1120,8 +1061,6 @@ getRecorderID() -> String?
 ```
 
 Get metadatum for Recording device model ID
-
-**Returns:** `String?`
 
 #### `:getRecorderManufacturer`
 
@@ -1131,8 +1070,6 @@ getRecorderManufacturer() -> String?
 
 Get metadatum for Recording device manufacturer
 
-**Returns:** `String?`
-
 #### `:getRecorderModel`
 
 ```lua
@@ -1140,8 +1077,6 @@ getRecorderModel() -> String?
 ```
 
 Get metadatum for Recording device model
-
-**Returns:** `String?`
 
 #### `:getRecorderSerialNumber`
 
@@ -1151,8 +1086,6 @@ getRecorderSerialNumber() -> String?
 
 Get metadatum for Recording device serial number
 
-**Returns:** `String?`
-
 #### `:getRecordingColorSpace`
 
 ```lua
@@ -1161,17 +1094,17 @@ getRecordingColorSpace() -> String?
 
 Get metadatum for Recording color space
 
-**Returns:** `String?`
-
 #### `:getRecordingDate`
 
 ```lua
-getRecordingDate() -> String?
+getRecordingDate(Bool?) -> Any
 ```
 
 Get metadatum for Recording date from recorder
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getReel`
 
@@ -1181,8 +1114,6 @@ getReel() -> String?
 
 Get metadatum for Reel/Tape
 
-**Returns:** `String?`
-
 #### `:getReferenceGamutCompression`
 
 ```lua
@@ -1191,47 +1122,53 @@ getReferenceGamutCompression() -> String?
 
 Get metadatum for Reference Gamut Compression
 
-**Returns:** `String?`
-
 #### `:getRegistrationDate`
 
 ```lua
-getRegistrationDate() -> String?
+getRegistrationDate(Bool?) -> Any
 ```
 
 Get metadatum for Date of ingest in library
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getResolution`
 
 ```lua
-getResolution() -> String?
+getResolution(Bool?) -> Any
 ```
 
 Get metadatum for Clip resolution before desqueeze, crop & rotate
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getRotation`
 
 ```lua
-getRotation() -> String?
+getRotation(Bool?) -> Any
 ```
 
-Get metadatum for Applied rotation
+Get metadatum for Applied rotation. Raw values defined in `asset.Metadata.RotationMode`.
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getSamplesSinceMidnight`
 
 ```lua
-getSamplesSinceMidnight() -> String?
+getSamplesSinceMidnight(Bool?) -> Any
 ```
 
 Get metadatum for Samples since midnight
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getScan`
 
@@ -1241,8 +1178,6 @@ getScan() -> String?
 
 Get metadatum for Scan type (progressive / interlaced)
 
-**Returns:** `String?`
-
 #### `:getScene`
 
 ```lua
@@ -1250,8 +1185,6 @@ getScene() -> String?
 ```
 
 Get metadatum for Scene
-
-**Returns:** `String?`
 
 #### `:getScriptSupervisor`
 
@@ -1261,8 +1194,6 @@ getScriptSupervisor() -> String?
 
 Get metadatum for Script supervisor
 
-**Returns:** `String?`
-
 #### `:getSeason`
 
 ```lua
@@ -1271,27 +1202,29 @@ getSeason() -> String?
 
 Get metadatum for Season
 
-**Returns:** `String?`
-
 #### `:getSensorFPS`
 
 ```lua
-getSensorFPS() -> String?
+getSensorFPS(Bool?) -> Any
 ```
 
 Get metadatum for Sensor FPS of camera
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getShootingDate`
 
 ```lua
-getShootingDate() -> String?
+getShootingDate(Bool?) -> Any
 ```
 
 Get metadatum for Shooting Date
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getShootingDay`
 
@@ -1301,8 +1234,6 @@ getShootingDay() -> String?
 
 Get metadatum for Shooting day
 
-**Returns:** `String?`
-
 #### `:getShot`
 
 ```lua
@@ -1310,8 +1241,6 @@ getShot() -> String?
 ```
 
 Get metadatum for Shot
-
-**Returns:** `String?`
 
 #### `:getShotDescriptors`
 
@@ -1321,8 +1250,6 @@ getShotDescriptors() -> String?
 
 Get metadatum for Shot descriptors
 
-**Returns:** `String?`
-
 #### `:getShotID`
 
 ```lua
@@ -1330,8 +1257,6 @@ getShotID() -> String?
 ```
 
 Get metadatum for ShotID for referencing clip information (e.g. in ShotHub)
-
-**Returns:** `String?`
 
 #### `:getShothubCreatedBy`
 
@@ -1341,8 +1266,6 @@ getShothubCreatedBy() -> String?
 
 Get metadatum for Added to ShotHub by user
 
-**Returns:** `String?`
-
 #### `:getShutterAngle`
 
 ```lua
@@ -1351,17 +1274,29 @@ getShutterAngle() -> String?
 
 Get metadatum for Shutter angle (degrees)
 
-**Returns:** `String?`
+#### `:getShutterAngleDegrees`
+
+```lua
+getShutterAngleDegrees(Bool?) -> Any
+```
+
+Get metadatum for Shutter angle in degrees
+
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getShutterTime`
 
 ```lua
-getShutterTime() -> String?
+getShutterTime(Bool?) -> Any
 ```
 
 Get metadatum for Shutter (exposure time)
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getSoundMixer`
 
@@ -1371,8 +1306,6 @@ getSoundMixer() -> String?
 
 Get metadatum for Sound mixer
 
-**Returns:** `String?`
-
 #### `:getSoundroll`
 
 ```lua
@@ -1381,17 +1314,17 @@ getSoundroll() -> String?
 
 Get metadatum for Tape name of synced audio clip
 
-**Returns:** `String?`
-
 #### `:getSourceCreationDate`
 
 ```lua
-getSourceCreationDate() -> String?
+getSourceCreationDate(Bool?) -> Any
 ```
 
 Get metadatum for Creation date of source file
 
-**Returns:** `String?`
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getTCaudioOffsets`
 
@@ -1401,8 +1334,6 @@ getTCaudioOffsets() -> String?
 
 Get metadatum for Offset between audio and video timecodes
 
-**Returns:** `String?`
-
 #### `:getTCend`
 
 ```lua
@@ -1410,8 +1341,6 @@ getTCend() -> String?
 ```
 
 Get metadatum for End timecode of clip (exclusive)
-
-**Returns:** `String?`
 
 #### `:getTCendExtAudio`
 
@@ -1421,8 +1350,6 @@ getTCendExtAudio() -> String?
 
 Get metadatum for Timecode of external audio clip at last video frame (exclusive)
 
-**Returns:** `String?`
-
 #### `:getTCformat`
 
 ```lua
@@ -1431,7 +1358,17 @@ getTCformat() -> String?
 
 Get metadatum for Timecode format
 
-**Returns:** `String?`
+#### `:getTCformatFPS`
+
+```lua
+getTCformatFPS(Bool?) -> Any
+```
+
+Get metadatum for no description
+
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
 
 #### `:getTCinPoint`
 
@@ -1441,8 +1378,6 @@ getTCinPoint() -> String?
 
 Get metadatum for Timecode of In point
 
-**Returns:** `String?`
-
 #### `:getTCoutPoint`
 
 ```lua
@@ -1450,8 +1385,6 @@ getTCoutPoint() -> String?
 ```
 
 Get metadatum for Timecode of Out point
-
-**Returns:** `String?`
 
 #### `:getTCstart`
 
@@ -1461,8 +1394,6 @@ getTCstart() -> String?
 
 Get metadatum for Start timecode of clip
 
-**Returns:** `String?`
-
 #### `:getTCstartExtAudio`
 
 ```lua
@@ -1470,8 +1401,6 @@ getTCstartExtAudio() -> String?
 ```
 
 Get metadatum for Timecode of external audio clip at first video frame
-
-**Returns:** `String?`
 
 #### `:getTCsyncSlate`
 
@@ -1481,8 +1410,6 @@ getTCsyncSlate() -> String?
 
 Get metadatum for Timecode of slate marker
 
-**Returns:** `String?`
-
 #### `:getTags`
 
 ```lua
@@ -1490,8 +1417,6 @@ getTags() -> String?
 ```
 
 Get metadatum for Tags
-
-**Returns:** `String?`
 
 #### `:getTake`
 
@@ -1501,8 +1426,6 @@ getTake() -> String?
 
 Get metadatum for Take
 
-**Returns:** `String?`
-
 #### `:getTape`
 
 ```lua
@@ -1510,8 +1433,6 @@ getTape() -> String?
 ```
 
 Get metadatum for Audio tape name
-
-**Returns:** `String?`
 
 #### `:getTstop`
 
@@ -1521,19 +1442,15 @@ getTstop() -> String?
 
 Get metadatum for T-Stop
 
-**Returns:** `String?`
-
-#### `:getVerificationState`
+#### `:getVerificationState` — *deprecated: Prefer hasVerificationState method.*
 
 ```lua
 getVerificationState() -> String?
 ```
 
-Get metadatum for Verification state
+Get metadatum for Verification State. Raw value: nil=unverified, false=failed, true=verified
 
-**Returns:** `String?`
-
-#### `:getWildTrack`
+#### `:getWildTrack` — *deprecated: Prefer hasWildTrack method.*
 
 ```lua
 getWildTrack() -> String?
@@ -1541,7 +1458,45 @@ getWildTrack() -> String?
 
 Get metadatum for Wild track
 
-**Returns:** `String?`
+#### `:hasDynamicMetadataExtracted`
+
+```lua
+hasDynamicMetadataExtracted() -> Bool
+```
+
+Get boolean value for Dynamic metatdata extracted
+
+#### `:hasFlag`
+
+```lua
+hasFlag() -> Bool
+```
+
+Get boolean value for Flag/Circled
+
+#### `:hasTCformatDrop`
+
+```lua
+hasTCformatDrop() -> Bool
+```
+
+Get boolean value for no description
+
+#### `:hasVerificationState`
+
+```lua
+hasVerificationState() -> Bool?
+```
+
+Get boolean value for Verification State. Raw value: nil=unverified, false=failed, true=verified
+
+#### `:hasWildTrack`
+
+```lua
+hasWildTrack() -> Bool
+```
+
+Get boolean value for Wild track
 
 #### `:setActors`
 
@@ -1549,27 +1504,23 @@ Get metadatum for Wild track
 setActors(String) -> String?
 ```
 
-Set metadatum for Actors: Actors
+Set metadatum for Actors
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setAnamorphic`
 
 ```lua
-setAnamorphic(String) -> String?
+setAnamorphic(Any) -> Any
 ```
 
-Set metadatum for Anamorphic: Anamorphic desqueeze
+Set metadatum for Anamorphic desqueeze
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setCameraAssistant`
 
@@ -1577,13 +1528,11 @@ Set metadatum for Anamorphic: Anamorphic desqueeze
 setCameraAssistant(String) -> String?
 ```
 
-Set metadatum for Camera Assistant: Camera Assistant
+Set metadatum for Camera Assistant
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCameraAssistant2`
 
@@ -1591,13 +1540,11 @@ Set metadatum for Camera Assistant: Camera Assistant
 setCameraAssistant2(String) -> String?
 ```
 
-Set metadatum for Camera Assistant (2nd): Second camera assistant
+Set metadatum for Second camera assistant
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCameraIndex`
 
@@ -1605,13 +1552,11 @@ Set metadatum for Camera Assistant (2nd): Second camera assistant
 setCameraIndex(String) -> String?
 ```
 
-Set metadatum for Camera: Camera index letter or number
+Set metadatum for Camera index letter or number
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCameraOrientation`
 
@@ -1619,41 +1564,35 @@ Set metadatum for Camera: Camera index letter or number
 setCameraOrientation(String) -> String?
 ```
 
-Set metadatum for Camera Orientation: Camera orientation
+Set metadatum for Camera orientation
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCameraRollAngle`
 
 ```lua
-setCameraRollAngle(String) -> String?
+setCameraRollAngle(Any) -> Any
 ```
 
-Set metadatum for Camera Roll [°]: Camera roll
+Set metadatum for Camera roll
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setCameraTiltAngle`
 
 ```lua
-setCameraTiltAngle(String) -> String?
+setCameraTiltAngle(Any) -> Any
 ```
 
-Set metadatum for Camera Tilt [°]: Camera tilt
+Set metadatum for Camera tilt
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setCaption`
 
@@ -1661,13 +1600,11 @@ Set metadatum for Camera Tilt [°]: Camera tilt
 setCaption(String) -> String?
 ```
 
-Set metadatum for Caption: Caption
+Set metadatum for Caption
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCinematographer`
 
@@ -1675,13 +1612,11 @@ Set metadatum for Caption: Caption
 setCinematographer(String) -> String?
 ```
 
-Set metadatum for Cinematographer: Cinematographer
+Set metadatum for Cinematographer
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setClipName`
 
@@ -1689,13 +1624,11 @@ Set metadatum for Cinematographer: Cinematographer
 setClipName(String) -> String?
 ```
 
-Set metadatum for Name: (Clip) Name
+Set metadatum for (Clip) Name
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setComment`
 
@@ -1703,13 +1636,11 @@ Set metadatum for Name: (Clip) Name
 setComment(String) -> String?
 ```
 
-Set metadatum for Comment: Comment
+Set metadatum for Comment
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCopyrightInfo`
 
@@ -1717,13 +1648,11 @@ Set metadatum for Comment: Comment
 setCopyrightInfo(String) -> String?
 ```
 
-Set metadatum for Copyright Information: Copyright information
+Set metadatum for Copyright information
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCrewUnit`
 
@@ -1731,13 +1660,23 @@ Set metadatum for Copyright Information: Copyright information
 setCrewUnit(String) -> String?
 ```
 
-Set metadatum for Crew Unit: Crew unit
+Set metadatum for Crew unit
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
 
-**Returns:** `String?`
+#### `:setCrop`
+
+```lua
+setCrop(Any) -> Any
+```
+
+Set metadatum for Applied crop
+
+| Parameter | Description |
+|-----------|-------------|
+| `Any` | Formatted String or raw value |
 
 #### `:setCustom1`
 
@@ -1745,13 +1684,11 @@ Set metadatum for Crew Unit: Crew unit
 setCustom1(String) -> String?
 ```
 
-Set metadatum for Custom 1: Custom field 1 (customizeable per project in prefs)
+Set metadatum for Custom field 1 (customizeable per project in prefs)
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCustom2`
 
@@ -1759,13 +1696,11 @@ Set metadatum for Custom 1: Custom field 1 (customizeable per project in prefs)
 setCustom2(String) -> String?
 ```
 
-Set metadatum for Custom 2: Custom field 2 (customizeable per project in prefs)
+Set metadatum for Custom field 2 (customizeable per project in prefs)
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCustom3`
 
@@ -1773,13 +1708,11 @@ Set metadatum for Custom 2: Custom field 2 (customizeable per project in prefs)
 setCustom3(String) -> String?
 ```
 
-Set metadatum for Custom 3: Custom field 3 (customizeable per project in prefs)
+Set metadatum for Custom field 3 (customizeable per project in prefs)
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCustom4`
 
@@ -1787,13 +1720,11 @@ Set metadatum for Custom 3: Custom field 3 (customizeable per project in prefs)
 setCustom4(String) -> String?
 ```
 
-Set metadatum for Custom 4: Custom field 4 (customizeable per project in prefs)
+Set metadatum for Custom field 4 (customizeable per project in prefs)
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCustom5`
 
@@ -1801,13 +1732,11 @@ Set metadatum for Custom 4: Custom field 4 (customizeable per project in prefs)
 setCustom5(String) -> String?
 ```
 
-Set metadatum for Custom 5: Custom field 5 (customizeable per project in prefs)
+Set metadatum for Custom field 5 (customizeable per project in prefs)
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setCustom6`
 
@@ -1815,13 +1744,11 @@ Set metadatum for Custom 5: Custom field 5 (customizeable per project in prefs)
 setCustom6(String) -> String?
 ```
 
-Set metadatum for Custom 6: Custom field 6 (customizeable per project in prefs)
+Set metadatum for Custom field 6 (customizeable per project in prefs)
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setDIT`
 
@@ -1829,13 +1756,11 @@ Set metadatum for Custom 6: Custom field 6 (customizeable per project in prefs)
 setDIT(String) -> String?
 ```
 
-Set metadatum for DIT: Digital image technican
+Set metadatum for Digital image technican
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setDataManager`
 
@@ -1843,13 +1768,11 @@ Set metadatum for DIT: Digital image technican
 setDataManager(String) -> String?
 ```
 
-Set metadatum for Data Manager: Data manager
+Set metadatum for Data manager
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setDayNight`
 
@@ -1857,13 +1780,11 @@ Set metadatum for Data Manager: Data manager
 setDayNight(String) -> String?
 ```
 
-Set metadatum for Day/Night: Day/Night
+Set metadatum for Day/Night
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setDirector`
 
@@ -1871,13 +1792,11 @@ Set metadatum for Day/Night: Day/Night
 setDirector(String) -> String?
 ```
 
-Set metadatum for Director: Director
+Set metadatum for Director
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setDistanceToObject`
 
@@ -1885,13 +1804,11 @@ Set metadatum for Director: Director
 setDistanceToObject(String) -> String?
 ```
 
-Set metadatum for Distance to Object: Distance to object
+Set metadatum for Distance to object
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setEpisode`
 
@@ -1899,69 +1816,59 @@ Set metadatum for Distance to Object: Distance to object
 setEpisode(String) -> String?
 ```
 
-Set metadatum for Episode: Episode
+Set metadatum for Episode
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setFlag`
 
 ```lua
-setFlag(String) -> String?
+setFlag(Any) -> Any
 ```
 
-Set metadatum for Flag/Circled: Flag/Circled
+Set metadatum for Flag/Circled
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Bool value |
 
 #### `:setFlip`
 
 ```lua
-setFlip(String) -> String?
+setFlip(Any) -> Any
 ```
 
-Set metadatum for Flip: Flip
+Set metadatum for Flip. Raw values defined in `asset.Metadata.FlipMode`.
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setFocalLength`
 
 ```lua
-setFocalLength(String) -> String?
+setFocalLength(Any) -> Any
 ```
 
-Set metadatum for Focal Length: Focal length
+Set metadatum for Focal length
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setFocusDistance`
 
 ```lua
-setFocusDistance(String) -> String?
+setFocusDistance(Any) -> Any
 ```
 
-Set metadatum for Focus Distance: Focus distance
+Set metadatum for Focus distance
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setFstop`
 
@@ -1969,13 +1876,11 @@ Set metadatum for Focus Distance: Focus distance
 setFstop(String) -> String?
 ```
 
-Set metadatum for F-Stop: F-Stop
+Set metadatum for F-Stop
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setGPSposition`
 
@@ -1983,13 +1888,11 @@ Set metadatum for F-Stop: F-Stop
 setGPSposition(String) -> String?
 ```
 
-Set metadatum for GPS Position: GPS position
+Set metadatum for GPS position
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setInteriorExterior`
 
@@ -1997,27 +1900,23 @@ Set metadatum for GPS Position: GPS position
 setInteriorExterior(String) -> String?
 ```
 
-Set metadatum for Int/Ext: Interior/Exterior
+Set metadatum for Interior/Exterior
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setLabel`
 
 ```lua
-setLabel(String) -> String?
+setLabel(Any) -> Any
 ```
 
-Set metadatum for Label: Label (customizeable per project in prefs)
+Set metadatum for Label. Raw value defined in `asset.Metadata.LabelColor`. Formatted value customizable per project in prefs.
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setLensFilter`
 
@@ -2025,13 +1924,11 @@ Set metadatum for Label: Label (customizeable per project in prefs)
 setLensFilter(String) -> String?
 ```
 
-Set metadatum for Lens Filter: Lens filter
+Set metadatum for Lens filter
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setLensModel`
 
@@ -2039,13 +1936,11 @@ Set metadatum for Lens Filter: Lens filter
 setLensModel(String) -> String?
 ```
 
-Set metadatum for Lens Model: Lens model
+Set metadatum for Lens model
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setLensSerialNumber`
 
@@ -2053,13 +1948,11 @@ Set metadatum for Lens Model: Lens model
 setLensSerialNumber(String) -> String?
 ```
 
-Set metadatum for Lens Serial: Lens serial number
+Set metadatum for Lens serial number
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setLocation`
 
@@ -2067,41 +1960,35 @@ Set metadatum for Lens Serial: Lens serial number
 setLocation(String) -> String?
 ```
 
-Set metadatum for Location: Location
+Set metadatum for Location
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setNDopticalDensity`
 
 ```lua
-setNDopticalDensity(String) -> String?
+setNDopticalDensity(Any) -> Any
 ```
 
-Set metadatum for ND Filter: Neutral-density filter (optical density)
+Set metadatum for Neutral-density filter (optical density)
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setNativeISO`
 
 ```lua
-setNativeISO(String) -> String?
+setNativeISO(Any) -> Any
 ```
 
-Set metadatum for Native ISO: Native ISO
+Set metadatum for Native ISO
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setProducer`
 
@@ -2109,13 +1996,11 @@ Set metadatum for Native ISO: Native ISO
 setProducer(String) -> String?
 ```
 
-Set metadatum for Producer: Producer
+Set metadatum for Producer
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setProductionCompany`
 
@@ -2123,55 +2008,47 @@ Set metadatum for Producer: Producer
 setProductionCompany(String) -> String?
 ```
 
-Set metadatum for Production: Production Company
+Set metadatum for Production Company
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setProjectFPS`
 
 ```lua
-setProjectFPS(String) -> String?
+setProjectFPS(Any) -> Any
 ```
 
-Set metadatum for Project FPS: Project / playback FPS
+Set metadatum for Project / playback FPS
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setRating`
 
 ```lua
-setRating(String) -> String?
+setRating(Any) -> Any
 ```
 
-Set metadatum for Rating: Rating
+Set metadatum for Rating
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setRecordingDate`
 
 ```lua
-setRecordingDate(String) -> String?
+setRecordingDate(Any) -> Any
 ```
 
-Set metadatum for Recording Date: Recording date from recorder
+Set metadatum for Recording date from recorder
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setReel`
 
@@ -2179,27 +2056,23 @@ Set metadatum for Recording Date: Recording date from recorder
 setReel(String) -> String?
 ```
 
-Set metadatum for Reel/Tape: Reel/Tape
+Set metadatum for Reel/Tape
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setRotation`
 
 ```lua
-setRotation(String) -> String?
+setRotation(Any) -> Any
 ```
 
-Set metadatum for Rotation: Applied rotation
+Set metadatum for Applied rotation. Raw values defined in `asset.Metadata.RotationMode`.
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setScene`
 
@@ -2207,13 +2080,11 @@ Set metadatum for Rotation: Applied rotation
 setScene(String) -> String?
 ```
 
-Set metadatum for Scene: Scene
+Set metadatum for Scene
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setScriptSupervisor`
 
@@ -2221,13 +2092,11 @@ Set metadatum for Scene: Scene
 setScriptSupervisor(String) -> String?
 ```
 
-Set metadatum for Script Supervisor: Script supervisor
+Set metadatum for Script supervisor
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setSeason`
 
@@ -2235,27 +2104,23 @@ Set metadatum for Script Supervisor: Script supervisor
 setSeason(String) -> String?
 ```
 
-Set metadatum for Season: Season
+Set metadatum for Season
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setShootingDate`
 
 ```lua
-setShootingDate(String) -> String?
+setShootingDate(Any) -> Any
 ```
 
-Set metadatum for Shooting Date: Shooting Date
+Set metadatum for Shooting Date
 
 | Parameter | Description |
 |-----------|-------------|
-| `String` | Formatted String |
-
-**Returns:** `String?`
+| `Any` | Formatted String or raw value |
 
 #### `:setShootingDay`
 
@@ -2263,13 +2128,11 @@ Set metadatum for Shooting Date: Shooting Date
 setShootingDay(String) -> String?
 ```
 
-Set metadatum for Shooting Day: Shooting day
+Set metadatum for Shooting day
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setShot`
 
@@ -2277,13 +2140,11 @@ Set metadatum for Shooting Day: Shooting day
 setShot(String) -> String?
 ```
 
-Set metadatum for Shot: Shot
+Set metadatum for Shot
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setShotDescriptors`
 
@@ -2291,13 +2152,11 @@ Set metadatum for Shot: Shot
 setShotDescriptors(String) -> String?
 ```
 
-Set metadatum for Shot Descriptors: Shot descriptors
+Set metadatum for Shot descriptors
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setSoundMixer`
 
@@ -2305,13 +2164,11 @@ Set metadatum for Shot Descriptors: Shot descriptors
 setSoundMixer(String) -> String?
 ```
 
-Set metadatum for Sound Mixer: Sound mixer
+Set metadatum for Sound mixer
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setTCstart`
 
@@ -2319,13 +2176,11 @@ Set metadatum for Sound Mixer: Sound mixer
 setTCstart(String) -> String?
 ```
 
-Set metadatum for TC Start: Start timecode of clip
+Set metadatum for Start timecode of clip
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setTake`
 
@@ -2333,13 +2188,11 @@ Set metadatum for TC Start: Start timecode of clip
 setTake(String) -> String?
 ```
 
-Set metadatum for Take: Take
+Set metadatum for Take
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setTape`
 
@@ -2347,13 +2200,11 @@ Set metadatum for Take: Take
 setTape(String) -> String?
 ```
 
-Set metadatum for Tape: Audio tape name
+Set metadatum for Audio tape name
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
-
-**Returns:** `String?`
 
 #### `:setTstop`
 
@@ -2361,13 +2212,35 @@ Set metadatum for Tape: Audio tape name
 setTstop(String) -> String?
 ```
 
-Set metadatum for T-Stop: T-Stop
+Set metadatum for T-Stop
 
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
 
-**Returns:** `String?`
+#### `.FlipMode`
+
+Raw values for getFlip, setFlip.
+
+`both` `horizontal` `none` `vertical`
+
+#### `.GradingMode`
+
+Raw values for getGradingMode.
+
+`ACES_CDL` `ACES_CDLadvanced` `ACESfreestyle` `AmiraCompatible` `ArriCAPsimple` `CDLadvanced` `CDLandLUT` `VaricamCompatible` `freestyle` `unknown`
+
+#### `.LabelColor`
+
+Raw values for getLabel, setLabel.
+
+`blue` `gray` `green` `none` `orange` `purple` `red` `yellow`
+
+#### `.RotationMode`
+
+Raw values for getRotation, setRotation.
+
+`left` `none` `right`
 
 <a id="type-volume"></a>
 
@@ -2381,8 +2254,6 @@ getLabel() -> String?
 
 Get the label of the Volume.
 
-**Returns:** `String?`
-
 #### `:getMountPath`
 
 ```lua
@@ -2390,8 +2261,6 @@ getMountPath() -> String?
 ```
 
 Get the mount path of the Volume.
-
-**Returns:** `String?`
 
 ## Functions
 
@@ -2414,8 +2283,6 @@ sst.utils.slack.getAvailableChannels() -> [String]
 ```
 
 Get available Slack channels. Add new channels in Application Settings > Accounts.
-
-**Returns:** `[String]`
 
 #### `utils.slack.sendMessage`
 
