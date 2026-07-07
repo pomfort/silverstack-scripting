@@ -91,6 +91,22 @@
             "throws" : true
           }
         },
+        "getBin" : {
+          "description" : "Get containing Bin",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Folder?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
         "getCuePoints" : {
           "description" : "Get CuePoints for video-clip asset.",
           "scene" : [
@@ -102,22 +118,6 @@
             ],
             "returns" : {
               "type" : "[CuePoint]?"
-            },
-            "static" : false,
-            "throws" : false
-          }
-        },
-        "getFolder" : {
-          "description" : "Get containing Folder",
-          "scene" : [
-            "metadataManipulating"
-          ],
-          "signature" : {
-            "args" : [
-
-            ],
-            "returns" : {
-              "type" : "Folder?"
             },
             "static" : false,
             "throws" : false
@@ -235,6 +235,39 @@
             },
             "static" : false,
             "throws" : false
+          }
+        },
+        "resetInOutPoint" : {
+          "description" : "Remove in- and out points from video asset.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setInOutPoint" : {
+          "description" : "Set in- and/or out points of video assets. Out point must not lie before in point. Both points are inclusive to the range.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Timecode or 1-based frame number of in point. nil to leave unchanged.",
+                "type" : "Union<String, Int>?"
+              },
+              {
+                "description" : "Timecode or 1-based frame number of out point. nil to leave unchanged.",
+                "type" : "Union<String, Int>?"
+              }
+            ],
+            "static" : false,
+            "throws" : true
           }
         }
       },
@@ -443,7 +476,7 @@
       },
       "functions" : {
         "getName" : {
-          "description" : "Get Folder name",
+          "description" : "Get Bin/Folder name",
           "scene" : [
             "metadataManipulating"
           ],
@@ -453,6 +486,22 @@
             ],
             "returns" : {
               "type" : "String?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getParent" : {
+          "description" : "Get parent Folder of the Bin/Folder",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Folder?"
             },
             "static" : false,
             "throws" : false
@@ -1104,6 +1153,66 @@
         },
         "getCuePointsCount" : {
           "description" : "Get metadatum for Number of cue points",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCurrentExposureIndex" : {
+          "description" : "Get metadatum for EI/ISO currently used for RAW processing (shows for non-raw clip EI/ISO form clip metadata)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCurrentTint" : {
+          "description" : "Get metadatum for Tint currently used for processing (shows for non-raw clip EI/ISO from clip metadata)",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "pass true to get unformatted raw value",
+                "type" : "Bool?"
+              }
+            ],
+            "returns" : {
+              "description" : "Formatted String or raw value",
+              "type" : "Any"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getCurrentWhitepoint" : {
+          "description" : "Get metadatum for White point currently used for RAW processing (shows for non-raw clip EI/ISO from clip metadata)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2736,7 +2845,7 @@
           }
         },
         "getTCinPoint" : {
-          "description" : "Get metadatum for Timecode of In point",
+          "description" : "Get metadatum for Timecode of In point (inclusive)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2753,7 +2862,7 @@
           }
         },
         "getTCoutPoint" : {
-          "description" : "Get metadatum for Timecode of Out point",
+          "description" : "Get metadatum for Timecode of Out point (inclusive)",
           "scene" : [
             "metadataManipulating"
           ],

@@ -305,6 +305,15 @@ const D = {
           "returns": "CuePoint"
         },
         {
+          "name": "getBin",
+          "signature": "getBin() -> Folder?",
+          "isStatic": false,
+          "description": "Get containing Bin",
+          "deprecation": null,
+          "args": [],
+          "returns": "Folder?"
+        },
+        {
           "name": "getCuePoints",
           "signature": "getCuePoints() -> [CuePoint]?",
           "isStatic": false,
@@ -312,15 +321,6 @@ const D = {
           "deprecation": null,
           "args": [],
           "returns": "[CuePoint]?"
-        },
-        {
-          "name": "getFolder",
-          "signature": "getFolder() -> Folder?",
-          "isStatic": false,
-          "description": "Get containing Folder",
-          "deprecation": null,
-          "args": [],
-          "returns": "Folder?"
         },
         {
           "name": "getHeaderInfo",
@@ -384,6 +384,33 @@ const D = {
           "deprecation": null,
           "args": [],
           "returns": "Metadata?"
+        },
+        {
+          "name": "resetInOutPoint",
+          "signature": "resetInOutPoint()",
+          "isStatic": false,
+          "description": "Remove in- and out points from video asset.",
+          "deprecation": null,
+          "args": [],
+          "returns": null
+        },
+        {
+          "name": "setInOutPoint",
+          "signature": "setInOutPoint(Union<String, Int>?, Union<String, Int>?)",
+          "isStatic": false,
+          "description": "Set in- and/or out points of video assets. Out point must not lie before in point. Both points are inclusive to the range.",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "Timecode or 1-based frame number of in point. nil to leave unchanged.",
+              "type": "Union<String, Int>?"
+            },
+            {
+              "description": "Timecode or 1-based frame number of out point. nil to leave unchanged.",
+              "type": "Union<String, Int>?"
+            }
+          ],
+          "returns": null
         }
       ]
     },
@@ -519,10 +546,19 @@ const D = {
           "name": "getName",
           "signature": "getName() -> String?",
           "isStatic": false,
-          "description": "Get Folder name",
+          "description": "Get Bin/Folder name",
           "deprecation": null,
           "args": [],
           "returns": "String?"
+        },
+        {
+          "name": "getParent",
+          "signature": "getParent() -> Folder?",
+          "isStatic": false,
+          "description": "Get parent Folder of the Bin/Folder",
+          "deprecation": null,
+          "args": [],
+          "returns": "Folder?"
         }
       ]
     },
@@ -880,6 +916,48 @@ const D = {
           "signature": "getCuePointsCount(Bool?) -> Any",
           "isStatic": false,
           "description": "Get metadatum for Number of cue points",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
+        },
+        {
+          "name": "getCurrentExposureIndex",
+          "signature": "getCurrentExposureIndex(Bool?) -> Any",
+          "isStatic": false,
+          "description": "Get metadatum for EI/ISO currently used for RAW processing (shows for non-raw clip EI/ISO form clip metadata)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
+        },
+        {
+          "name": "getCurrentTint",
+          "signature": "getCurrentTint(Bool?) -> Any",
+          "isStatic": false,
+          "description": "Get metadatum for Tint currently used for processing (shows for non-raw clip EI/ISO from clip metadata)",
+          "deprecation": null,
+          "args": [
+            {
+              "description": "pass true to get unformatted raw value",
+              "type": "Bool?"
+            }
+          ],
+          "returns": "Any"
+        },
+        {
+          "name": "getCurrentWhitepoint",
+          "signature": "getCurrentWhitepoint(Bool?) -> Any",
+          "isStatic": false,
+          "description": "Get metadatum for White point currently used for RAW processing (shows for non-raw clip EI/ISO from clip metadata)",
           "deprecation": null,
           "args": [
             {
@@ -1838,7 +1916,7 @@ const D = {
           "name": "getTCinPoint",
           "signature": "getTCinPoint() -> String?",
           "isStatic": false,
-          "description": "Get metadatum for Timecode of In point",
+          "description": "Get metadatum for Timecode of In point (inclusive)",
           "deprecation": null,
           "args": [],
           "returns": "String?"
@@ -1847,7 +1925,7 @@ const D = {
           "name": "getTCoutPoint",
           "signature": "getTCoutPoint() -> String?",
           "isStatic": false,
-          "description": "Get metadatum for Timecode of Out point",
+          "description": "Get metadatum for Timecode of Out point (inclusive)",
           "deprecation": null,
           "args": [],
           "returns": "String?"

@@ -32,6 +32,14 @@ Add a CuePoint to a video-clip asset.
 | `Int` | Frame Index |
 | `Int` | Duration in Frames |
 
+#### `:getBin`
+
+```lua
+getBin() -> Folder?
+```
+
+Get containing Bin
+
 #### `:getCuePoints`
 
 ```lua
@@ -39,14 +47,6 @@ getCuePoints() -> [CuePoint]?
 ```
 
 Get CuePoints for video-clip asset.
-
-#### `:getFolder`
-
-```lua
-getFolder() -> Folder?
-```
-
-Get containing Folder
 
 #### `:getHeaderInfo`
 
@@ -103,6 +103,27 @@ metadata() -> Metadata?
 ```
 
 Get metadata accessor
+
+#### `:resetInOutPoint`
+
+```lua
+resetInOutPoint()
+```
+
+Remove in- and out points from video asset.
+
+#### `:setInOutPoint`
+
+```lua
+setInOutPoint(Union<String, Int>?, Union<String, Int>?)
+```
+
+Set in- and/or out points of video assets. Out point must not lie before in point. Both points are inclusive to the range.
+
+| Parameter | Description |
+|-----------|-------------|
+| `Union<String, Int>?` | Timecode or 1-based frame number of in point. nil to leave unchanged. |
+| `Union<String, Int>?` | Timecode or 1-based frame number of out point. nil to leave unchanged. |
 
 <a id="type-cuepoint"></a>
 
@@ -224,7 +245,15 @@ Get volume resource.
 getName() -> String?
 ```
 
-Get Folder name
+Get Bin/Folder name
+
+#### `:getParent`
+
+```lua
+getParent() -> Folder?
+```
+
+Get parent Folder of the Bin/Folder
 
 <a id="type-metadata"></a>
 
@@ -537,6 +566,42 @@ getCuePointsCount(Bool?) -> Any
 ```
 
 Get metadatum for Number of cue points
+
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
+
+#### `:getCurrentExposureIndex`
+
+```lua
+getCurrentExposureIndex(Bool?) -> Any
+```
+
+Get metadatum for EI/ISO currently used for RAW processing (shows for non-raw clip EI/ISO form clip metadata)
+
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
+
+#### `:getCurrentTint`
+
+```lua
+getCurrentTint(Bool?) -> Any
+```
+
+Get metadatum for Tint currently used for processing (shows for non-raw clip EI/ISO from clip metadata)
+
+| Parameter | Description |
+|-----------|-------------|
+| `Bool?` | pass true to get unformatted raw value |
+
+#### `:getCurrentWhitepoint`
+
+```lua
+getCurrentWhitepoint(Bool?) -> Any
+```
+
+Get metadatum for White point currently used for RAW processing (shows for non-raw clip EI/ISO from clip metadata)
 
 | Parameter | Description |
 |-----------|-------------|
@@ -1376,7 +1441,7 @@ Get metadatum for no description
 getTCinPoint() -> String?
 ```
 
-Get metadatum for Timecode of In point
+Get metadatum for Timecode of In point (inclusive)
 
 #### `:getTCoutPoint`
 
@@ -1384,7 +1449,7 @@ Get metadatum for Timecode of In point
 getTCoutPoint() -> String?
 ```
 
-Get metadatum for Timecode of Out point
+Get metadatum for Timecode of Out point (inclusive)
 
 #### `:getTCstart`
 
