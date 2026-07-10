@@ -22,6 +22,7 @@ This the technical documentation for the Silverstack scripting interface which i
 * A machine-readable [`lua-reference.json`](./reference/lua-reference.json)
 * A machine-readable [`schema.json`](./reference/schema.json) for validation and LLM/tooling integration
 * See [example scripts](./examples) for practical usage
+* [Changelog](./CHANGELOG.md)
 
 Scripts can be applied with the following scope:
 * Ingest scripts enable you to apply adjustments when ingesting clips into Silverstack (and only then)
@@ -201,9 +202,3 @@ For testing, you can provoke errors like this:
 ```
 error("Source asset is nil!")
 ```
-
-## 4. Changelog
-
-### Version 1.0 — 2026-04-15
-
-* Initial public release
