@@ -180,7 +180,7 @@ end
 return M
 ```
 
-You can place the code above into a separate Lua file like `myModule.lua` and save it into one of Silverstack's script locations like `Shared`. In the script from which you would like to load the module, you simply set the statement `local module = require("myModule")` and call it with `module.normalizeTake(take)`.
+You can place the code above into a separate Lua file like `myModule.lua` and save it into one of Silverstack's script locations like `Shared`. In the script from which you would like to load the module, you simply set the statement globally `local module = require("myModule")` after the context tag and call it with `module.normalizeTake(take)`. Don't use `require` within functions that are called repeatedly, like `onStampVideo` in ingest scripts, since it won't find the module.
 
 ### 2.5 Processing external data
 
