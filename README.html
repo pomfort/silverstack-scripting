@@ -87,6 +87,7 @@ img {
 <li>A machine-readable <a href="./reference/lua-reference.json"><code>lua-reference.json</code></a></li>
 <li>A machine-readable <a href="./reference/schema.json"><code>schema.json</code></a> for validation and LLM/tooling integration</li>
 <li>See <a href="./examples">example scripts</a> for practical usage</li>
+<li><a href="./CHANGELOG.md">Changelog</a></li>
 </ul>
 <p>Scripts can be applied with the following scope:</p>
 <ul>
@@ -199,7 +200,7 @@ end
 
 return M
 </code></pre>
-<p>You can place the code above into a separate Lua file like <code>myModule.lua</code> and save it into one of Silverstack's script locations like <code>Shared</code>. In the script from which you would like to load the module, you simply set the statement <code>local module = require("myModule")</code> and call it with <code>module.normalizeTake(take)</code>.</p>
+<p>You can place the code above into a separate Lua file like <code>myModule.lua</code> and save it into one of Silverstack's script locations like <code>Shared</code>. In the script from which you would like to load the module, you simply set the statement globally <code>local module = require("myModule")</code> after the context tag and call it with <code>module.normalizeTake(take)</code>. Don't use <code>require</code> within functions that are called repeatedly, like <code>onStampVideo</code> in ingest scripts, since it won't find the module.</p>
 <h3>2.5 Processing external data</h3>
 <p>Scripts can read and write external files (e.g. CSV, JSON) using standard Lua file I/O.
 Silverstack provides access to the relevant metadata, but does not include built-in parsers or exporters for formats such as ALE or CSV.
@@ -214,10 +215,5 @@ end
 <p>For testing, you can provoke errors like this:</p>
 <pre><code>error(&quot;Source asset is nil!&quot;)
 </code></pre>
-<h2>4. Changelog</h2>
-<h3>Version 1.0 — 2026-04-15</h3>
-<ul>
-<li>Initial public release</li>
-</ul>
 </body>
 </html>

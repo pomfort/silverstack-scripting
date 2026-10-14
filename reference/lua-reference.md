@@ -48,6 +48,18 @@ getCuePoints() -> [CuePoint]?
 
 Get CuePoints for video-clip asset.
 
+#### `:getFrameIndexForTC`
+
+```lua
+getFrameIndexForTC(String) -> Int
+```
+
+Get 0-based frame index in clip from timecode. Standard timecode values have the format `HH:MM:SS:FF`. For HFR clips with a timecode frame counter ≥ 100, the frame field has three digits: `HH:MM:SS:FFF`.
+
+| Parameter | Description |
+|-----------|-------------|
+| `String` | Timecode string |
+
 #### `:getHeaderInfo`
 
 ```lua
@@ -63,6 +75,18 @@ getResources() -> [FileResource]
 ```
 
 Get all FileResources associated with this Asset
+
+#### `:getTCforFrameIndex`
+
+```lua
+getTCforFrameIndex(Int) -> String?
+```
+
+Get timecode string for frame index. Standard timecode values have the format `HH:MM:SS:FF`. For HFR clips with a timecode frame counter ≥ 100, the frame field has three digits: `HH:MM:SS:FFF`.
+
+| Parameter | Description |
+|-----------|-------------|
+| `Int` | 0-based frame index |
 
 #### `:getTranscodingSourceAsset`
 
@@ -99,7 +123,7 @@ Check if asset is video-clip asset.
 #### `:metadata`
 
 ```lua
-metadata() -> Metadata?
+metadata() -> Metadata
 ```
 
 Get metadata accessor
@@ -112,7 +136,7 @@ resetInOutPoint()
 
 Remove in- and out points from video asset.
 
-#### `:setInOutPoint`
+#### `:setInOutPoint` — *deprecated: Prefer frame index-, 0-based, `a:setInOutPointIndices(a:getFrameIndexForTC(x), ...)`*
 
 ```lua
 setInOutPoint(Union<String, Int>?, Union<String, Int>?)
@@ -122,8 +146,21 @@ Set in- and/or out points of video assets. Out point must not lie before in poin
 
 | Parameter | Description |
 |-----------|-------------|
-| `Union<String, Int>?` | Timecode or 1-based frame number of in point. nil to leave unchanged. |
-| `Union<String, Int>?` | Timecode or 1-based frame number of out point. nil to leave unchanged. |
+| `Union<String, Int>?` | 1-based frame number (or timecode) of in point. nil to leave unchanged. |
+| `Union<String, Int>?` | 1-based frame number (or timecode) of out point. nil to leave unchanged. |
+
+#### `:setInOutPointIndices`
+
+```lua
+setInOutPointIndices(Int?, Int?)
+```
+
+Set in- and/or out points of video assets. Out point must not lie before in point. Both points are inclusive to the range.
+
+| Parameter | Description |
+|-----------|-------------|
+| `Int?` | 0-based frame index of in point. nil to leave unchanged. |
+| `Int?` | 0-based frame index of out point. nil to leave unchanged. |
 
 <a id="type-cuepoint"></a>
 
@@ -139,13 +176,21 @@ getDuration() -> Int
 
 Get Cue Point duration in frames.
 
-#### `:getFrame`
+#### `:getFrame` — *deprecated: Prefer explicit getFrameIndex.*
 
 ```lua
 getFrame() -> Int
 ```
 
-Get Cue Point position in frames.
+Get Cue Point position as 0-based frame index.
+
+#### `:getFrameIndex`
+
+```lua
+getFrameIndex() -> Int
+```
+
+Get Cue Point position as 0-based frame index.
 
 #### `:getName`
 
@@ -175,17 +220,29 @@ Set Cue Point duration in frames.
 |-----------|-------------|
 | `Int` |  |
 
-#### `:setFrame`
+#### `:setFrame` — *deprecated: Prefer explicit setFrameIndex.*
 
 ```lua
 setFrame(Int)
 ```
 
-Set Cue Point position in frames.
+Set Cue Point position as 0-based frame index.
 
 | Parameter | Description |
 |-----------|-------------|
-| `Int` |  |
+| `Int` | 0-based frame index |
+
+#### `:setFrameIndex`
+
+```lua
+setFrameIndex(Int)
+```
+
+Set Cue Point position as 0-based frame index.
+
+| Parameter | Description |
+|-----------|-------------|
+| `Int` | 0-based frame index |
 
 #### `:setName`
 
@@ -553,7 +610,7 @@ Get metadatum for Crew unit
 getCrop(Bool?) -> Any
 ```
 
-Get metadatum for Applied crop
+Get metadatum for Applied crop. Valid setter formattings: `X:Y` (Aspect), `WxH` (Resolution, Center offset), `WxH (X,Y)` (Resolution w/ offset), `X:Y:W:H` (Resolution w/ offset)
 
 | Parameter | Description |
 |-----------|-------------|
@@ -1165,7 +1222,7 @@ Get metadatum for Recording color space
 getRecordingDate(Bool?) -> Any
 ```
 
-Get metadatum for Recording date from recorder
+Get metadatum for Recording date from recorder. Date is formatted according to current locale, raw value is a Unix timestamp.
 
 | Parameter | Description |
 |-----------|-------------|
@@ -1285,7 +1342,7 @@ Get metadatum for Sensor FPS of camera
 getShootingDate(Bool?) -> Any
 ```
 
-Get metadatum for Shooting Date
+Get metadatum for Shooting Date. Date is formatted in ISO 8601 format, raw value is a Unix timestamp.
 
 | Parameter | Description |
 |-----------|-------------|
@@ -1515,6 +1572,22 @@ getVerificationState() -> String?
 
 Get metadatum for Verification State. Raw value: nil=unverified, false=failed, true=verified
 
+#### `:getVideoTrack`
+
+```lua
+getVideoTrack() -> Int64?
+```
+
+Get integer value for Video Track
+
+#### `:getVideoTrackCount`
+
+```lua
+getVideoTrackCount() -> Int64?
+```
+
+Get integer value for Video Tracks
+
 #### `:getWildTrack` — *deprecated: Prefer hasWildTrack method.*
 
 ```lua
@@ -1737,7 +1810,7 @@ Set metadatum for Crew unit
 setCrop(Any) -> Any
 ```
 
-Set metadatum for Applied crop
+Set metadatum for Applied crop. Valid setter formattings: `X:Y` (Aspect), `WxH` (Resolution, Center offset), `WxH (X,Y)` (Resolution w/ offset), `X:Y:W:H` (Resolution w/ offset)
 
 | Parameter | Description |
 |-----------|-------------|
@@ -2109,7 +2182,7 @@ Set metadatum for Rating
 setRecordingDate(Any) -> Any
 ```
 
-Set metadatum for Recording date from recorder
+Set metadatum for Recording date from recorder. Date is formatted according to current locale, raw value is a Unix timestamp.
 
 | Parameter | Description |
 |-----------|-------------|
@@ -2181,7 +2254,7 @@ Set metadatum for Season
 setShootingDate(Any) -> Any
 ```
 
-Set metadatum for Shooting Date
+Set metadatum for Shooting Date. Date is formatted in ISO 8601 format, raw value is a Unix timestamp.
 
 | Parameter | Description |
 |-----------|-------------|
@@ -2282,6 +2355,18 @@ Set metadatum for T-Stop
 | Parameter | Description |
 |-----------|-------------|
 | `String` | Formatted String |
+
+#### `:setVideoTrack`
+
+```lua
+setVideoTrack(Int64) -> Int64?
+```
+
+Set metadatum for Video Track
+
+| Parameter | Description |
+|-----------|-------------|
+| `Int64` |  |
 
 #### `.FlipMode`
 
