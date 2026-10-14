@@ -123,6 +123,25 @@
             "throws" : false
           }
         },
+        "getFrameIndexForTC" : {
+          "description" : "Get 0-based frame index in clip from timecode. Standard timecode values have the format `HH:MM:SS:FF`. For HFR clips with a timecode frame counter ≥ 100, the frame field has three digits: `HH:MM:SS:FFF`.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "Timecode string",
+                "type" : "String"
+              }
+            ],
+            "returns" : {
+              "type" : "Int"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
         "getHeaderInfo" : {
           "description" : "Get a table of the header info",
           "scene" : [
@@ -154,6 +173,25 @@
             },
             "static" : false,
             "throws" : false
+          }
+        },
+        "getTCforFrameIndex" : {
+          "description" : "Get timecode string for frame index. Standard timecode values have the format `HH:MM:SS:FF`. For HFR clips with a timecode frame counter ≥ 100, the frame field has three digits: `HH:MM:SS:FFF`.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "0-based frame index",
+                "type" : "Int"
+              }
+            ],
+            "returns" : {
+              "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
           }
         },
         "getTranscodingSourceAsset" : {
@@ -231,7 +269,7 @@
 
             ],
             "returns" : {
-              "type" : "Metadata?"
+              "type" : "Metadata"
             },
             "static" : false,
             "throws" : false
@@ -251,6 +289,7 @@
           }
         },
         "setInOutPoint" : {
+          "deprecation" : "Prefer frame index-, 0-based, `a:setInOutPointIndices(a:getFrameIndexForTC(x), ...)`",
           "description" : "Set in- and/or out points of video assets. Out point must not lie before in point. Both points are inclusive to the range.",
           "scene" : [
             "metadataManipulating"
@@ -258,12 +297,32 @@
           "signature" : {
             "args" : [
               {
-                "description" : "Timecode or 1-based frame number of in point. nil to leave unchanged.",
+                "description" : "1-based frame number (or timecode) of in point. nil to leave unchanged.",
                 "type" : "Union<String, Int>?"
               },
               {
-                "description" : "Timecode or 1-based frame number of out point. nil to leave unchanged.",
+                "description" : "1-based frame number (or timecode) of out point. nil to leave unchanged.",
                 "type" : "Union<String, Int>?"
+              }
+            ],
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setInOutPointIndices" : {
+          "description" : "Set in- and/or out points of video assets. Out point must not lie before in point. Both points are inclusive to the range.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "0-based frame index of in point. nil to leave unchanged.",
+                "type" : "Int?"
+              },
+              {
+                "description" : "0-based frame index of out point. nil to leave unchanged.",
+                "type" : "Int?"
               }
             ],
             "static" : false,
@@ -314,7 +373,24 @@
           }
         },
         "getFrame" : {
-          "description" : "Get Cue Point position in frames.",
+          "deprecation" : "Prefer explicit getFrameIndex.",
+          "description" : "Get Cue Point position as 0-based frame index.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Int"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getFrameIndex" : {
+          "description" : "Get Cue Point position as 0-based frame index.",
           "scene" : [
             "metadataManipulating"
           ],
@@ -377,13 +453,31 @@
           }
         },
         "setFrame" : {
-          "description" : "Set Cue Point position in frames.",
+          "deprecation" : "Prefer explicit setFrameIndex.",
+          "description" : "Set Cue Point position as 0-based frame index.",
           "scene" : [
             "metadataManipulating"
           ],
           "signature" : {
             "args" : [
               {
+                "description" : "0-based frame index",
+                "type" : "Int"
+              }
+            ],
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "setFrameIndex" : {
+          "description" : "Set Cue Point position as 0-based frame index.",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "description" : "0-based frame index",
                 "type" : "Int"
               }
             ],
@@ -1132,7 +1226,7 @@
           }
         },
         "getCrop" : {
-          "description" : "Get metadatum for Applied crop",
+          "description" : "Get metadatum for Applied crop. Valid setter formattings: `X:Y` (Aspect), `WxH` (Resolution, Center offset), `WxH (X,Y)` (Resolution w/ offset), `X:Y:W:H` (Resolution w/ offset)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2319,7 +2413,7 @@
           }
         },
         "getRecordingDate" : {
-          "description" : "Get metadatum for Recording date from recorder",
+          "description" : "Get metadatum for Recording date from recorder. Date is formatted according to current locale, raw value is a Unix timestamp.",
           "scene" : [
             "metadataManipulating"
           ],
@@ -2541,7 +2635,7 @@
           }
         },
         "getShootingDate" : {
-          "description" : "Get metadatum for Shooting Date",
+          "description" : "Get metadatum for Shooting Date. Date is formatted in ISO 8601 format, raw value is a Unix timestamp.",
           "scene" : [
             "metadataManipulating"
           ],
@@ -3015,6 +3109,38 @@
             "throws" : false
           }
         },
+        "getVideoTrack" : {
+          "description" : "Get integer value for Video Track",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Int64?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
+        "getVideoTrackCount" : {
+          "description" : "Get integer value for Video Tracks",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+
+            ],
+            "returns" : {
+              "type" : "Int64?"
+            },
+            "static" : false,
+            "throws" : false
+          }
+        },
         "getWildTrack" : {
           "deprecation" : "Prefer hasWildTrack method.",
           "description" : "Get metadatum for Wild track",
@@ -3394,7 +3520,7 @@
           }
         },
         "setCrop" : {
-          "description" : "Set metadatum for Applied crop",
+          "description" : "Set metadatum for Applied crop. Valid setter formattings: `X:Y` (Aspect), `WxH` (Resolution, Center offset), `WxH (X,Y)` (Resolution w/ offset), `X:Y:W:H` (Resolution w/ offset)",
           "scene" : [
             "metadataManipulating"
           ],
@@ -4014,7 +4140,7 @@
           }
         },
         "setRecordingDate" : {
-          "description" : "Set metadatum for Recording date from recorder",
+          "description" : "Set metadatum for Recording date from recorder. Date is formatted according to current locale, raw value is a Unix timestamp.",
           "scene" : [
             "metadataManipulating"
           ],
@@ -4134,7 +4260,7 @@
           }
         },
         "setShootingDate" : {
-          "description" : "Set metadatum for Shooting Date",
+          "description" : "Set metadatum for Shooting Date. Date is formatted in ISO 8601 format, raw value is a Unix timestamp.",
           "scene" : [
             "metadataManipulating"
           ],
@@ -4308,6 +4434,25 @@
             "returns" : {
               "description" : "Formatted String of previous value",
               "type" : "String?"
+            },
+            "static" : false,
+            "throws" : true
+          }
+        },
+        "setVideoTrack" : {
+          "description" : "Set metadatum for Video Track",
+          "scene" : [
+            "metadataManipulating"
+          ],
+          "signature" : {
+            "args" : [
+              {
+                "type" : "Int64"
+              }
+            ],
+            "returns" : {
+              "description" : "Previous value",
+              "type" : "Int64?"
             },
             "static" : false,
             "throws" : true
