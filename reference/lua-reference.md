@@ -66,7 +66,7 @@ Get 0-based frame index in clip from timecode. Standard timecode values have the
 getHeaderInfo() -> Any
 ```
 
-Get a table of the header info
+Get a table of the header info. Keys and value-formats are clip dependent and may be subject to change between Silverstack versions.
 
 #### `:getResources`
 
