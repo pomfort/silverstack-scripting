@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 1.2 — Silverstack 9.4.0 - 2026-10-27
+## Version 1.2 — Silverstack 9.4.0 - 2026-11-03
 
 ### Added
 
